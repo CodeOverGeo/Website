@@ -1,0 +1,32 @@
+@if (showTabs()) {
+  <nav class="tabs" aria-label="Editor tabs">
+    <button
+      class="menu-btn"
+      type="button"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="isMenuOpen()"
+      aria-label="Toggle file tabs"
+    >
+      ☰
+    </button>
+
+    <div class="tabs-list" [class.mobile-open]="isMenuOpen()">
+      @for (tab of tabs; track tab.route) {
+        <a
+          class="tab"
+          [routerLink]="tab.route"
+          routerLinkActive="active"
+          (click)="closeMenu()"
+          [class.file-home]="tab.extClass === 'file-home'"
+          [class.file-cs]="tab.extClass === 'file-cs'"
+          [class.file-py]="tab.extClass === 'file-py'"
+          [class.file-json]="tab.extClass === 'file-json'"
+        >
+          <span class="dot">●</span>
+          <span>{{ tab.label }}</span>
+          <span class="close" aria-hidden="true">×</span>
+        </a>
+      }
+    </div>
+  </nav>
+}

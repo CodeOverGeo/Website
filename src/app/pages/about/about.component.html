@@ -1,0 +1,46 @@
+<section class="about-page">
+  <header class="about-header">
+    <h1 class="mono">about.json</h1>
+    <button type="button" class="toggle-btn" (click)="toggleMode()">{{ toggledLabel() }}</button>
+  </header>
+
+  @if (about(); as data) {
+    @if (!isRaw()) {
+      <div class="json-view mono">
+        <button type="button" class="section-btn" (click)="toggleSection('professional')">"professional"</button>
+        @if (expanded()['professional']) {
+          <p class="value">{{ data.professional }}</p>
+        }
+
+        <button type="button" class="section-btn" (click)="toggleSection('personal')">"personal"</button>
+        @if (expanded()['personal']) {
+          <p class="value">{{ data.personal }}</p>
+        }
+
+        <button type="button" class="section-btn" (click)="toggleSection('certifications')">"certifications"</button>
+        @if (expanded()['certifications']) {
+          <div class="indent">
+            @for (cert of data.certifications; track cert.name) {
+              <p>{{ cert.name }} · {{ cert.issuer }} · {{ cert.date }}</p>
+            }
+          </div>
+        }
+
+        <button type="button" class="section-btn" (click)="toggleSection('interests')">"interests"</button>
+        @if (expanded()['interests']) {
+          <div class="indent">
+            @for (interest of data.interests; track interest) {
+              <p>"{{ interest }}",</p>
+            }
+          </div>
+        }
+      </div>
+    } @else {
+      <pre class="raw mono">{{ data | json }}</pre>
+    }
+
+    <div class="social-row">
+      <app-social-links />
+    </div>
+  }
+</section>

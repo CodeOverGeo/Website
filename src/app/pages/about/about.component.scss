@@ -1,0 +1,42 @@
+.about-page {
+  padding: 1.25rem;
+}
+
+.about-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.toggle-btn,
+.section-btn {
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  padding: 0.35rem 0.55rem;
+}
+
+.section-btn {
+  margin-top: 0.45rem;
+  display: block;
+}
+
+.json-view,
+.raw {
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  background: #10141a;
+  padding: 0.9rem;
+  color: #d2d9e0;
+}
+
+.value,
+.indent {
+  margin-left: 1rem;
+}
+
+.social-row {
+  margin-top: 0.9rem;
+}

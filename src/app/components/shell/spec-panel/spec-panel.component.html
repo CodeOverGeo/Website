@@ -1,0 +1,10 @@
+@if (isOpen()) {
+  <aside class="spec-panel" aria-label="Specification panel">
+    <header class="spec-header">
+      <strong>{{ panelTitle() }}</strong>
+      <button class="close-btn" type="button" (click)="close()" aria-label="Close panel">×</button>
+    </header>
+    <button class="refresh-btn" type="button" (click)="loadSpec()">Run ai --verify-specs</button>
+    <pre class="spec-content mono">{{ content() }}</pre>
+  </aside>
+}

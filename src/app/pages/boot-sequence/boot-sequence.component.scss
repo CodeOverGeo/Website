@@ -1,0 +1,54 @@
+.boot {
+  min-height: 100vh;
+  padding: 2rem;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.prompt-line {
+  display: flex;
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+}
+
+.prompt {
+  color: var(--accent-blue);
+}
+
+.typed {
+  color: var(--accent-green);
+}
+
+.cursor {
+  animation: blink 1s infinite;
+}
+
+.output {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.line {
+  display: flex;
+  gap: 0.65rem;
+  opacity: 0;
+  animation: fadeIn 220ms ease forwards;
+}
+
+.prefix {
+  width: 50px;
+}
+
+.type-init .prefix,
+.type-load .prefix {
+  color: var(--accent-blue);
+}
+
+.type-pass .prefix,
+.type-ok .prefix {
+  color: var(--accent-green);
+}
+
+.type-exec .prefix {
+  color: var(--dotnet-purple);
+}

@@ -1,0 +1,89 @@
+:root {
+	--bg-primary: #0d1117;
+	--bg-secondary: #181a1f;
+	--bg-card: #1e2228;
+	--text-primary: #e6edf3;
+	--accent-green: #4af626;
+	--accent-blue: #569cd6;
+	--dotnet-purple: #9b6bff;
+	--python-yellow: #ffd43b;
+	--node-green: #68a063;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html,
+body {
+	min-height: 100%;
+	background: var(--bg-primary);
+	color: var(--text-primary);
+	font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+	overflow-y: auto;
+}
+
+.mono {
+	font-family: 'Fira Code', 'SFMono-Regular', Menlo, monospace;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--bg-card);
+}
+
+::-webkit-scrollbar-thumb {
+	background: #3a3f47;
+	border-radius: 999px;
+}
+
+@keyframes typing {
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
+	}
+}
+
+@keyframes blink {
+	0%,
+	50% {
+		opacity: 1;
+	}
+	51%,
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(6px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes slideInRight {
+	from {
+		opacity: 0;
+		transform: translateX(16px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}

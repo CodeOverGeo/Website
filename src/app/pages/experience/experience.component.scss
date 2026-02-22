@@ -1,0 +1,99 @@
+.experience-page {
+  padding: 1.25rem;
+}
+
+.timeline {
+  margin-top: 1rem;
+  position: relative;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--accent-green);
+}
+
+.commit-card {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 0.85rem;
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.commit-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 260ms ease;
+}
+
+.node {
+  margin-top: 0.3rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #7d8590;
+}
+
+.branch-main { background: var(--accent-green); }
+.branch-devops { background: #5cc8ff; }
+.branch-ai { background: #e77dff; }
+.branch-cs { background: var(--dotnet-purple); }
+.branch-py { background: var(--python-yellow); }
+.branch-json { background: var(--node-green); }
+
+.content {
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  background: var(--bg-card);
+  padding: 0.85rem;
+  border-left-width: 4px;
+  border-left-color: #30363d;
+}
+
+.commit-card.branch-main .content { border-left-color: var(--accent-green); }
+.commit-card.branch-devops .content { border-left-color: #5cc8ff; }
+.commit-card.branch-ai .content { border-left-color: #e77dff; }
+.commit-card.branch-cs .content { border-left-color: var(--dotnet-purple); }
+.commit-card.branch-py .content { border-left-color: var(--python-yellow); }
+.commit-card.branch-json .content { border-left-color: var(--node-green); }
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  color: #9da7b4;
+  font-size: 0.8rem;
+}
+
+.merge {
+  color: var(--accent-green);
+  border: 1px solid rgba(74, 246, 38, 0.35);
+  border-radius: 999px;
+  padding: 0.05rem 0.35rem;
+}
+
+.date {
+  color: #9da7b4;
+  margin-bottom: 0.45rem;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.55rem;
+}
+
+.skill {
+  border: 1px solid #30363d;
+  border-radius: 999px;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.75rem;
+}

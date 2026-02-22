@@ -1,0 +1,15 @@
+:host {
+	display: block;
+	min-height: 100vh;
+}
+
+.app-shell {
+	min-height: 100vh;
+	background: var(--bg-primary);
+	color: var(--text-primary);
+}
+
+.app-main {
+	min-height: calc(100vh - 68px);
+	padding-bottom: 24px;
+}

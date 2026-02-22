@@ -1,0 +1,32 @@
+@if (isOpen()) {
+  <div class="palette-backdrop" (click)="close()">
+    <section class="palette" (click)="$event.stopPropagation()" aria-label="Command palette">
+      <input
+        class="palette-input mono"
+        type="text"
+        placeholder="Type a command..."
+        [value]="query()"
+        (input)="onQueryInput($event)"
+        aria-label="Search command"
+      />
+
+      <div class="palette-list">
+        @if (filteredItems().length === 0) {
+          <p class="empty-state mono">No matching commands</p>
+        } @else {
+          @for (item of filteredItems(); track item.label; let idx = $index) {
+            <button
+              type="button"
+              class="palette-item"
+              [class.selected]="idx === selectedIndex()"
+              (click)="execute(item)"
+            >
+              <span>{{ item.icon }}</span>
+              <span>{{ item.label }}</span>
+            </button>
+          }
+        }
+      </div>
+    </section>
+  </div>
+}

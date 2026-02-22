@@ -1,0 +1,33 @@
+.social-links {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.3rem 0.55rem;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  transition: all 120ms ease;
+}
+
+.social-linkedin:hover {
+  border-color: #569cd6;
+  box-shadow: 0 0 10px rgba(86, 156, 214, 0.45);
+}
+
+.social-x:hover {
+  border-color: #e6edf3;
+  box-shadow: 0 0 10px rgba(230, 237, 243, 0.45);
+}
+
+.social-github:hover {
+  border-color: #9b6bff;
+  box-shadow: 0 0 10px rgba(155, 107, 255, 0.45);
+}

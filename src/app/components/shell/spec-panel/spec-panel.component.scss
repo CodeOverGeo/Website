@@ -1,0 +1,46 @@
+.spec-panel {
+  position: fixed;
+  top: 44px;
+  right: 0;
+  width: min(420px, 92vw);
+  height: calc(100vh - 68px);
+  border-left: 1px solid #30363d;
+  background: #10141a;
+  z-index: 50;
+  animation: slideInRight 180ms ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.spec-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #30363d;
+  padding: 0.75rem 1rem;
+}
+
+.close-btn,
+.refresh-btn {
+  border: 1px solid #30363d;
+  background: #181a1f;
+  color: var(--text-primary);
+  padding: 0.35rem 0.55rem;
+  border-radius: 6px;
+}
+
+.refresh-btn {
+  margin: 0.75rem 1rem 0;
+}
+
+.spec-content {
+  margin: 0.75rem 1rem 1rem;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  background: #0d1117;
+  padding: 0.8rem;
+  color: var(--accent-green);
+  white-space: pre-wrap;
+  overflow: auto;
+  flex: 1;
+}

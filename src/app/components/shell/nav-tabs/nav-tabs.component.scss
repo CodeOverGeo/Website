@@ -1,0 +1,97 @@
+.tabs {
+  height: 44px;
+  display: flex;
+  align-items: stretch;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid #30363d;
+  position: relative;
+}
+
+.tabs-list {
+  display: flex;
+  align-items: stretch;
+  overflow-x: auto;
+  width: 100%;
+}
+
+.menu-btn {
+  display: none;
+  border: 0;
+  border-right: 1px solid #30363d;
+  background: transparent;
+  color: var(--text-primary);
+  padding: 0 0.85rem;
+  font-size: 1rem;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #a6adbb;
+  text-decoration: none;
+  padding: 0 0.85rem;
+  border-right: 1px solid #30363d;
+  font-size: 0.85rem;
+}
+
+.tab.active {
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  border-bottom: 2px solid var(--accent-blue);
+}
+
+.dot {
+  font-size: 0.65rem;
+}
+
+.close {
+  opacity: 0.65;
+  font-family: 'Fira Code', monospace;
+}
+
+.tab.file-home .dot {
+  color: var(--accent-blue);
+}
+
+.tab.file-cs .dot {
+  color: var(--dotnet-purple);
+}
+
+.tab.file-py .dot {
+  color: var(--python-yellow);
+}
+
+.tab.file-json .dot {
+  color: var(--node-green);
+}
+
+@media (max-width: 768px) {
+  .menu-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tabs-list {
+    display: none;
+    position: absolute;
+    top: 44px;
+    left: 0;
+    right: 0;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid #30363d;
+    flex-direction: column;
+    z-index: 20;
+  }
+
+  .tabs-list.mobile-open {
+    display: flex;
+  }
+
+  .tab {
+    min-height: 42px;
+    border-right: 0;
+    border-bottom: 1px solid #30363d;
+  }
+}

@@ -1,0 +1,37 @@
+<section class="experience-page">
+  <h1 class="mono">git log --graph --oneline</h1>
+
+  <div class="timeline">
+    @for (commit of commits(); track commit.hash) {
+      <article
+        class="commit-card"
+        appVisibility
+        [class.branch-main]="commit.branch === 'main'"
+        [class.branch-devops]="commit.branch === 'feature/devops'"
+        [class.branch-ai]="commit.branch === 'feature/ai-refinements'"
+        [class.branch-cs]="commit.branch === 'feature/backend'"
+        [class.branch-py]="commit.branch === 'feature/bootcamp'"
+        [class.branch-json]="commit.branch === 'feature/ops'"
+      >
+        <div class="node" [class.branch-main]="commit.branch === 'main'" [class.branch-devops]="commit.branch === 'feature/devops'" [class.branch-ai]="commit.branch === 'feature/ai-refinements'" [class.branch-cs]="commit.branch === 'feature/backend'" [class.branch-py]="commit.branch === 'feature/bootcamp'" [class.branch-json]="commit.branch === 'feature/ops'"></div>
+        <div class="content">
+          <p class="meta mono">
+            <span>{{ commit.hash }}</span>
+            <span>{{ commit.branch }}</span>
+            @if (commit.isMerge) {
+              <span class="merge">◆ merge</span>
+            }
+          </p>
+          <h2>{{ commit.role }} · {{ commit.company }}</h2>
+          <p class="date">{{ commit.date }}</p>
+          <p>{{ commit.description }}</p>
+          <div class="skills">
+            @for (skill of commit.skills; track skill) {
+              <span class="skill">{{ skill }}</span>
+            }
+          </div>
+        </div>
+      </article>
+    }
+  </div>
+</section>
