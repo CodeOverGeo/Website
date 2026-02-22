@@ -13,14 +13,12 @@ import { VisibilityDirective } from '../../directives/visibility.directive';
 })
 export class ProjectsComponent {
   private readonly dataService = inject(PortfolioDataService);
-  readonly projects = signal<Project[]>([]);
+  readonly projects = this.dataService.projects;
 
   readonly sorted = computed(() => {
     const items = [...this.projects()];
     return items.sort((a, b) => Number(b.featured) - Number(a.featured));
   });
 
-  constructor() {
-    this.dataService.getProjects().subscribe((value) => this.projects.set(value));
-  }
+
 }

@@ -1,16 +1,21 @@
 @if (links(); as social) {
-  <div class="social-links" aria-label="Social links">
-    <a [href]="social.linkedin" target="_blank" rel="noopener noreferrer" class="social social-linkedin" aria-label="LinkedIn">
-      <span>in</span>
-      <span>LinkedIn</span>
-    </a>
-    <a [href]="social.x" target="_blank" rel="noopener noreferrer" class="social social-x" aria-label="X">
-      <span>𝕏</span>
-      <span>X</span>
-    </a>
-    <a [href]="social.github" target="_blank" rel="noopener noreferrer" class="social social-github" aria-label="GitHub">
-      <span>⌘</span>
-      <span>GitHub</span>
-    </a>
-  </div>
+<div class="social-links" aria-label="Social links">
+  <a [href]="social.linkedin" target="_blank" rel="noopener noreferrer" class="social social-linkedin"
+    aria-label="LinkedIn">
+    <span>in</span>
+    <span>LinkedIn</span>
+  </a>
+  <a [href]="social.x" target="_blank" rel="noopener noreferrer" class="social social-x" aria-label="X">
+    <span>𝕏</span>
+    <span>X</span>
+  </a>
+  <a [href]="social.github" target="_blank" rel="noopener noreferrer" class="social social-github" aria-label="GitHub">
+    <span>⌘</span>
+    <span>GitHub</span>
+  </a>
+  <a [href]="social.email" class="social social-email" aria-label="Email">
+    <span>@</span>
+    <span>Contact</span>
+  </a>
+</div>
 }

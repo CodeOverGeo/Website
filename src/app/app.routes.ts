@@ -7,18 +7,22 @@ export const routes: Routes = [
 	},
 	{
 		path: 'dashboard',
+		title: 'Giovanni Rufino | Dashboard',
 		loadComponent: () => import('./pages/dashboard/dashboard.component').then((m) => m.DashboardComponent)
 	},
 	{
 		path: 'experience.cs',
+		title: 'Giovanni Rufino | Experience',
 		loadComponent: () => import('./pages/experience/experience.component').then((m) => m.ExperienceComponent)
 	},
 	{
 		path: 'projects.py',
+		title: 'Giovanni Rufino | Projects',
 		loadComponent: () => import('./pages/projects/projects.component').then((m) => m.ProjectsComponent)
 	},
 	{
 		path: 'about',
+		title: 'Giovanni Rufino | About',
 		loadComponent: () => import('./pages/about/about.component').then((m) => m.AboutComponent)
 	},
 	{

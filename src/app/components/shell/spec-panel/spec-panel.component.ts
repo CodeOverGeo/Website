@@ -47,11 +47,10 @@ export class SpecPanelComponent {
   }
 
   loadSpec(): void {
-    this.dataService.getSpecData(this.route()).subscribe((spec) => {
-      this.content.set('');
-      interval(14)
-        .pipe(take(spec.length))
-        .subscribe((index) => this.content.set(spec.slice(0, index + 1)));
-    });
+    const spec = this.dataService.getSpecData(this.route());
+    this.content.set('');
+    interval(14)
+      .pipe(take(spec.length))
+      .subscribe((index) => this.content.set(spec.slice(0, index + 1)));
   }
 }

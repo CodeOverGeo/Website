@@ -13,9 +13,5 @@ import { VisibilityDirective } from '../../directives/visibility.directive';
 })
 export class ExperienceComponent {
   private readonly dataService = inject(PortfolioDataService);
-  readonly commits = signal<ExperienceCommit[]>([]);
-
-  constructor() {
-    this.dataService.getExperience().subscribe((value) => this.commits.set(value));
-  }
+  readonly commits = this.dataService.experience;
 }

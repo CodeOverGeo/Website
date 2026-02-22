@@ -136,17 +136,16 @@ export class BootSequenceComponent implements OnDestroy {
     this.showCursor.set(false);
     this.lines.set([]);
 
-    this.dataService.getTerminalSequence().subscribe((sequence) => {
-      this.sequenceSubscription?.unsubscribe();
-      this.sequenceSubscription = from(sequence)
-        .pipe(concatMap((line, index) => of(line).pipe(delay(BOOT_LINE_BASE_MS + index * BOOT_LINE_STEP_MS))))
-        .subscribe((line) => {
-          this.lines.update((existing) => [...existing, line]);
-          if (line.type === 'exec') {
-            setTimeout(() => this.router.navigate(['/dashboard']), 800);
-          }
-        });
-    });
+    const sequence = this.dataService.terminalSequence();
+    this.sequenceSubscription?.unsubscribe();
+    this.sequenceSubscription = from(sequence)
+      .pipe(concatMap((line, index) => of(line).pipe(delay(BOOT_LINE_BASE_MS + index * BOOT_LINE_STEP_MS))))
+      .subscribe((line) => {
+        this.lines.update((existing) => [...existing, line]);
+        if (line.type === 'exec') {
+          setTimeout(() => this.router.navigate(['/dashboard']), 800);
+        }
+      });
   }
 
   private startTestSimulation(): void {

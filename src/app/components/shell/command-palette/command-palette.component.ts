@@ -23,7 +23,7 @@ export class CommandPaletteComponent {
   readonly isOpen = signal(false);
   readonly query = signal('');
   readonly selectedIndex = signal(0);
-  readonly items = signal<CommandPaletteItem[]>([]);
+  readonly items = this.dataService.commandPaletteItems;
 
   readonly filteredItems = computed(() => {
     const value = this.query().toLowerCase().trim();
@@ -38,9 +38,7 @@ export class CommandPaletteComponent {
       .map((entry) => entry.item);
   });
 
-  constructor() {
-    this.dataService.getCommandPaletteItems().subscribe((items) => this.items.set(items));
-  }
+  constructor() { }
 
   onDocumentKeydown(event: KeyboardEvent): void {
     const isPaletteShortcut = (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k';
@@ -87,13 +85,21 @@ export class CommandPaletteComponent {
   }
 
   execute(item: CommandPaletteItem): void {
-    if (item.label === 'ai --verify-specs') {
+    if (item.actionId === 'MAILTO') {
+      window.location.href = 'mailto:giovannirufino@gmail.com';
+      this.close();
+      return;
+    }
+
+    if (item.actionId === 'VERIFY_SPECS') {
       this.shellUiService.openSpecPanel();
       this.close();
       return;
     }
 
-    this.router.navigate([item.route]);
+    if (item.route) {
+      this.router.navigate([item.route]);
+    }
     this.close();
   }
 

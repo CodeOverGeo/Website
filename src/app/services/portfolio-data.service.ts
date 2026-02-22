@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
 import {
   AboutSection,
   CommandPaletteItem,
@@ -13,7 +12,8 @@ import {
 const SOCIAL_LINKS: SocialLinks = {
   linkedin: 'https://linkedin.com/in/giovannirufino',
   x: 'https://x.com/CodeOverGeo',
-  github: 'https://github.com/CodeOverGeo'
+  github: 'https://github.com/CodeOverGeo',
+  email: 'mailto:giovannirufino@gmail.com'
 };
 
 const HERO: HeroProfile = {
@@ -25,10 +25,20 @@ const HERO: HeroProfile = {
 
 const EXPERIENCE: ExperienceCommit[] = [
   {
+    hash: 'a9b8c7d',
+    date: 'Nov 2025',
+    role: 'Software Engineer',
+    company: 'Relias',
+    description: 'Achieved "Gold" status in Cortex for the Regulation Management API, advancing observability and quality standards.',
+    branch: 'release/gold-tier',
+    isMerge: true,
+    skills: ['C#', '.NET', 'Cortex', 'Observability', 'API Design']
+  },
+  {
     hash: 'f1a2b3c',
     date: 'Dec 2025 - Present',
     role: 'Software Engineer',
-    company: 'Company',
+    company: 'Relias',
     description: 'Created MCP-based AI skills that read technical docs, compare repository context, and generate user stories with Gherkin acceptance criteria for faster refinements.',
     branch: 'feature/ai-refinements',
     isMerge: false,
@@ -38,7 +48,7 @@ const EXPERIENCE: ExperienceCommit[] = [
     hash: 'a1b2c3d',
     date: 'Oct 2024 - Present',
     role: 'Software Engineer',
-    company: 'Company',
+    company: 'Relias',
     description: 'Delivered backend APIs for AI initiatives, optimized performance from 10s to <1.5s, and advanced observability and quality standards.',
     branch: 'main',
     isMerge: false,
@@ -48,7 +58,7 @@ const EXPERIENCE: ExperienceCommit[] = [
     hash: 'c5d6e7f',
     date: '2023 - 2024',
     role: 'DevOps Evangelist & Feature Flag Enablement',
-    company: 'Company',
+    company: 'Relias',
     description: 'Became a go-to LaunchDarkly resource, trained teams, and supported architecture migrations with practical implementation guidance.',
     branch: 'feature/devops',
     isMerge: true,
@@ -58,7 +68,7 @@ const EXPERIENCE: ExperienceCommit[] = [
     hash: 'e4f5g6h',
     date: 'Jul 2022 - Oct 2024',
     role: 'Associate Software Engineer',
-    company: 'Company',
+    company: 'Relias',
     description: 'Contributed to service-based architecture projects, cross-team collaboration, and client-impacting feature delivery.',
     branch: 'feature/backend',
     isMerge: false,
@@ -97,6 +107,20 @@ const EXPERIENCE: ExperienceCommit[] = [
 ];
 
 const PROJECTS: Project[] = [
+  {
+    title: 'Vypto.org',
+    description: 'Zero-knowledge architecture platform ensuring privacy-first interactions and secure data handling.',
+    stack: ['Architecture', 'Zero-Knowledge Proofs', 'TypeScript'],
+    featured: true,
+    specData: 'Given user data, when verified via ZK proofs, then authenticity is confirmed without revealing the underlying information.'
+  },
+  {
+    title: 'Fluck iOS App',
+    description: 'In development (Apple Developer Program): native iOS app building on Apple & Coursera mobile standards.',
+    stack: ['Swift', 'iOS', 'StoreKit', 'Firebase'],
+    featured: true,
+    specData: 'Given a connected couple, when navigating the app, then relationship milestones and activities are displayed.'
+  },
   {
     title: 'AI Refinement MCP Server',
     description: 'Reads technical documents, compares repo context, and drafts refined user stories with Gherkin acceptance criteria.',
@@ -137,7 +161,7 @@ const ABOUT: AboutSection = {
     { name: 'Introduction to Software Engineering', issuer: 'IBM', date: '2025' },
     { name: 'Introduction to Mobile App Development', issuer: 'Coursera', date: '2025' }
   ],
-  interests: ['AI Engineering', 'Backend Development', 'Cloud Architecture', 'Mentorship', 'Developer Productivity'],
+  interests: ['Node.js', 'Python', 'AI Engineering', 'Backend Development', 'Cloud Architecture', 'Mentorship', 'Developer Productivity'],
   education: [
     'Springboard - Computer Software Engineering (2021-2022)',
     'Johnson & Wales University - AS Business Management (2000-2003)'
@@ -159,7 +183,8 @@ const COMMANDS: CommandPaletteItem[] = [
   { label: 'Open Experience', route: '/experience.cs', icon: 'commit', keywords: ['timeline', 'git', 'career'] },
   { label: 'Open Projects', route: '/projects.py', icon: 'code', keywords: ['apps', 'portfolio', 'featured'] },
   { label: 'Open About', route: '/about', icon: 'data_object', keywords: ['bio', 'json', 'profile'] },
-  { label: 'ai --verify-specs', route: '', icon: 'terminal', keywords: ['ai', 'spec', 'gherkin'] }
+  { label: 'Contact Giovanni', actionId: 'MAILTO', icon: 'mail', keywords: ['email', 'contact', 'message', 'hire'] },
+  { label: 'ai --verify-specs', actionId: 'VERIFY_SPECS', icon: 'terminal', keywords: ['ai', 'spec', 'gherkin'] }
 ];
 
 const SPEC_DATA: Record<string, string> = {
@@ -172,35 +197,15 @@ const SPEC_DATA: Record<string, string> = {
 
 @Injectable({ providedIn: 'root' })
 export class PortfolioDataService {
-  getHero(): Observable<HeroProfile> {
-    return of(HERO);
-  }
+  readonly hero = signal(HERO);
+  readonly experience = signal(EXPERIENCE);
+  readonly projects = signal(PROJECTS);
+  readonly about = signal(ABOUT);
+  readonly socialLinks = signal(SOCIAL_LINKS);
+  readonly terminalSequence = signal(TERMINAL_SEQUENCE);
+  readonly commandPaletteItems = signal(COMMANDS);
 
-  getExperience(): Observable<ExperienceCommit[]> {
-    return of(EXPERIENCE);
-  }
-
-  getProjects(): Observable<Project[]> {
-    return of(PROJECTS);
-  }
-
-  getAbout(): Observable<AboutSection> {
-    return of(ABOUT);
-  }
-
-  getSocialLinks(): Observable<SocialLinks> {
-    return of(SOCIAL_LINKS);
-  }
-
-  getTerminalSequence(): Observable<TerminalLine[]> {
-    return of(TERMINAL_SEQUENCE);
-  }
-
-  getCommandPaletteItems(): Observable<CommandPaletteItem[]> {
-    return of(COMMANDS);
-  }
-
-  getSpecData(view: string): Observable<string> {
-    return of(SPEC_DATA[view] ?? 'Feature: Spec Verification\n  Scenario: Default\n    Given a route is opened\n    Then route-specific specification text is shown');
+  getSpecData(view: string): string {
+    return SPEC_DATA[view] ?? 'Feature: Spec Verification\n  Scenario: Default\n    Given a route is opened\n    Then route-specific specification text is shown';
   }
 }

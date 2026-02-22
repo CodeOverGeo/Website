@@ -9,6 +9,7 @@ export interface SocialLinks {
   linkedin: string;
   x: string;
   github: string;
+  email: string;
 }
 
 export interface ExperienceCommit {
@@ -55,7 +56,8 @@ export interface TerminalLine {
 
 export interface CommandPaletteItem {
   label: string;
-  route: string;
+  route?: string;
+  actionId?: 'VERIFY_SPECS' | string;
   icon: string;
   keywords: string[];
 }

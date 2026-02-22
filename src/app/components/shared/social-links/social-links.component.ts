@@ -13,9 +13,5 @@ import { SocialLinks } from '../../../models/portfolio.models';
 export class SocialLinksComponent {
   private readonly dataService = inject(PortfolioDataService);
 
-  readonly links = signal<SocialLinks | null>(null);
-
-  constructor() {
-    this.dataService.getSocialLinks().subscribe((value) => this.links.set(value));
-  }
+  readonly links = this.dataService.socialLinks;
 }

@@ -14,9 +14,5 @@ import { SocialLinksComponent } from '../../components/shared/social-links/socia
 })
 export class DashboardComponent {
   private readonly dataService = inject(PortfolioDataService);
-  readonly hero = signal<HeroProfile | null>(null);
-
-  constructor() {
-    this.dataService.getHero().subscribe((value) => this.hero.set(value));
-  }
+  readonly hero = this.dataService.hero;
 }

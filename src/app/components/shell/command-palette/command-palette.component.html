@@ -8,9 +8,12 @@
         [value]="query()"
         (input)="onQueryInput($event)"
         aria-label="Search command"
+        role="combobox"
+        [attr.aria-expanded]="isOpen()"
+        [attr.aria-activedescendant]="filteredItems().length > 0 ? 'palette-item-' + selectedIndex() : null"
       />
 
-      <div class="palette-list">
+      <div class="palette-list" role="listbox">
         @if (filteredItems().length === 0) {
           <p class="empty-state mono">No matching commands</p>
         } @else {
@@ -20,6 +23,9 @@
               class="palette-item"
               [class.selected]="idx === selectedIndex()"
               (click)="execute(item)"
+              [id]="'palette-item-' + idx"
+              role="option"
+              [attr.aria-selected]="idx === selectedIndex()"
             >
               <span>{{ item.icon }}</span>
               <span>{{ item.label }}</span>

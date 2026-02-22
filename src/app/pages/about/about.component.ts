@@ -15,7 +15,7 @@ import { SocialLinksComponent } from '../../components/shared/social-links/socia
 export class AboutComponent {
   private readonly dataService = inject(PortfolioDataService);
 
-  readonly about = signal<AboutSection | null>(null);
+  readonly about = this.dataService.about;
   readonly isRaw = signal(false);
   readonly expanded = signal<Record<string, boolean>>({
     professional: true,
@@ -26,9 +26,7 @@ export class AboutComponent {
 
   readonly toggledLabel = computed(() => (this.isRaw() ? 'Show Formatted' : 'Show Raw JSON'));
 
-  constructor() {
-    this.dataService.getAbout().subscribe((value) => this.about.set(value));
-  }
+  constructor() { }
 
   toggleMode(): void {
     this.isRaw.update((value) => !value);
