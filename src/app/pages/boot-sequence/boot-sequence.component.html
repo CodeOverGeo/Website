@@ -7,6 +7,10 @@
     }
   </div>
 
+  @if (awaitingInput()) {
+    <p class="hint">type &nbsp;<span class="hint-cmd">dotnet run</span>&nbsp; or &nbsp;<span class="hint-cmd">dotnet test</span>&nbsp; then press <span class="hint-key">Enter</span></p>
+  }
+
   <div class="output">
     @for (line of lines(); track $index) {
       <p class="line" [class.type-init]="line.type === 'init'" [class.type-load]="line.type === 'load'" [class.type-pass]="line.type === 'pass'" [class.type-ok]="line.type === 'ok'" [class.type-exec]="line.type === 'exec'">

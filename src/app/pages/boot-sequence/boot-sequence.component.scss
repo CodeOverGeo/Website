@@ -23,6 +23,26 @@
   animation: blink 1s infinite;
 }
 
+.hint {
+  font-size: 0.78rem;
+  color: var(--text-secondary, #8B949E);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeIn 300ms ease 200ms forwards;
+}
+
+.hint-cmd {
+  color: var(--accent-green);
+}
+
+.hint-key {
+  color: var(--accent-blue);
+  border: 1px solid var(--accent-blue);
+  border-radius: 3px;
+  padding: 0 4px;
+  font-size: 0.74rem;
+}
+
 .output {
   display: grid;
   gap: 0.35rem;
