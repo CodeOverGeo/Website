@@ -12,7 +12,6 @@ const CHAR_DELAY_MS = 80;
 const CORRECT_CHAR_MS = 65;
 const BOOT_LINE_BASE_MS = 500;
 const BOOT_LINE_STEP_MS = 280;
-const TEST_LINE_MS = 500;
 
 @Component({
   selector: 'app-boot-sequence',
@@ -166,7 +165,7 @@ export class BootSequenceComponent implements OnDestroy {
 
     this.sequenceSubscription?.unsubscribe();
     this.sequenceSubscription = from(testLines)
-      .pipe(concatMap((line) => of(line).pipe(delay(TEST_LINE_MS))))
+      .pipe(concatMap((line, index) => of(line).pipe(delay(BOOT_LINE_BASE_MS + index * BOOT_LINE_STEP_MS))))
       .subscribe({
         next: (line) => this.lines.update((existing) => [...existing, line]),
         complete: () => {
