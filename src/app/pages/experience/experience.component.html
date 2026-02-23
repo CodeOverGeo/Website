@@ -8,12 +8,18 @@
       [class.branch-devops]="commit.branch === 'feature/devops'"
       [class.branch-ai]="commit.branch === 'feature/ai-refinements'"
       [class.branch-cs]="commit.branch === 'feature/backend'" [class.branch-py]="commit.branch === 'feature/bootcamp'"
-      [class.branch-json]="commit.branch === 'feature/ops'">
+      [class.branch-json]="commit.branch === 'feature/ops'" [class.branch-gold]="commit.branch === 'release/gold-tier'"
+      [class.branch-backend]="commit.branch === 'feature/backend'" [class.branch-ops]="commit.branch === 'feature/ops'"
+      [class.branch-leadership]="commit.branch === 'feature/leadership'">
       <div class="node" [class.branch-main]="commit.branch === 'main'"
         [class.branch-devops]="commit.branch === 'feature/devops'"
         [class.branch-ai]="commit.branch === 'feature/ai-refinements'"
         [class.branch-cs]="commit.branch === 'feature/backend'" [class.branch-py]="commit.branch === 'feature/bootcamp'"
-        [class.branch-json]="commit.branch === 'feature/ops'"></div>
+        [class.branch-json]="commit.branch === 'feature/ops'"
+        [class.branch-gold]="commit.branch === 'release/gold-tier'"
+        [class.branch-backend]="commit.branch === 'feature/backend'"
+        [class.branch-ops]="commit.branch === 'feature/ops'"
+        [class.branch-leadership]="commit.branch === 'feature/leadership'"></div>
       <div class="content">
         <p class="meta mono">
           <span>{{ commit.hash }}</span>

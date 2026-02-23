@@ -41,12 +41,45 @@
   background: #7d8590;
 }
 
-.branch-main { background: var(--accent-green); }
-.branch-devops { background: #5cc8ff; }
-.branch-ai { background: #e77dff; }
-.branch-cs { background: var(--dotnet-purple); }
-.branch-py { background: var(--python-yellow); }
-.branch-json { background: var(--node-green); }
+.branch-main {
+  background: var(--accent-green);
+}
+
+.branch-devops {
+  background: #5cc8ff;
+}
+
+.branch-ai {
+  background: #e77dff;
+}
+
+.branch-cs {
+  background: var(--dotnet-purple);
+}
+
+.branch-py {
+  background: var(--python-yellow);
+}
+
+.branch-json {
+  background: var(--node-green);
+}
+
+.branch-gold {
+  background: #ffd700;
+}
+
+.branch-backend {
+  background: #ff7b72;
+}
+
+.branch-ops {
+  background: #d2a8ff;
+}
+
+.branch-leadership {
+  background: #ffa657;
+}
 
 .content {
   border: 1px solid #30363d;
@@ -57,12 +90,45 @@
   border-left-color: #30363d;
 }
 
-.commit-card.branch-main .content { border-left-color: var(--accent-green); }
-.commit-card.branch-devops .content { border-left-color: #5cc8ff; }
-.commit-card.branch-ai .content { border-left-color: #e77dff; }
-.commit-card.branch-cs .content { border-left-color: var(--dotnet-purple); }
-.commit-card.branch-py .content { border-left-color: var(--python-yellow); }
-.commit-card.branch-json .content { border-left-color: var(--node-green); }
+.commit-card.branch-main .content {
+  border-left-color: var(--accent-green);
+}
+
+.commit-card.branch-devops .content {
+  border-left-color: #5cc8ff;
+}
+
+.commit-card.branch-ai .content {
+  border-left-color: #e77dff;
+}
+
+.commit-card.branch-cs .content {
+  border-left-color: var(--dotnet-purple);
+}
+
+.commit-card.branch-py .content {
+  border-left-color: var(--python-yellow);
+}
+
+.commit-card.branch-json .content {
+  border-left-color: var(--node-green);
+}
+
+.commit-card.branch-gold .content {
+  border-left-color: #ffd700;
+}
+
+.commit-card.branch-backend .content {
+  border-left-color: #ff7b72;
+}
+
+.commit-card.branch-ops .content {
+  border-left-color: #d2a8ff;
+}
+
+.commit-card.branch-leadership .content {
+  border-left-color: #ffa657;
+}
 
 .meta {
   display: flex;
