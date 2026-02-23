@@ -161,7 +161,7 @@ export class BootSequenceComponent implements OnDestroy {
       { prefix: '[pass]', text: '✓ skills.verified (3ms)', type: 'pass' },
       { prefix: '[pass]', text: '✓ experience.loaded (1ms)', type: 'pass' },
       { prefix: '[pass]', text: '✓ projects.rendered (2ms)', type: 'pass' },
-      { prefix: '[ok]', text: '452 passed, 0 failed', type: 'ok' }
+      { prefix: '[ok]', text: '501 passed, 0 failed', type: 'ok' }
     ];
 
     this.sequenceSubscription?.unsubscribe();
