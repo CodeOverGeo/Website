@@ -16,6 +16,12 @@
 	padding: 0;
 }
 
+*:focus-visible {
+	outline: 2px dashed var(--accent-blue);
+	outline-offset: 4px;
+	border-radius: 2px;
+}
+
 html,
 body {
 	min-height: 100%;

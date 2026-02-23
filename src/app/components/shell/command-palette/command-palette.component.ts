@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { afterRenderEffect, ChangeDetectionStrategy, Component, computed, ElementRef, inject, QueryList, signal, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { PortfolioDataService } from '../../../services/portfolio-data.service';
 import { CommandPaletteItem } from '../../../models/portfolio.models';
@@ -20,6 +20,8 @@ export class CommandPaletteComponent {
   private readonly dataService = inject(PortfolioDataService);
   private readonly shellUiService = inject(ShellUiService);
 
+  @ViewChildren('paletteOption') paletteOptions!: QueryList<ElementRef<HTMLElement>>;
+
   readonly isOpen = signal(false);
   readonly query = signal('');
   readonly selectedIndex = signal(0);
@@ -38,7 +40,13 @@ export class CommandPaletteComponent {
       .map((entry) => entry.item);
   });
 
-  constructor() { }
+  constructor() {
+    afterRenderEffect(() => {
+      const idx = this.selectedIndex();
+      const option = this.paletteOptions?.get(idx);
+      option?.nativeElement.scrollIntoView({ block: 'nearest' });
+    });
+  }
 
   onDocumentKeydown(event: KeyboardEvent): void {
     const isPaletteShortcut = (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k';

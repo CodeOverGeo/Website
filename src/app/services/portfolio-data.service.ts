@@ -152,8 +152,8 @@ const PROJECTS: Project[] = [
 ];
 
 const ABOUT: AboutSection = {
-  professional: 'Software engineer focused on backend systems, platform enablement, and AI-assisted delivery. Recognized for cross-team collaboration, mentorship, and measurable impact.',
-  personal: 'Builder mindset with a practical, team-first approach to solving complex technical problems.',
+  professional: 'I am an intentional, highly collaborative introvert who excels at building high-performing teams from the ground up. I hold multiple certifications (AZ-204, AI-900, DP-203) and am proficient in Node.js, Python, C#, and .NET.',
+  personal: "When I'm not writing code from my Mac, I'm likely hitting the road with my family for an amusement park trip or cabin camping, tackling a DIY home project, or cheering for the Kansas City Chiefs. I'm a massive EV enthusiast—always looking for the next optimization for my Kia EV9—and an avid gamer (PS5).",
   certifications: [
     { name: 'AZ-204 Azure Developer Associate', issuer: 'Microsoft', date: '2024' },
     { name: 'AI-900 Azure AI Fundamentals', issuer: 'Microsoft', date: '2024' },
@@ -161,7 +161,17 @@ const ABOUT: AboutSection = {
     { name: 'Introduction to Software Engineering', issuer: 'IBM', date: '2025' },
     { name: 'Introduction to Mobile App Development', issuer: 'Coursera', date: '2025' }
   ],
-  interests: ['Node.js', 'Python', 'AI Engineering', 'Backend Development', 'Cloud Architecture', 'Mentorship', 'Developer Productivity'],
+  interests: [
+    'Node.js',
+    'Python',
+    'AI Engineering',
+    'Cloud Architecture',
+    'EV Optimization (Kia EV9)',
+    'Cabin Camping',
+    'DIY Home Projects',
+    'Kansas City Chiefs',
+    'PS5 Gaming'
+  ],
   education: [
     'Springboard - Computer Software Engineering (2021-2022)',
     'Johnson & Wales University - AS Business Management (2000-2003)'

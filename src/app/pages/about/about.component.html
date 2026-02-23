@@ -5,42 +5,56 @@
   </header>
 
   @if (about(); as data) {
-    @if (!isRaw()) {
-      <div class="json-view mono">
-        <button type="button" class="section-btn" (click)="toggleSection('professional')">"professional"</button>
-        @if (expanded()['professional']) {
-          <p class="value">{{ data.professional }}</p>
-        }
-
-        <button type="button" class="section-btn" (click)="toggleSection('personal')">"personal"</button>
-        @if (expanded()['personal']) {
-          <p class="value">{{ data.personal }}</p>
-        }
-
-        <button type="button" class="section-btn" (click)="toggleSection('certifications')">"certifications"</button>
-        @if (expanded()['certifications']) {
-          <div class="indent">
-            @for (cert of data.certifications; track cert.name) {
-              <p>{{ cert.name }} · {{ cert.issuer }} · {{ cert.date }}</p>
-            }
-          </div>
-        }
-
-        <button type="button" class="section-btn" (click)="toggleSection('interests')">"interests"</button>
-        @if (expanded()['interests']) {
-          <div class="indent">
-            @for (interest of data.interests; track interest) {
-              <p>"{{ interest }}",</p>
-            }
-          </div>
-        }
-      </div>
-    } @else {
-      <pre class="raw mono">{{ data | json }}</pre>
+  @if (!isRaw()) {
+  <div class="json-view mono">
+    <button type="button" class="section-btn" (click)="toggleSection('professional')"
+      [attr.aria-expanded]="expanded()['professional']">"professional"</button>
+    @if (expanded()['professional']) {
+    <p class="value">{{ data.professional }}</p>
     }
 
-    <div class="social-row">
-      <app-social-links />
+    <button type="button" class="section-btn" (click)="toggleSection('personal')"
+      [attr.aria-expanded]="expanded()['personal']">"personal"</button>
+    @if (expanded()['personal']) {
+    <p class="value">{{ data.personal }}</p>
+    }
+
+    <button type="button" class="section-btn" (click)="toggleSection('certifications')"
+      [attr.aria-expanded]="expanded()['certifications']">"certifications"</button>
+    @if (expanded()['certifications']) {
+    <div class="indent">
+      @for (cert of data.certifications; track cert.name) {
+      <p>{{ cert.name }} · {{ cert.issuer }} · {{ cert.date }}</p>
+      }
     </div>
+    }
+
+    <button type="button" class="section-btn" (click)="toggleSection('interests')"
+      [attr.aria-expanded]="expanded()['interests']">"interests"</button>
+    @if (expanded()['interests']) {
+    <div class="indent">
+      @for (interest of data.interests; track interest) {
+      <p>"{{ interest }}",</p>
+      }
+    </div>
+    }
+
+    <button type="button" class="section-btn" (click)="toggleSection('education')"
+      [attr.aria-expanded]="expanded()['education']">"education"</button>
+    @if (expanded()['education']) {
+    <div class="indent">
+      @for (edu of data.education; track edu) {
+      <p>"{{ edu }}",</p>
+      }
+    </div>
+    }
+  </div>
+  } @else {
+  <pre class="raw mono">{{ data | json }}</pre>
+  }
+
+  <div class="social-row">
+    <app-social-links />
+  </div>
   }
 </section>

@@ -156,10 +156,12 @@ export class BootSequenceComponent implements OnDestroy {
 
     const testLines: TerminalLine[] = [
       { prefix: '[exec]', text: 'Running tests...', type: 'exec' },
+      { prefix: '[pass]', text: '✓ node.js_environment.verified (2ms)', type: 'pass' },
+      { prefix: '[pass]', text: '✓ python_scripts.loaded (4ms)', type: 'pass' },
       { prefix: '[pass]', text: '✓ skills.verified (3ms)', type: 'pass' },
       { prefix: '[pass]', text: '✓ experience.loaded (1ms)', type: 'pass' },
       { prefix: '[pass]', text: '✓ projects.rendered (2ms)', type: 'pass' },
-      { prefix: '[ok]', text: '3 passed, 0 failed', type: 'ok' }
+      { prefix: '[ok]', text: '452 passed, 0 failed', type: 'ok' }
     ];
 
     this.sequenceSubscription?.unsubscribe();

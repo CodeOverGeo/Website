@@ -3,18 +3,18 @@
 
   <div class="project-grid">
     @for (project of sorted(); track project.title) {
-      <article class="project-card" appVisibility [class.featured]="project.featured">
-        @if (project.featured) {
-          <span class="ribbon">FEATURED</span>
+    <article class="project-card" appVisibility [class.featured]="project.featured">
+      @if (project.featured) {
+      <span class="ribbon">FEATURED</span>
+      }
+      <h2>{{ project.title }}</h2>
+      <p>{{ project.description }}</p>
+      <ul class="stack" aria-label="Tech stack">
+        @for (item of project.stack; track item) {
+        <li class="badge">{{ item }}</li>
         }
-        <h2>{{ project.title }}</h2>
-        <p>{{ project.description }}</p>
-        <div class="stack">
-          @for (item of project.stack; track item) {
-            <span class="badge">{{ item }}</span>
-          }
-        </div>
-      </article>
+      </ul>
+    </article>
     }
   </div>
 </section>

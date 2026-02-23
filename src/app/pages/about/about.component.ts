@@ -21,7 +21,8 @@ export class AboutComponent {
     professional: true,
     personal: true,
     certifications: true,
-    interests: true
+    interests: true,
+    education: true
   });
 
   readonly toggledLabel = computed(() => (this.isRaw() ? 'Show Formatted' : 'Show Raw JSON'));
