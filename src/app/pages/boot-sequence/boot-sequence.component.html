@@ -1,22 +1,24 @@
-<section class="boot mono">
+<section class="boot mono" [class.fade-out]="isFadingOut()">
   <div class="prompt-line">
     <span class="prompt">user@portfolio:~$</span>
     <span class="typed">{{ typedCommand() }}</span>
     @if (showCursor()) {
-      <span class="cursor">▋</span>
+    <span class="cursor">▋</span>
     }
   </div>
 
   @if (awaitingInput()) {
-    <p class="hint">press <span class="hint-key">Enter</span> to run</p>
+  <p class="hint">press <span class="hint-key">Enter</span> to run</p>
   }
 
   <div class="output">
     @for (line of lines(); track $index) {
-      <p class="line" [class.type-init]="line.type === 'init'" [class.type-load]="line.type === 'load'" [class.type-pass]="line.type === 'pass'" [class.type-ok]="line.type === 'ok'" [class.type-exec]="line.type === 'exec'">
-        <span class="prefix">{{ line.prefix }}</span>
-        <span>{{ line.text }}</span>
-      </p>
+    <p class="line" [class.type-init]="line.type === 'init'" [class.type-load]="line.type === 'load'"
+      [class.type-pass]="line.type === 'pass'" [class.type-ok]="line.type === 'ok'"
+      [class.type-exec]="line.type === 'exec'">
+      <span class="prefix">{{ line.prefix }}</span>
+      <span>{{ line.text }}</span>
+    </p>
     }
   </div>
 </section>

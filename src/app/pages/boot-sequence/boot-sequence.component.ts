@@ -31,6 +31,7 @@ export class BootSequenceComponent implements OnDestroy {
   readonly typedCommand = signal('');
   readonly lines = signal<TerminalLine[]>([]);
   readonly showCursor = signal(true);
+  readonly isFadingOut = signal(false);
   /** True only while waiting for the user to press Enter. */
   readonly awaitingInput = signal(false);
 
@@ -143,6 +144,7 @@ export class BootSequenceComponent implements OnDestroy {
       .subscribe((line) => {
         this.lines.update((existing) => [...existing, line]);
         if (line.type === 'exec') {
+          setTimeout(() => this.isFadingOut.set(true), 600);
           setTimeout(() => this.router.navigate(['/dashboard']), 800);
         }
       });

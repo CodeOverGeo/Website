@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { simulateLoading } from '../../utils/simulated-loading.util';
 import { JsonPipe } from '@angular/common';
 import { PortfolioDataService } from '../../services/portfolio-data.service';
 import { AboutSection } from '../../models/portfolio.models';
@@ -15,7 +16,7 @@ import { SocialLinksComponent } from '../../components/shared/social-links/socia
 export class AboutComponent {
   private readonly dataService = inject(PortfolioDataService);
 
-  readonly about = this.dataService.about;
+  readonly about = simulateLoading(this.dataService.about, 400, 900);
   readonly isRaw = signal(false);
   readonly expanded = signal<Record<string, boolean>>({
     professional: true,

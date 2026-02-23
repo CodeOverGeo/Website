@@ -1,8 +1,9 @@
 <section class="projects-page">
   <h1 class="mono">projects.py</h1>
 
-  <div class="project-grid">
-    @for (project of sorted(); track project.title) {
+  @if (sorted(); as resolvedProjects) {
+  <div class="project-grid fade-in">
+    @for (project of resolvedProjects; track project.title) {
     <article class="project-card" appVisibility [class.featured]="project.featured">
       @if (project.featured) {
       <span class="ribbon">FEATURED</span>
@@ -17,4 +18,7 @@
     </article>
     }
   </div>
+  } @else {
+  <div class="terminal-loader">&gt; Loading workspaces... -</div>
+  }
 </section>

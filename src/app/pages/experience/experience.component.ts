@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { simulateLoading } from '../../utils/simulated-loading.util';
 import { PortfolioDataService } from '../../services/portfolio-data.service';
 import { ExperienceCommit } from '../../models/portfolio.models';
 import { VisibilityDirective } from '../../directives/visibility.directive';
@@ -13,5 +14,5 @@ import { VisibilityDirective } from '../../directives/visibility.directive';
 })
 export class ExperienceComponent {
   private readonly dataService = inject(PortfolioDataService);
-  readonly commits = this.dataService.experience;
+  readonly commits = simulateLoading(this.dataService.experience, 600, 1200);
 }

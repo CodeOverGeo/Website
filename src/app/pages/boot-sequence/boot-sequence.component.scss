@@ -68,3 +68,8 @@
 .type-exec .prefix {
   color: var(--dotnet-purple);
 }
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 200ms ease;
+}

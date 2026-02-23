@@ -6,7 +6,7 @@
 
   @if (about(); as data) {
   @if (!isRaw()) {
-  <div class="json-view mono">
+  <div class="json-view mono fade-in">
     <button type="button" class="section-btn" (click)="toggleSection('professional')"
       [attr.aria-expanded]="expanded()['professional']">"professional"</button>
     @if (expanded()['professional']) {
@@ -50,11 +50,13 @@
     }
   </div>
   } @else {
-  <pre class="raw mono">{{ data | json }}</pre>
+  <pre class="raw mono fade-in">{{ data | json }}</pre>
   }
 
-  <div class="social-row">
+  <div class="social-row fade-in">
     <app-social-links />
   </div>
+  } @else {
+  <div class="terminal-loader">&gt; Connecting to profile data endpoint... [ / ]</div>
   }
 </section>

@@ -2,13 +2,15 @@
   <div class="grid-bg" aria-hidden="true"></div>
 
   @if (hero(); as profile) {
-    <article class="hero-card">
-      <h1>{{ profile.name }}</h1>
-      <p class="title">{{ profile.title }}</p>
-      <p class="tagline">{{ profile.tagline }}</p>
-      <p class="location">📍 {{ profile.location }}</p>
-      <app-social-links />
-    </article>
+  <article class="hero-card fade-in">
+    <h1>{{ profile.name }}</h1>
+    <p class="title">{{ profile.title }}</p>
+    <p class="tagline">{{ profile.tagline }}</p>
+    <p class="location">📍 {{ profile.location }}</p>
+    <app-social-links />
+  </article>
+  } @else {
+  <div class="terminal-loader">&gt; Fetching user profile... \</div>
   }
 
   <div class="quick-links">

@@ -56,16 +56,19 @@ body {
 	from {
 		width: 0;
 	}
+
 	to {
 		width: 100%;
 	}
 }
 
 @keyframes blink {
+
 	0%,
 	50% {
 		opacity: 1;
 	}
+
 	51%,
 	100% {
 		opacity: 0;
@@ -77,6 +80,7 @@ body {
 		opacity: 0;
 		transform: translateY(6px);
 	}
+
 	to {
 		opacity: 1;
 		transform: translateY(0);
@@ -88,8 +92,34 @@ body {
 		opacity: 0;
 		transform: translateX(16px);
 	}
+
 	to {
 		opacity: 1;
 		transform: translateX(0);
+	}
+}
+
+.terminal-loader {
+	font-family: 'Fira Code', 'SFMono-Regular', Menlo, monospace;
+	color: var(--accent-green);
+	font-size: 0.9rem;
+	padding: 1rem;
+	opacity: 0.8;
+	animation: pulse 1.5s infinite;
+}
+
+.fade-in {
+	animation: fadeIn 350ms ease forwards;
+}
+
+@keyframes pulse {
+
+	0%,
+	100% {
+		opacity: 0.5;
+	}
+
+	50% {
+		opacity: 1;
 	}
 }
