@@ -15,20 +15,50 @@
   color: var(--accent-blue);
 }
 
+.typed-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: text;
+}
+
 .typed {
   color: var(--accent-green);
+}
+
+.command-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: transparent;
+  caret-color: transparent;
+  font: inherit;
+  padding: 0;
+  margin: 0;
+  z-index: 1;
 }
 
 .cursor {
   animation: blink 1s infinite;
 }
 
-.hint {
-  font-size: 0.78rem;
-  color: var(--text-secondary, #8B949E);
+.hint-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   margin-bottom: 1.5rem;
   opacity: 0;
   animation: fadeIn 300ms ease 200ms forwards;
+}
+
+.hint {
+  font-size: 0.78rem;
+  color: var(--text-secondary, #8B949E);
+  margin: 0;
 }
 
 .hint-key {
@@ -37,6 +67,25 @@
   border-radius: 3px;
   padding: 0 4px;
   font-size: 0.74rem;
+}
+
+.enter-btn {
+  font-family: inherit;
+  font-size: 0.78rem;
+  color: var(--accent-green);
+  background: transparent;
+  border: 1px solid var(--accent-green);
+  border-radius: 4px;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+  transition: background 200ms ease, color 200ms ease;
+  white-space: nowrap;
+
+  &:hover,
+  &:active {
+    background: var(--accent-green);
+    color: var(--bg-primary);
+  }
 }
 
 .output {

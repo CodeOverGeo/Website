@@ -1,14 +1,26 @@
 <section class="boot mono" [class.fade-out]="isFadingOut()">
   <div class="prompt-line">
     <span class="prompt">user@portfolio:~$</span>
-    <span class="typed">{{ typedCommand() }}</span>
-    @if (showCursor()) {
-    <span class="cursor">▋</span>
-    }
+    <span class="typed-wrapper" (click)="focusInput()">
+      <span class="typed">{{ typedCommand() }}</span>
+      @if (showCursor()) {
+      <span class="cursor">▋</span>
+      }
+      @if (awaitingInput()) {
+      <input #commandInput class="command-input" type="text" [value]="typedCommand()" maxlength="12" autocomplete="off"
+        autocorrect="off" autocapitalize="off" spellcheck="false" (input)="onInputChange($event)"
+        (keydown.enter)="onEnterPressed()" />
+      }
+    </span>
   </div>
 
   @if (awaitingInput()) {
-  <p class="hint">press <span class="hint-key">Enter</span> to run</p>
+  <div class="hint-row">
+    <p class="hint">press <span class="hint-key">Enter</span> to run</p>
+    <button class="enter-btn" (click)="onEnterPressed()" aria-label="Run command">
+      Enter ↵
+    </button>
+  </div>
   }
 
   <div class="output">

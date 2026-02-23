@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnDestroy, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, OnDestroy, signal, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { concatMap, delay, from, interval, of, Subscription, take } from 'rxjs';
 import { PortfolioDataService } from '../../services/portfolio-data.service';
@@ -8,6 +8,7 @@ type Phase = 'typing-init' | 'waiting' | 'correcting' | 'booting' | 'testing';
 
 const VALID_COMMANDS = ['dotnet run', 'dotnet test'] as const;
 const MAX_LEN = 12;
+
 const CHAR_DELAY_MS = 80;
 const CORRECT_CHAR_MS = 65;
 const BOOT_LINE_BASE_MS = 500;
@@ -28,12 +29,15 @@ export class BootSequenceComponent implements OnDestroy {
   private readonly router = inject(Router);
   private readonly dataService = inject(PortfolioDataService);
 
+  @ViewChild('commandInput') private commandInput?: ElementRef<HTMLInputElement>;
+
   readonly typedCommand = signal('');
   readonly lines = signal<TerminalLine[]>([]);
   readonly showCursor = signal(true);
   readonly isFadingOut = signal(false);
   /** True only while waiting for the user to press Enter. */
   readonly awaitingInput = signal(false);
+
 
   private phase: Phase = 'typing-init';
   private sequenceSubscription?: Subscription;
@@ -52,20 +56,14 @@ export class BootSequenceComponent implements OnDestroy {
     if (this.phase !== 'waiting') return;
 
     if (event.key === 'Enter') {
-      const cmd = this.typedCommand();
-      if (cmd === 'dotnet run') {
-        this.startBoot();
-      } else if (cmd === 'dotnet test') {
-        this.startTestSimulation();
-      } else {
-        this.correctAndBoot();
-      }
+      this.onEnterPressed();
       return;
     }
 
     if (event.key === 'Backspace') {
       event.preventDefault();
       this.typedCommand.update(c => c.slice(0, -1));
+      this.syncInput();
       return;
     }
 
@@ -75,12 +73,45 @@ export class BootSequenceComponent implements OnDestroy {
     if (next.length > MAX_LEN) return;
 
     this.typedCommand.set(next);
+    this.syncInput();
 
     // If no longer a prefix of any valid command, immediately correct
     const stillValid = VALID_COMMANDS.some(cmd => cmd.startsWith(next));
     if (!stillValid) {
       this.correctAndBoot();
     }
+  }
+
+  /** Called by the Enter button or the input keydown.enter event. */
+  onEnterPressed(): void {
+    if (this.phase !== 'waiting') return;
+    const cmd = this.typedCommand();
+    if (cmd === 'dotnet run') {
+      this.startBoot();
+    } else if (cmd === 'dotnet test') {
+      this.startTestSimulation();
+    } else {
+      this.correctAndBoot();
+    }
+  }
+
+  /** Handles input from the hidden <input> (mobile keyboard). */
+  onInputChange(event: Event): void {
+    if (this.phase !== 'waiting') return;
+    const value = (event.target as HTMLInputElement).value;
+    if (value.length > MAX_LEN) return;
+
+    this.typedCommand.set(value);
+
+    const stillValid = VALID_COMMANDS.some(cmd => cmd.startsWith(value));
+    if (!stillValid) {
+      this.correctAndBoot();
+    }
+  }
+
+  /** Focus the hidden input to open the mobile keyboard. */
+  focusInput(): void {
+    this.commandInput?.nativeElement.focus();
   }
 
   // ─── Private ────────────────────────────────────────────────────────────────
@@ -185,5 +216,12 @@ export class BootSequenceComponent implements OnDestroy {
   private clearCorrectionTimers(): void {
     this.correctionTimers.forEach(clearTimeout);
     this.correctionTimers = [];
+  }
+
+  /** Keep the hidden input value in sync with the signal. */
+  private syncInput(): void {
+    if (this.commandInput) {
+      this.commandInput.nativeElement.value = this.typedCommand();
+    }
   }
 }
