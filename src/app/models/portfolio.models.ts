@@ -70,7 +70,7 @@ export interface DossierStat {
 export interface PowerRating {
   name: string;
   level: number;
-  category: 'frontend' | 'backend' | 'cloud' | 'data' | 'devops';
+  category: 'frontend' | 'backend' | 'cloud' | 'data' | 'devops' | 'mobile';
 }
 
 export interface Testimonial {

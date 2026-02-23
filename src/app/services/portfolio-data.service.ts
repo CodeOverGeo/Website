@@ -32,7 +32,7 @@ const EXPERIENCE: ExperienceCommit[] = [
     date: 'Nov 2025',
     role: 'Software Engineer',
     company: 'Relias',
-    description: 'Achieved "Gold" status in Cortex for the Regulation Management API, advancing observability and quality standards.',
+    description: 'Achieved "Gold" status in Cortex for microservice, advancing observability and quality standards.',
     branch: 'release/gold-tier',
     isMerge: true,
     skills: ['C#', '.NET', 'Cortex', 'Observability', 'API Design']
@@ -149,7 +149,7 @@ const PROJECTS: Project[] = [
 
 const ABOUT: AboutSection = {
   professional: 'I am an intentional, highly collaborative introvert who excels at building high-performing teams from the ground up. I hold multiple certifications (AZ-204, AI-900, DP-203) and am proficient in Node.js, Python, C#, and .NET.',
-  personal: "When I'm not writing code from my Mac, I'm likely hitting the road with my family for an amusement park trip or cabin camping, tackling a DIY home project, or cheering for the Kansas City Chiefs. I'm a massive EV enthusiast—always looking for the next optimization for my Kia EV9—and an avid gamer (PS5).",
+  personal: "When I'm not writing code from my Mac, I'm likely hitting the road with my family for an amusement park trip or cabin camping, tackling a DIY home project, or cheering for the Kansas City Chiefs. I'm a massive EV enthusiast—always researching the latest in EV tech—and an avid PlayStation gamer.",
   certifications: [
     { name: 'AZ-204 Azure Developer Associate', issuer: 'Microsoft', date: '2024' },
     { name: 'AI-900 Azure AI Fundamentals', issuer: 'Microsoft', date: '2024' },
@@ -200,10 +200,11 @@ const POWERS: PowerRating[] = [
   { name: 'Angular', level: 8, category: 'frontend' },
   { name: 'TypeScript', level: 9, category: 'frontend' },
   { name: 'Azure Cloud', level: 7, category: 'cloud' },
-  { name: 'Cosmos DB', level: 8, category: 'data' },
+  { name: 'Cosmos DB', level: 9, category: 'data' },
   { name: 'SQL / Postgres', level: 8, category: 'data' },
   { name: 'CI/CD Pipelines', level: 8, category: 'devops' },
-  { name: 'Docker', level: 7, category: 'devops' }
+  { name: 'Docker', level: 7, category: 'devops' },
+  { name: 'Swift', level: 7, category: 'mobile' }
 ];
 
 const TESTIMONIALS: Testimonial[] = [
