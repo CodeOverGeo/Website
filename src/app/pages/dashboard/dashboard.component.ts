@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+
 import { PortfolioDataService } from '../../services/portfolio-data.service';
 import { SocialLinksComponent } from '../../components/shared/social-links/social-links.component';
 import { simulateLoading } from '../../utils/simulated-loading.util';
@@ -7,7 +7,7 @@ import { simulateLoading } from '../../utils/simulated-loading.util';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterLink, SocialLinksComponent],
+  imports: [SocialLinksComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

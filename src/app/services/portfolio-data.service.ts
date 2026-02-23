@@ -148,12 +148,12 @@ const PROJECTS: Project[] = [
 ];
 
 const ABOUT: AboutSection = {
-  professional: 'I am an intentional, highly collaborative introvert who excels at building high-performing teams from the ground up. I hold multiple certifications (AZ-204, AI-900, DP-203) and am proficient in Node.js, Python, C#, and .NET.',
+  professional: 'I am an intentional, highly collaborative introvert who excels at building high-performing teams from the ground up. I hold multiple certifications (AZ-900, AZ-204, AI-900) and am proficient in Node.js, Python, C#, and .NET.',
   personal: "When I'm not writing code from my Mac, I'm likely hitting the road with my family for an amusement park trip or cabin camping, tackling a DIY home project, or cheering for the Kansas City Chiefs. I'm a massive EV enthusiast—always researching the latest in EV tech—and an avid PlayStation gamer.",
   certifications: [
+    { name: 'AZ-900 Azure Fundamentals', issuer: 'Microsoft', date: '2023' },
     { name: 'AZ-204 Azure Developer Associate', issuer: 'Microsoft', date: '2024' },
     { name: 'AI-900 Azure AI Fundamentals', issuer: 'Microsoft', date: '2024' },
-    { name: 'DP-203 Data Engineering on Azure', issuer: 'Udemy', date: '2024' },
     { name: 'Introduction to Software Engineering', issuer: 'IBM', date: '2025' },
     { name: 'Introduction to Mobile App Development', issuer: 'Coursera', date: '2025' }
   ],
@@ -169,8 +169,8 @@ const ABOUT: AboutSection = {
     'PS5 Gaming'
   ],
   education: [
-    'Springboard - Computer Software Engineering (2021-2022)',
-    'Johnson & Wales University - AS Business Management (2000-2003)'
+    'Johnson & Wales University - AS Business Management (2000-2003)',
+    'Springboard - Computer Software Engineering (2021-2022)'
   ],
   socialLinks: SOCIAL_LINKS
 };
