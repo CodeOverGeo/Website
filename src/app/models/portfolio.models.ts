@@ -61,3 +61,21 @@ export interface CommandPaletteItem {
   icon: string;
   keywords: string[];
 }
+
+export interface DossierStat {
+  label: string;
+  value: string;
+}
+
+export interface PowerRating {
+  name: string;
+  level: number;
+  category: 'frontend' | 'backend' | 'cloud' | 'data' | 'devops';
+}
+
+export interface Testimonial {
+  quote: string;
+  author: string;
+  role: string;
+  year: number;
+}

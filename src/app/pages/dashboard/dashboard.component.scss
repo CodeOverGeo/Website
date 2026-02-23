@@ -12,12 +12,24 @@
   pointer-events: none;
 }
 
-.hero-card,
-.quick-links {
+/* --- Layout --- */
+.section-block {
   position: relative;
   z-index: 1;
+  margin-bottom: 1.5rem;
 }
 
+.section-heading {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--accent-blue);
+  border-bottom: 1px solid #30363d;
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+/* --- SUBJECT (Hero) --- */
 .hero-card {
   border: 1px solid #30363d;
   border-radius: 12px;
@@ -41,7 +53,200 @@
   margin-bottom: 0.8rem;
 }
 
+/* --- CURRENTLY ACTIVE --- */
+.status-active {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid rgba(74, 246, 38, 0.3);
+  border-radius: 10px;
+  background: rgba(74, 246, 38, 0.05);
+  max-width: 360px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  box-shadow: 0 0 8px var(--accent-green), 0 0 16px rgba(74, 246, 38, 0.4);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 8px var(--accent-green);
+  }
+
+  50% {
+    opacity: 0.6;
+    box-shadow: 0 0 16px var(--accent-green), 0 0 24px rgba(74, 246, 38, 0.3);
+  }
+}
+
+.status-label {
+  font-size: 0.85rem;
+  color: var(--accent-green);
+}
+
+/* --- DOSSIER (Stats) --- */
+.dossier-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.dossier-card {
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  background: var(--bg-card);
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dossier-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent-green);
+}
+
+.dossier-label {
+  font-size: 0.72rem;
+  color: #8b949e;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* --- CREDENTIALS (Certs) --- */
+.cred-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.cred-badge {
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  background: var(--bg-card);
+  padding: 0.6rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 200px;
+}
+
+.cred-issuer {
+  font-size: 0.65rem;
+  color: var(--accent-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.cred-name {
+  font-size: 0.78rem;
+  color: var(--text-primary);
+}
+
+.cred-year {
+  font-size: 0.65rem;
+  color: #8b949e;
+}
+
+/* --- POWERS & ABILITIES --- */
+.power-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.power-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 32px;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.power-name {
+  font-size: 0.78rem;
+  color: #b5bec9;
+  text-align: right;
+}
+
+.power-bar-track {
+  height: 12px;
+  background: #21262d;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.power-bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 600ms ease;
+}
+
+.power-bar-fill.level-10 {
+  background: var(--accent-green);
+  box-shadow: 0 0 8px var(--accent-green);
+}
+
+.power-bar-fill.level-9 {
+  background: var(--accent-blue);
+}
+
+.power-bar-fill.level-8 {
+  background: var(--dotnet-purple);
+}
+
+.power-bar-fill.level-7 {
+  background: var(--python-yellow);
+}
+
+.power-level {
+  font-size: 0.78rem;
+  color: #8b949e;
+  text-align: center;
+}
+
+/* --- PUBLIC PERCEPTION (Testimonials) --- */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 0.75rem;
+}
+
+.testimonial-card {
+  border: 1px solid #30363d;
+  border-left: 3px solid var(--accent-blue);
+  border-radius: 8px;
+  background: var(--bg-card);
+  padding: 0.85rem;
+  margin: 0;
+}
+
+.testimonial-quote {
+  font-size: 0.82rem;
+  color: #8b949e;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.testimonial-footer {
+  margin-top: 0.55rem;
+  font-size: 0.72rem;
+  color: var(--accent-green);
+}
+
+/* --- Quick Links --- */
 .quick-links {
+  position: relative;
+  z-index: 1;
   margin-top: 1rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -58,6 +263,25 @@
   font-family: 'Fira Code', monospace;
 }
 
-.quick-cs { border-left: 3px solid var(--dotnet-purple); }
-.quick-py { border-left: 3px solid var(--python-yellow); }
-.quick-json { border-left: 3px solid var(--node-green); }
+.quick-cs {
+  border-left: 3px solid var(--dotnet-purple);
+}
+
+.quick-py {
+  border-left: 3px solid var(--python-yellow);
+}
+
+.quick-json {
+  border-left: 3px solid var(--node-green);
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+  .power-row {
+    grid-template-columns: 100px 1fr 28px;
+  }
+
+  .power-name {
+    font-size: 0.7rem;
+  }
+}

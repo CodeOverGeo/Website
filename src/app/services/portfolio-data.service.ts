@@ -2,11 +2,14 @@ import { Injectable, signal } from '@angular/core';
 import {
   AboutSection,
   CommandPaletteItem,
+  DossierStat,
   ExperienceCommit,
   HeroProfile,
+  PowerRating,
   Project,
   SocialLinks,
-  TerminalLine
+  TerminalLine,
+  Testimonial
 } from '../models/portfolio.models';
 
 const SOCIAL_LINKS: SocialLinks = {
@@ -188,6 +191,55 @@ const TERMINAL_SEQUENCE: TerminalLine[] = [
   { prefix: '[exec]', text: 'Navigating to ~/dashboard...', type: 'exec' }
 ];
 
+const DOSSIER_STATS: DossierStat[] = [
+  { label: 'Years Active', value: '4+' },
+  { label: 'Tests Passed', value: '626' },
+  { label: 'Certifications', value: '8' },
+  { label: 'Proficient Languages', value: '6' }
+];
+
+const AVAILABILITY = { status: 'active' as const, label: 'Available for Opportunities' };
+
+const POWERS: PowerRating[] = [
+  { name: 'C# / .NET', level: 10, category: 'backend' },
+  { name: 'Node.js', level: 8, category: 'backend' },
+  { name: 'Python', level: 8, category: 'backend' },
+  { name: 'Angular', level: 8, category: 'frontend' },
+  { name: 'TypeScript', level: 9, category: 'frontend' },
+  { name: 'Azure Cloud', level: 7, category: 'cloud' },
+  { name: 'Cosmos DB', level: 8, category: 'data' },
+  { name: 'SQL / Postgres', level: 8, category: 'data' },
+  { name: 'CI/CD Pipelines', level: 8, category: 'devops' },
+  { name: 'Docker', level: 7, category: 'devops' }
+];
+
+const TESTIMONIALS: Testimonial[] = [
+  {
+    quote: 'Relationship building is one of his strengths upon which he capitalizes. He turned a potential negative into a positive relationship building opportunity.',
+    author: 'Barnell Bohusk',
+    role: 'Engineering Lead',
+    year: 2023
+  },
+  {
+    quote: 'He has built strong relationships across multiple teams and departments, demonstrating exceptional communication and collaboration skills. An outstanding mentor and collaborator.',
+    author: 'Layla Miller',
+    role: 'Senior Manager',
+    year: 2024
+  },
+  {
+    quote: 'His willingness to step up was especially evident in the chatbot project. Their efforts not only led to a successful outcome but also earned well-deserved recognition from senior management.',
+    author: 'Guido Carosella',
+    role: 'Director of Engineering',
+    year: 2024
+  },
+  {
+    quote: 'Achieving Gold status for the API, one of only four repositories out of sixty-three to reach this level, speaks volumes about your dedication to quality.',
+    author: 'Clarice Ferguson',
+    role: 'VP of Engineering',
+    year: 2025
+  }
+];
+
 const COMMANDS: CommandPaletteItem[] = [
   { label: 'Open Dashboard', route: '/dashboard', icon: 'dashboard', keywords: ['home', 'hero'] },
   { label: 'Open Experience', route: '/experience.cs', icon: 'commit', keywords: ['timeline', 'git', 'career'] },
@@ -214,6 +266,10 @@ export class PortfolioDataService {
   readonly socialLinks = signal(SOCIAL_LINKS);
   readonly terminalSequence = signal(TERMINAL_SEQUENCE);
   readonly commandPaletteItems = signal(COMMANDS);
+  readonly dossierStats = signal(DOSSIER_STATS);
+  readonly availability = signal(AVAILABILITY);
+  readonly powers = signal(POWERS);
+  readonly testimonials = signal(TESTIMONIALS);
 
   getSpecData(view: string): string {
     return SPEC_DATA[view] ?? 'Feature: Spec Verification\n  Scenario: Default\n    Given a route is opened\n    Then route-specific specification text is shown';

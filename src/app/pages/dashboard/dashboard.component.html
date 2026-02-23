@@ -1,17 +1,110 @@
 <section class="dashboard-page">
   <div class="grid-bg" aria-hidden="true"></div>
 
-  @if (hero(); as profile) {
-  <article class="hero-card fade-in">
-    <h1>{{ profile.name }}</h1>
-    <p class="title">{{ profile.title }}</p>
-    <p class="tagline">{{ profile.tagline }}</p>
-    <p class="location">📍 {{ profile.location }}</p>
-    <app-social-links />
-  </article>
-  } @else {
-  <div class="terminal-loader">&gt; Fetching user profile... \</div>
-  }
+  <!-- SUBJECT -->
+  <div class="section-block">
+    <h2 class="section-heading mono">SUBJECT</h2>
+    @if (hero(); as profile) {
+    <article class="hero-card fade-in">
+      <h1>{{ profile.name }}</h1>
+      <p class="title">{{ profile.title }}</p>
+      <p class="tagline">{{ profile.tagline }}</p>
+      <p class="location">📍 {{ profile.location }}</p>
+      <app-social-links />
+    </article>
+    } @else {
+    <div class="terminal-loader">&gt; Fetching subject profile... \</div>
+    }
+  </div>
+
+  <!-- CURRENTLY ACTIVE -->
+  <div class="section-block">
+    <h2 class="section-heading mono">CURRENTLY ACTIVE</h2>
+    @if (availability(); as status) {
+    <div class="status-active fade-in">
+      <span class="status-dot"></span>
+      <span class="status-label mono">{{ status.label }}</span>
+    </div>
+    } @else {
+    <div class="terminal-loader">&gt; Checking system status... |</div>
+    }
+  </div>
+
+  <!-- DOSSIER -->
+  <div class="section-block">
+    <h2 class="section-heading mono">DOSSIER</h2>
+    @if (dossierStats(); as stats) {
+    <div class="dossier-grid fade-in">
+      @for (stat of stats; track stat.label) {
+      <div class="dossier-card">
+        <span class="dossier-value">{{ stat.value }}</span>
+        <span class="dossier-label mono">{{ stat.label }}</span>
+      </div>
+      }
+    </div>
+    } @else {
+    <div class="terminal-loader">&gt; Loading dossier intel... /</div>
+    }
+  </div>
+
+  <!-- CREDENTIALS -->
+  <div class="section-block">
+    <h2 class="section-heading mono">CREDENTIALS</h2>
+    @if (certifications(); as data) {
+    <div class="cred-strip fade-in">
+      @for (cert of data.certifications; track cert.name) {
+      <div class="cred-badge mono">
+        <span class="cred-issuer">{{ cert.issuer }}</span>
+        <span class="cred-name">{{ cert.name }}</span>
+        <span class="cred-year">{{ cert.date }}</span>
+      </div>
+      }
+    </div>
+    } @else {
+    <div class="terminal-loader">&gt; Verifying credentials... -</div>
+    }
+  </div>
+
+  <!-- POWERS & ABILITIES -->
+  <div class="section-block">
+    <h2 class="section-heading mono">POWERS & ABILITIES</h2>
+    @if (powers(); as powerList) {
+    <div class="power-grid fade-in">
+      @for (power of powerList; track power.name) {
+      <div class="power-row">
+        <span class="power-name mono">{{ power.name }}</span>
+        <div class="power-bar-track">
+          <div class="power-bar-fill" [style.width.%]="power.level * 10" [class.level-10]="power.level === 10"
+            [class.level-9]="power.level === 9" [class.level-8]="power.level === 8" [class.level-7]="power.level === 7">
+          </div>
+        </div>
+        <span class="power-level mono">{{ power.level }}</span>
+      </div>
+      }
+    </div>
+    } @else {
+    <div class="terminal-loader">&gt; Scanning power levels... \</div>
+    }
+  </div>
+
+  <!-- PUBLIC PERCEPTION -->
+  <div class="section-block">
+    <h2 class="section-heading mono">PUBLIC PERCEPTION</h2>
+    @if (testimonials(); as quotes) {
+    <div class="testimonial-grid fade-in">
+      @for (t of quotes; track t.author) {
+      <blockquote class="testimonial-card">
+        <p class="testimonial-quote mono">// "{{ t.quote }}"</p>
+        <footer class="testimonial-footer mono">
+          — {{ t.author }}, {{ t.role }} · {{ t.year }}
+        </footer>
+      </blockquote>
+      }
+    </div>
+    } @else {
+    <div class="terminal-loader">&gt; Compiling public records... |</div>
+    }
+  </div>
 
   <div class="quick-links">
     <a class="quick-card quick-cs" routerLink="/experience.cs">experience.cs</a>
