@@ -119,24 +119,17 @@ const PROJECTS: Project[] = [
   },
   {
     title: 'Fluck iOS App',
-    description: 'In development (Apple Developer Program): native iOS app building on Apple & Coursera mobile standards.',
+    description: 'Native iOS dual-profile application featuring secure Firebase authentication, real-time Firestore sync, and StoreKit 2 monetization.',
     stack: ['Swift', 'iOS', 'StoreKit', 'Firebase'],
     featured: true,
     specData: 'Given a connected couple, when navigating the app, then relationship milestones and activities are displayed.'
   },
   {
-    title: 'AI Refinement MCP Server',
+    title: 'Refinement AI Skill',
     description: 'Reads technical documents, compares repo context, and drafts refined user stories with Gherkin acceptance criteria.',
     stack: ['TypeScript', 'MCP', 'AI', 'Gherkin'],
     featured: true,
     specData: 'Given technical documentation is loaded, when repository context is compared, then structured user stories and acceptance criteria are generated.'
-  },
-  {
-    title: 'Atlassian MCP Integration',
-    description: 'Connected MCP workflows with project tracking to improve backlog quality and handoff clarity.',
-    stack: ['TypeScript', 'MCP', 'Atlassian'],
-    featured: true,
-    specData: 'Given a backlog item, when the integration runs, then delivery metadata is synchronized for planning.'
   },
   {
     title: 'Elimibug',
