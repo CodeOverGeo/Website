@@ -30,6 +30,11 @@ export const routes: Routes = [
 		redirectTo: 'about'
 	},
 	{
+		path: 'blog.md',
+		title: 'Giovanni Rufino | Blog',
+		loadComponent: () => import('./pages/blog/blog.component').then((m) => m.BlogComponent)
+	},
+	{
 		path: '**',
 		redirectTo: 'dashboard'
 	}

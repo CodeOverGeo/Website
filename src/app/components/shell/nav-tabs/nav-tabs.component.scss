@@ -66,6 +66,10 @@
   color: var(--node-green);
 }
 
+.tab.file-md .dot {
+  color: var(--markdown-blue);
+}
+
 @media (max-width: 768px) {
   .menu-btn {
     display: inline-flex;

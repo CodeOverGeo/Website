@@ -1,0 +1,39 @@
+<section class="blog-page">
+  <h1 class="mono">blog.md</h1>
+
+  @if (articlesResource.isLoading()) {
+    <div class="terminal-loader">&gt; Fetching dev.to articles... /</div>
+  } @else if (articlesResource.error()) {
+    <div class="error-msg mono">
+      <span class="err-prefix">&gt; ERROR:</span> Failed to fetch articles. Try refreshing.
+    </div>
+  } @else {
+    <div class="article-grid fade-in">
+      @for (article of articlesResource.value(); track article.id) {
+        <article class="article-card" appVisibility>
+          <div class="article-header">
+            <span class="reading-time mono">{{ article.reading_time_minutes }} min read</span>
+            <span class="reactions mono">♥ {{ article.positive_reactions_count }}</span>
+          </div>
+          <h2>
+            <a [href]="article.url" target="_blank" rel="noopener noreferrer">
+              {{ article.title }}
+            </a>
+          </h2>
+          <p class="description">{{ article.description }}</p>
+          <div class="article-meta mono">
+            <span class="date">{{ article.published_timestamp | date:'longDate' }}</span>
+            <span class="comments">💬 {{ article.comments_count }}</span>
+          </div>
+          <ul class="tags" aria-label="Tags">
+            @for (tag of article.tag_list; track tag) {
+              <li class="tag">#{{ tag }}</li>
+            }
+          </ul>
+        </article>
+      } @empty {
+        <div class="terminal-loader">&gt; No articles found.</div>
+      }
+    </div>
+  }
+</section>

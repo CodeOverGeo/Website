@@ -20,6 +20,7 @@ export class NavTabsComponent {
     { label: '~/dashboard', route: '/dashboard', extClass: 'file-home' },
     { label: 'experience.cs', route: '/experience.cs', extClass: 'file-cs' },
     { label: 'projects.py', route: '/projects.py', extClass: 'file-py' },
+    { label: 'blog.md', route: '/blog.md', extClass: 'file-md' },
     { label: 'about.json', route: '/about', extClass: 'file-json' }
   ];
 
