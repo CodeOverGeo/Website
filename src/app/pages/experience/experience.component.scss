@@ -88,6 +88,12 @@
   padding: 0.85rem;
   border-left-width: 4px;
   border-left-color: #30363d;
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+.content:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(74, 246, 38, 0.18);
 }
 
 .commit-card.branch-main .content {

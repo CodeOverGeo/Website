@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { ShellUiService } from '../../../services/shell-ui.service';
 
 @Component({
   selector: 'app-status-bar',
@@ -11,6 +12,7 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class StatusBarComponent {
   private readonly router = inject(Router);
+  private readonly shellUiService = inject(ShellUiService);
   readonly currentRoute = signal('/dashboard');
 
   readonly showBar = computed(() => this.currentRoute() !== '/');
@@ -22,5 +24,9 @@ export class StatusBarComponent {
         this.currentRoute.set(event.urlAfterRedirects);
       }
     });
+  }
+
+  openCommandPalette(): void {
+    this.shellUiService.toggleCommandPalette();
   }
 }

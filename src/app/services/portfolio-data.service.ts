@@ -115,6 +115,7 @@ const PROJECTS: Project[] = [
     description: 'Zero-knowledge architecture platform ensuring privacy-first interactions and secure data handling.',
     stack: ['Architecture', 'Zero-Knowledge Proofs', 'TypeScript'],
     featured: true,
+    isPrivate: true,
     specData: 'Given user data, when verified via ZK proofs, then authenticity is confirmed without revealing the underlying information.'
   },
   {
@@ -122,6 +123,7 @@ const PROJECTS: Project[] = [
     description: 'Native iOS dual-profile application featuring secure Firebase authentication, real-time Firestore sync, and StoreKit 2 monetization.',
     stack: ['Swift', 'iOS', 'StoreKit', 'Firebase'],
     featured: true,
+    isPrivate: true,
     specData: 'Given a connected couple, when navigating the app, then relationship milestones and activities are displayed.'
   },
   {
@@ -129,6 +131,7 @@ const PROJECTS: Project[] = [
     description: 'Reads technical documents, compares repo context, and drafts refined user stories with Gherkin acceptance criteria.',
     stack: ['TypeScript', 'MCP', 'AI', 'Gherkin'],
     featured: true,
+    isPrivate: true,
     specData: 'Given technical documentation is loaded, when repository context is compared, then structured user stories and acceptance criteria are generated.'
   },
   {
@@ -136,6 +139,8 @@ const PROJECTS: Project[] = [
     description: 'Bug tracking SPA built with a modern full-stack JavaScript toolchain.',
     stack: ['React', 'Bootstrap', 'Node.js', 'PostgreSQL', 'Express'],
     featured: false,
+    isPrivate: false,
+    githubUrl: 'https://github.com/CodeOverGeo/ElimiBug',
     specData: 'Given a bug report, when details are saved, then the issue appears in the current sprint board.'
   },
   {
@@ -143,6 +148,8 @@ const PROJECTS: Project[] = [
     description: 'EV charging station rating and comments platform.',
     stack: ['Flask', 'SQLAlchemy', 'Jinja', 'PostgreSQL', 'JavaScript'],
     featured: false,
+    isPrivate: false,
+    githubUrl: 'https://github.com/CodeOverGeo/rtc',
     specData: 'Given a charging station, when users submit feedback, then aggregated ratings update instantly.'
   }
 ];
@@ -240,6 +247,7 @@ const COMMANDS: CommandPaletteItem[] = [
   { label: 'Open Projects', route: '/projects.py', icon: 'code', keywords: ['apps', 'portfolio', 'featured'] },
   { label: 'Open About', route: '/about', icon: 'data_object', keywords: ['bio', 'json', 'profile'] },
   { label: 'Contact Giovanni', actionId: 'MAILTO', icon: 'mail', keywords: ['email', 'contact', 'message', 'hire'] },
+  { label: 'resume --download', actionId: 'DOWNLOAD_RESUME', icon: 'description', keywords: ['resume', 'cv', 'download', 'pdf', 'hire'] },
   { label: 'ai --verify-specs', actionId: 'VERIFY_SPECS', icon: 'terminal', keywords: ['ai', 'spec', 'gherkin'] }
 ];
 

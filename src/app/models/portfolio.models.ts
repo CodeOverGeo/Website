@@ -29,6 +29,9 @@ export interface Project {
   stack: string[];
   featured: boolean;
   specData: string;
+  isPrivate: boolean;
+  githubUrl?: string;
+  liveUrl?: string;
 }
 
 export interface Certification {
@@ -57,7 +60,7 @@ export interface TerminalLine {
 export interface CommandPaletteItem {
   label: string;
   route?: string;
-  actionId?: 'VERIFY_SPECS' | string;
+  actionId?: 'VERIFY_SPECS' | 'MAILTO' | 'DOWNLOAD_RESUME' | string;
   icon: string;
   keywords: string[];
 }

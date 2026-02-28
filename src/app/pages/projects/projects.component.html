@@ -15,6 +15,25 @@
         <li class="badge">{{ item }}</li>
         }
       </ul>
+      <div class="project-footer">
+      @if (project.githubUrl || project.liveUrl) {
+      <div class="project-links">
+        @if (project.githubUrl) {
+        <a [href]="project.githubUrl" target="_blank" rel="noopener noreferrer" class="project-link github-link">
+          <span>⌘</span> Source
+        </a>
+        }
+        @if (project.liveUrl) {
+        <a [href]="project.liveUrl" target="_blank" rel="noopener noreferrer" class="project-link live-link">
+          <span>↗</span> Live
+        </a>
+        }
+      </div>
+      }
+      @if (project.isPrivate) {
+      <span class="private-badge mono">private</span>
+      }
+      </div>
     </article>
     }
   </div>

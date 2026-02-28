@@ -1,4 +1,4 @@
-import { afterRenderEffect, ChangeDetectionStrategy, Component, computed, ElementRef, inject, QueryList, signal, ViewChildren } from '@angular/core';
+import { afterRenderEffect, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, QueryList, signal, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { PortfolioDataService } from '../../../services/portfolio-data.service';
 import { CommandPaletteItem } from '../../../models/portfolio.models';
@@ -45,6 +45,13 @@ export class CommandPaletteComponent {
       const idx = this.selectedIndex();
       const option = this.paletteOptions?.get(idx);
       option?.nativeElement.scrollIntoView({ block: 'nearest' });
+    });
+
+    effect(() => {
+      if (this.shellUiService.isCommandPaletteOpen()) {
+        this.isOpen.set(true);
+        this.shellUiService.closeCommandPalette();
+      }
     });
   }
 
@@ -101,6 +108,15 @@ export class CommandPaletteComponent {
 
     if (item.actionId === 'VERIFY_SPECS') {
       this.shellUiService.openSpecPanel();
+      this.close();
+      return;
+    }
+
+    if (item.actionId === 'DOWNLOAD_RESUME') {
+      const link = document.createElement('a');
+      link.href = '/Giovanni_Rufino_Resume.pdf';
+      link.download = 'Giovanni_Rufino_Resume.pdf';
+      link.click();
       this.close();
       return;
     }

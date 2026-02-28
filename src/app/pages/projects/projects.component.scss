@@ -64,3 +64,44 @@
     grid-column: span 1;
   }
 }
+
+.private-badge {
+  font-size: 0.65rem;
+  color: #6e7681;
+  margin-left: auto;
+}
+
+.project-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+}
+
+.project-links {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 0.25rem 0.55rem;
+  transition: all 120ms ease;
+}
+
+.github-link:hover {
+  border-color: var(--dotnet-purple);
+  box-shadow: 0 0 10px rgba(155, 107, 255, 0.35);
+}
+
+.live-link:hover {
+  border-color: var(--accent-green);
+  box-shadow: 0 0 10px rgba(74, 246, 38, 0.35);
+}
