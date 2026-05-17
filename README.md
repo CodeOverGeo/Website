@@ -1,47 +1,89 @@
-# PersonalPortfolio
+# georufino.com — Personal Portfolio
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.4.
+Personal portfolio website for **Giovanni Rufino**, Software Engineer based in the Raleigh-Durham-Chapel Hill area. Live at [georufino.com](https://georufino.com).
 
-## Development server
+The UI is themed as an interactive VS Code / IDE environment — complete with a boot sequence, tab navigation, command palette, status bar, and spec panel showing Gherkin-style acceptance criteria per route.
 
-To start a local development server, run:
+## Tech Stack
 
-```bash
-ng serve
+| Layer | Technology |
+|---|---|
+| Framework | Angular 21 (standalone components, signals) |
+| Language | TypeScript 5.9 |
+| Styling | SCSS |
+| Reactive State | Angular Signals (`signal`, `PortfolioDataService`) |
+| Hosting | Firebase Hosting |
+| Package Manager | npm 11 |
+
+## Pages & Routes
+
+| Route | Title | Description |
+|---|---|---|
+| `/` | Boot Sequence | Animated terminal intro on first load |
+| `/dashboard` | Dashboard | Hero profile, dossier stats, powers & abilities, testimonials |
+| `/experience.cs` | Experience | Git-style commit timeline of work history |
+| `/projects.py` | Projects | Featured project showcase with stack badges |
+| `/about` | About | Bio, certifications, interests, raw JSON toggle |
+| `/blog.md` | Blog | Blog posts |
+
+All routes are lazy-loaded for performance.
+
+## Shell Components
+
+| Component | Purpose |
+|---|---|
+| `nav-tabs` | File-tab style navigation bar |
+| `command-palette` | ⌘K quick-open launcher for navigation and actions |
+| `spec-panel` | Gherkin spec viewer scoped to the current route |
+| `status-bar` | VS Code-style status bar (branch, AI status, specs) |
+
+## Project Structure
+
+```
+src/app/
+├── components/
+│   ├── shared/social-links/     # Social link icons
+│   └── shell/                   # nav-tabs, command-palette, spec-panel, status-bar
+├── directives/
+│   └── visibility.directive.ts  # Intersection observer directive
+├── models/
+│   └── portfolio.models.ts      # TypeScript interfaces for all data
+├── pages/                       # Lazy-loaded route components
+│   ├── boot-sequence/
+│   ├── dashboard/
+│   ├── experience/
+│   ├── projects/
+│   ├── about/
+│   └── blog/
+├── services/
+│   ├── portfolio-data.service.ts  # Single source of truth for all portfolio data
+│   └── shell-ui.service.ts        # Shell/UI state (command palette open, active route)
+└── utils/
+    └── simulated-loading.util.ts  # Typewriter / simulated loading helper
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Portfolio Content
 
-## Code scaffolding
+- **Experience** — Software Engineer at Relias (Oct 2024–Present), with prior roles in DevOps evangelism, feature flag enablement, and a full-stack bootcamp at Springboard
+- **Projects** — Vypto.org (ZK architecture), Fluck iOS App (Swift/Firebase), Refinement AI Skill (MCP/Gherkin), Elimibug (React/Node), Rate the Charge (Flask)
+- **Skills** — C#/.NET, TypeScript, Angular, Node.js, Python, Azure, Cosmos DB, SQL, CI/CD, Docker, Swift
+- **Certifications** — AZ-900, AZ-204, AI-900 (Microsoft), IBM & Coursera certs
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Local Development
 
 ```bash
-ng generate --help
+npm start          # ng serve → http://localhost:4200
+npm run build      # Production build → dist/personal-portfolio/browser
+npm test           # Run unit tests with Vitest
 ```
 
-## Building
+## Deployment
 
-To build the project run:
+Hosted on **Firebase Hosting**. Build output is `dist/personal-portfolio/browser`. All routes rewrite to `index.html` for SPA routing.
 
 ```bash
 ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
+firebase deploy
 ```
 
 ## Running end-to-end tests
