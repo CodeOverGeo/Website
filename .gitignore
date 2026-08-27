@@ -39,6 +39,11 @@ testem.log
 /typings
 __screenshots__/
 
+# Claude Code local state
+.claude/worktrees/
+
 # System files
 .DS_Store
+# AppleDouble sidecars macOS writes on exFAT/network volumes
+._*
 Thumbs.db
