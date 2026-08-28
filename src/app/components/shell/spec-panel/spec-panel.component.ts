@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { interval, take } from 'rxjs';
+import { interval, Subscription, take } from 'rxjs';
 import { PortfolioDataService } from '../../../services/portfolio-data.service';
 import { ShellUiService } from '../../../services/shell-ui.service';
 
@@ -22,6 +22,8 @@ export class SpecPanelComponent {
   readonly content = signal('');
 
   readonly panelTitle = computed(() => `Spec • ${this.route()}`);
+
+  private typewriterSubscription?: Subscription;
 
   constructor() {
     this.route.set(this.router.url || '/dashboard');
@@ -47,9 +49,10 @@ export class SpecPanelComponent {
   }
 
   loadSpec(): void {
+    this.typewriterSubscription?.unsubscribe();
     const spec = this.dataService.getSpecData(this.route());
     this.content.set('');
-    interval(14)
+    this.typewriterSubscription = interval(14)
       .pipe(take(spec.length))
       .subscribe((index) => this.content.set(spec.slice(0, index + 1)));
   }
