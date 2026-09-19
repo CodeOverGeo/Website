@@ -1,3 +1,14 @@
+# Build, test, and deploy.
+#
+# Deliberately one workflow: actions/upload-artifact and download-artifact only
+# share within a single workflow run, so a production build can only be handed to
+# the deploy jobs if build and deploy live in the same file.
+#
+# This replaces the two workflows the Firebase CLI generated
+# (firebase-hosting-merge.yml, firebase-hosting-pull-request.yml). Running
+# `firebase init hosting:github` again will recreate them; delete them again if it
+# does, or every push will build and deploy the site twice.
+
 name: CI
 
 on:
@@ -9,16 +20,92 @@ on:
 permissions:
   contents: read
 
+env:
+  # The one place the Node version is declared; both npm-running jobs read it.
+  NODE_VERSION: '24'
+
 jobs:
+  # Required status check on `main` — the job id must stay `test` or branch
+  # protection stops matching it.
+  #
+  # Independent of `build` on purpose: `npm test` drives its own *development*
+  # build through @angular/build:unit-test against tsconfig.spec.json, which
+  # cannot consume a production dist/. Gating it on `build` would serialize the
+  # required check behind a build it has no use for.
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: ${{ env.NODE_VERSION }}
           cache: npm
       - run: npm ci
       # --watch=false is explicit: @angular/build:unit-test infers `watch` from TTY,
       # and a hung job is not worth relying on that inference.
       - run: npm test -- --watch=false
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          # firebase.json's `public` directory. The sibling server/ output is not
+          # deployed, so it is not worth carrying through the artifact.
+          path: dist/personal-portfolio/browser
+          if-no-files-found: error
+          # Only ever consumed by the deploy jobs in this same run.
+          retention-days: 1
+
+  # Preview channel for PRs. Skipped for forks: the pull_request event gives a fork
+  # PR a read-only token and no access to the service-account secret, so the deploy
+  # could only fail.
+  deploy_preview:
+    needs: build
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      contents: read
+      pull-requests: write
+    steps:
+      # For firebase.json and .firebaserc only. No setup-node, no npm ci — the
+      # deploy action needs the built output on disk and nothing else.
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/personal-portfolio/browser
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GEORUFINO_EDC02 }}
+          projectId: georufino-edc02
+
+  # Live channel on merge to main. Not gated on `test`: branch protection already
+  # required it to pass on the PR, and this preserves the previous behaviour where
+  # the merge deploy ran alongside CI rather than behind it.
+  deploy_live:
+    needs: build
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/personal-portfolio/browser
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GEORUFINO_EDC02 }}
+          channelId: live
+          projectId: georufino-edc02
