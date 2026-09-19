@@ -133,8 +133,12 @@ Two things about that block are easy to break:
   `/index.html` would never apply to `/` or to extensionless paths like `/dashboard`, which
   is why the HTML default is expressed as the catch-all instead.
 
-`no-cache` means "revalidate", not "don't store" — Firebase serves an `ETag`, so a
-returning visitor gets a 304 on the shell and hits cache for everything it references.
+`no-cache` means "revalidate", not "don't store". In practice Firebase Hosting answers the
+shell with a full `200` rather than a `304` — it does not honour conditional requests on a
+`no-cache` response, even for `If-None-Match: *`, though it does return `304` for the
+immutable bundles. So a repeat visit re-downloads roughly 4 kB of gzipped HTML and serves
+everything that shell references from cache. That is the intended trade: a few kB per hard
+load in exchange for never booting a shell that points at deleted chunk hashes.
 
 ## Running end-to-end tests
 
