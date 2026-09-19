@@ -31,6 +31,8 @@ export class BootSequenceComponent implements OnDestroy {
 
   @ViewChild('commandInput') private commandInput?: ElementRef<HTMLInputElement>;
 
+  readonly hero = this.dataService.hero;
+
   readonly typedCommand = signal('');
   readonly lines = signal<TerminalLine[]>([]);
   readonly showCursor = signal(true);

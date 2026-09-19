@@ -12,6 +12,7 @@ The UI is themed as an interactive VS Code / IDE environment — complete with a
 | Language | TypeScript 5.9 |
 | Styling | SCSS |
 | Reactive State | Angular Signals (`signal`, `PortfolioDataService`) |
+| Rendering | Prerendered at build time (`@angular/build` + `@angular/ssr`, `outputMode: static`) |
 | Hosting | Firebase Hosting |
 | Package Manager | npm 11 |
 
@@ -77,9 +78,33 @@ npm run build      # Production build → dist/personal-portfolio/browser
 npm test           # Run unit tests with Vitest
 ```
 
+## SEO & Social Metadata
+
+Every route is **prerendered at build time** into its own `index.html`, so crawlers and link
+unfurlers (LinkedIn, X, Slack, iMessage) receive real markup instead of an empty `<app-root>`.
+No server is required — the output is still plain static files.
+
+| Piece | Where |
+|---|---|
+| Base description, Open Graph, Twitter card, canonical, JSON-LD `Person` | `src/index.html` |
+| Per-route title + description | `data.description` on each route in `src/app/app.routes.ts` |
+| Tag updates on navigation | `SeoService` (`src/app/services/seo.service.ts`) |
+| Share card (1200×630) | `public/og-image.png` |
+| Crawler directives | `public/robots.txt`, `public/sitemap.xml` |
+
+`SeoService` runs during prerendering *and* on client-side navigation, so each route ships its
+own description, canonical URL, and OG/Twitter tags either way. Update `SITE_URL` in that file
+if the domain ever changes.
+
+Because pages are prerendered, the simulated loading effect is skipped on the first render
+(the content is already on screen) and plays on in-app navigations — see
+`src/app/utils/simulated-loading.util.ts`.
+
 ## Deployment
 
-Hosted on **Firebase Hosting**. Build output is `dist/personal-portfolio/browser`. All routes rewrite to `index.html` for SPA routing.
+Hosted on **Firebase Hosting**. Build output is `dist/personal-portfolio/browser`, which
+contains the prerendered `index.html` per route plus `robots.txt`, `sitemap.xml`, and
+`og-image.png`. Unknown paths still rewrite to `index.html` for SPA routing.
 
 ```bash
 ng build
