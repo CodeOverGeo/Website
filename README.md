@@ -111,6 +111,31 @@ ng build
 firebase deploy
 ```
 
+### Caching
+
+`firebase.json` sets `Cache-Control` per file type rather than relying on Firebase's
+one-hour default. Because `outputHashing: "all"` puts a content hash in every JS and CSS
+filename, those bundles are safe to cache forever; the prerendered HTML is not, since a
+stale shell would reference chunk hashes that a later deploy has already replaced.
+
+| Pattern | `Cache-Control` |
+|---|---|
+| `**` — prerendered HTML, `robots.txt`, `sitemap.xml`, `site.webmanifest` | `no-cache` |
+| `**/*.@(js\|css)` — hashed bundles | `public, max-age=31536000, immutable` |
+| Images and fonts (unhashed, copied from `public/`) | `public, max-age=604800` |
+| `Giovanni_Rufino_Resume.pdf` | `public, max-age=3600` |
+
+Two things about that block are easy to break:
+
+- **The last matching entry wins.** The `**` catch-all is listed first so the narrower
+  asset globs override it. Adding a broad rule below them would silently undo them.
+- **Globs match the original request path, not the rewrite destination.** A rule on
+  `/index.html` would never apply to `/` or to extensionless paths like `/dashboard`, which
+  is why the HTML default is expressed as the catch-all instead.
+
+`no-cache` means "revalidate", not "don't store" — Firebase serves an `ETag`, so a
+returning visitor gets a 304 on the shell and hits cache for everything it references.
+
 ## Running end-to-end tests
 
 For end-to-end (e2e) testing, run:
