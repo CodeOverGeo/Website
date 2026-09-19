@@ -14,5 +14,5 @@ import { VisibilityDirective } from '../../directives/visibility.directive';
 })
 export class ExperienceComponent {
   private readonly dataService = inject(PortfolioDataService);
-  readonly commits = simulateLoading(this.dataService.experience, 600, 1200);
+  readonly commits = simulateLoading(this.dataService.experience, 120, 260);
 }
