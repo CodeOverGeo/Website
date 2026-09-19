@@ -16,7 +16,7 @@ import { SocialLinksComponent } from '../../components/shared/social-links/socia
 export class AboutComponent {
   private readonly dataService = inject(PortfolioDataService);
 
-  readonly about = simulateLoading(this.dataService.about, 400, 900);
+  readonly about = simulateLoading(this.dataService.about, 80, 200);
   readonly isRaw = signal(false);
   readonly expanded = signal<Record<string, boolean>>({
     professional: true,

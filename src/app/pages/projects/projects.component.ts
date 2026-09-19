@@ -14,7 +14,7 @@ import { VisibilityDirective } from '../../directives/visibility.directive';
 })
 export class ProjectsComponent {
   private readonly dataService = inject(PortfolioDataService);
-  readonly projects = simulateLoading(this.dataService.projects, 800, 1500);
+  readonly projects = simulateLoading(this.dataService.projects, 160, 300);
 
   readonly sorted = computed(() => {
     const raw = this.projects();
