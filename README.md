@@ -111,6 +111,35 @@ ng build
 firebase deploy
 ```
 
+### Caching
+
+`firebase.json` sets `Cache-Control` per file type rather than relying on Firebase's
+one-hour default. Because `outputHashing: "all"` puts a content hash in every JS and CSS
+filename, those bundles are safe to cache forever; the prerendered HTML is not, since a
+stale shell would reference chunk hashes that a later deploy has already replaced.
+
+| Pattern | `Cache-Control` |
+|---|---|
+| `**` — prerendered HTML, `robots.txt`, `sitemap.xml`, `site.webmanifest` | `no-cache` |
+| `**/*.@(js\|css)` — hashed bundles | `public, max-age=31536000, immutable` |
+| Images and fonts (unhashed, copied from `public/`) | `public, max-age=604800` |
+| `Giovanni_Rufino_Resume.pdf` | `public, max-age=3600` |
+
+Two things about that block are easy to break:
+
+- **The last matching entry wins.** The `**` catch-all is listed first so the narrower
+  asset globs override it. Adding a broad rule below them would silently undo them.
+- **Globs match the original request path, not the rewrite destination.** A rule on
+  `/index.html` would never apply to `/` or to extensionless paths like `/dashboard`, which
+  is why the HTML default is expressed as the catch-all instead.
+
+`no-cache` means "revalidate", not "don't store". In practice Firebase Hosting answers the
+shell with a full `200` rather than a `304` — it does not honour conditional requests on a
+`no-cache` response, even for `If-None-Match: *`, though it does return `304` for the
+immutable bundles. So a repeat visit re-downloads roughly 4 kB of gzipped HTML and serves
+everything that shell references from cache. That is the intended trade: a few kB per hard
+load in exchange for never booting a shell that points at deleted chunk hashes.
+
 ## Running end-to-end tests
 
 For end-to-end (e2e) testing, run:
