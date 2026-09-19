@@ -111,6 +111,32 @@ ng build
 firebase deploy
 ```
 
+### Continuous integration
+
+`.github/workflows/ci.yml` is the only workflow. It fans out from a single production build:
+
+| Job | Runs on | Does |
+|---|---|---|
+| `test` | every PR, and push to `main` | `npm test` — the required status check on `main` |
+| `build` | every PR, and push to `main` | `npm run build`, uploads `dist/personal-portfolio/browser` as the `dist` artifact |
+| `deploy_preview` | PRs from this repo | downloads `dist`, deploys to a Firebase preview channel |
+| `deploy_live` | push to `main` | downloads `dist`, deploys to the `live` channel |
+
+`test` deliberately does not depend on `build` — `npm test` drives its own *development*
+build through `@angular/build:unit-test` against `tsconfig.spec.json`, which cannot consume
+a production `dist/`. The deploy jobs install nothing: they need only `firebase.json`,
+`.firebaserc`, and the downloaded build output, so they run no `npm ci` and set up no Node.
+The Node version lives in one place, the workflow-level `NODE_VERSION` env var.
+
+Build and deploy share one file because GitHub artifacts only travel within a single
+workflow run. This replaced the two workflows that `firebase init hosting:github`
+generates (`firebase-hosting-merge.yml`, `firebase-hosting-pull-request.yml`) — **re-running
+that command recreates them, and every push would then build and deploy the site twice.**
+Delete them again if that happens.
+
+Branch protection on `main` matches the check by job id, `test`; renaming that job means
+updating branch protection to match.
+
 ### Caching
 
 `firebase.json` sets `Cache-Control` per file type rather than relying on Firebase's
