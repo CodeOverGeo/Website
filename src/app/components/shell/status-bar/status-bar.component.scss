@@ -20,6 +20,10 @@
 
 .cmd-hint {
   cursor: pointer;
+  background: none;
+  color: inherit;
+  font-family: inherit;
+  line-height: inherit;
   border: 1px solid rgba(13, 17, 23, 0.4);
   border-radius: 3px;
   padding: 0 4px;
@@ -27,7 +31,13 @@
   opacity: 0.7;
   transition: opacity 120ms ease;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     opacity: 1;
+  }
+
+  // The bar is 24px tall, so the global 4px outline offset would be clipped by it.
+  &:focus-visible {
+    outline-offset: 1px;
   }
 }

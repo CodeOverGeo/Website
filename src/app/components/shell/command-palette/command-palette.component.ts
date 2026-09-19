@@ -1,8 +1,9 @@
-import { afterRenderEffect, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, QueryList, signal, ViewChildren } from '@angular/core';
+import { afterNextRender, afterRenderEffect, ChangeDetectionStrategy, Component, computed, effect, ElementRef, inject, Injector, signal, viewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { PortfolioDataService } from '../../../services/portfolio-data.service';
 import { CommandPaletteItem } from '../../../models/portfolio.models';
 import { ShellUiService } from '../../../services/shell-ui.service';
+import { captureFocusOrigin, restoreFocus, trapTab } from '../../../utils/focus-trap.util';
 
 @Component({
   selector: 'app-command-palette',
@@ -20,7 +21,13 @@ export class CommandPaletteComponent {
   private readonly dataService = inject(PortfolioDataService);
   private readonly shellUiService = inject(ShellUiService);
 
-  @ViewChildren('paletteOption') paletteOptions!: QueryList<ElementRef<HTMLElement>>;
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+  private readonly injector = inject(Injector);
+
+  readonly paletteOptions = viewChildren<ElementRef<HTMLElement>>('paletteOption');
+
+  /** Where focus sat before the palette opened, so close() can hand it back. */
+  private focusOrigin: HTMLElement | null = null;
 
   readonly isOpen = signal(false);
   readonly query = signal('');
@@ -43,13 +50,13 @@ export class CommandPaletteComponent {
   constructor() {
     afterRenderEffect(() => {
       const idx = this.selectedIndex();
-      const option = this.paletteOptions?.get(idx);
+      const option = this.paletteOptions()[idx];
       option?.nativeElement.scrollIntoView({ block: 'nearest' });
     });
 
     effect(() => {
       if (this.shellUiService.isCommandPaletteOpen()) {
-        this.isOpen.set(true);
+        this.open();
         this.shellUiService.closeCommandPalette();
       }
     });
@@ -69,6 +76,14 @@ export class CommandPaletteComponent {
 
     if (event.key === 'Escape') {
       this.close();
+      return;
+    }
+
+    if (event.key === 'Tab') {
+      const surface = this.surfaceElement();
+      if (surface) {
+        trapTab(event, surface);
+      }
       return;
     }
 
@@ -128,17 +143,53 @@ export class CommandPaletteComponent {
   }
 
   close(): void {
+    if (!this.isOpen()) {
+      return;
+    }
+
     this.isOpen.set(false);
     this.query.set('');
     this.selectedIndex.set(0);
+
+    const origin = this.focusOrigin;
+    this.focusOrigin = null;
+    restoreFocus(origin);
+  }
+
+  private open(): void {
+    if (this.isOpen()) {
+      return;
+    }
+
+    this.focusOrigin = captureFocusOrigin();
+    this.isOpen.set(true);
+
+    // The input does not exist until the render this call just triggered, so the
+    // focus has to wait for it. Keying off the open transition rather than off
+    // every render leaves the user's own focus moves inside the palette alone.
+    afterNextRender(() => this.inputElement()?.focus(), { injector: this.injector });
+  }
+
+  /**
+   * Read from the DOM rather than from a view query: both callers run at the
+   * moment the palette is created, which is earlier than a query for an element
+   * inside the `@if` block resolves.
+   */
+  private inputElement(): HTMLInputElement | null {
+    return this.host.nativeElement.querySelector<HTMLInputElement>('.palette-input');
+  }
+
+  private surfaceElement(): HTMLElement | null {
+    return this.host.nativeElement.querySelector<HTMLElement>('.palette');
   }
 
   private toggleOpen(): void {
-    this.isOpen.update((value) => !value);
-    if (!this.isOpen()) {
-      this.query.set('');
-      this.selectedIndex.set(0);
+    if (this.isOpen()) {
+      this.close();
+      return;
     }
+
+    this.open();
   }
 
   private getItemScore(item: CommandPaletteItem, query: string): number {
