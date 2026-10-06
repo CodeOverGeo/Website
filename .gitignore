@@ -48,7 +48,5 @@ __screenshots__/
 ._*
 Thumbs.db
 
-# Playbook build: venv and intermediate outputs (the shipped copies live in public/)
+# Playbook build venv
 /playbook-src/.venv/
-/playbook-src/playbook.html
-/playbook-src/ai-without-the-hype-starter-playbook.pdf

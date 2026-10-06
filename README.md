@@ -107,9 +107,11 @@ contains the prerendered `index.html` per route plus `robots.txt`, `sitemap.xml`
 `og-image.png`. Unknown paths still rewrite to `index.html` for SPA routing.
 
 ```bash
-ng build
+npm run build
 firebase deploy
 ```
+
+Use `npm run build`, not bare `ng build`: the npm script also applies the playbook feature flag.
 
 ### Continuous integration
 
@@ -176,14 +178,24 @@ Edit wording in that markdown file only, never in the generated HTML, then rebui
 npm run playbook
 ```
 
-`playbook-src/rebuild.sh` creates `playbook-src/.venv` with Playwright + Chromium on first run,
-runs `build.py` and `make_pdf.py`, and copies `playbook.html` and
-`ai-without-the-hype-starter-playbook.pdf` into `public/`. Commit both regenerated files: CI does
-not run Python. The script warns while any Editor notes remain; do not publish until they are
-resolved. See `playbook-src/README.md` for the markdown conventions.
+`playbook-src/rebuild.sh` creates `playbook-src/.venv` with Playwright + Chromium on first run and
+runs `build.py` and `make_pdf.py`, which write `playbook.html` and
+`ai-without-the-hype-starter-playbook.pdf` into `playbook-src/`. Commit both: CI does not run
+Python. See `playbook-src/README.md` for the markdown conventions.
+
+### Feature flag
+
+The page is published only while `"playbook": true` in `feature-flags.json`. `npm run build`
+runs `scripts/publish-playbook.mjs` after `ng build`; with the flag on it copies both files to the
+root of the build output, and with it off it copies nothing, so neither file is deployed and `/ai`
+returns a 404. To go live, set the flag to `true` and merge to `main`. To check locally without
+touching the flag, run `PLAYBOOK=on npm run build`.
+
+With the flag on, the build **fails** if the page still contains any Editor notes or `[link]`
+placeholders, so an unfinished handout cannot be deployed by accident.
 
 `firebase.json` rewrites `/ai` to `/playbook.html` and redirects `/ai/` to `/ai`. Both files must
-stay at the root of `public/`: the page links to the PDF by relative filename, so the PDF has to
+land at the root of the output: the page links to the PDF by relative filename, so the PDF has to
 resolve from `/ai`. The rewrite sits above the `**` SPA fallback, which would otherwise catch it.
 
 ## Running end-to-end tests

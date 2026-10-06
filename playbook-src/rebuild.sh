@@ -1,16 +1,14 @@
 #!/bin/sh
-# Rebuild the /ai handout page and its PDF from playbook_final.md, then copy
-# both into public/ so the Angular build ships them at the site root.
-# firebase.json rewrites /ai to /playbook.html; the page's relative PDF link
-# only resolves because both files sit side by side in public/.
+# Rebuild the /ai handout page and its PDF from playbook_final.md. Both are
+# committed here; scripts/publish-playbook.mjs copies them into the deployed
+# output after `ng build`, but only while the `playbook` flag in
+# feature-flags.json is on.
 #
 # Usage: npm run playbook
 set -eu
 
 SRC_DIR=$(cd "$(dirname "$0")" && pwd)
-PUBLIC_DIR="$SRC_DIR/../public"
 VENV="$SRC_DIR/.venv"
-PDF=ai-without-the-hype-starter-playbook.pdf
 
 # build.py uses backslashes inside f-string expressions, which needs Python 3.12+.
 if [ ! -x "$VENV/bin/python" ]; then
@@ -26,12 +24,8 @@ cd "$SRC_DIR"
 "$VENV/bin/python" build.py
 "$VENV/bin/python" make_pdf.py
 
-cp playbook.html "$PUBLIC_DIR/playbook.html"
-cp "$PDF" "$PUBLIC_DIR/$PDF"
-echo "Copied playbook.html and $PDF to public/"
-
 NOTES=$(grep -cE '^\[(CONFIRM|OPTIONAL|REMOVE|HAVE)' playbook_final.md || true)
 if [ "$NOTES" -gt 0 ]; then
-  echo "WARNING: $NOTES Editor note(s) remain in playbook_final.md. Do not publish until they are resolved:" >&2
+  echo "WARNING: $NOTES Editor note(s) remain in playbook_final.md. The build refuses to publish /ai until they are resolved:" >&2
   grep -nE '^\[(CONFIRM|OPTIONAL|REMOVE|HAVE)' playbook_final.md | cut -c1-100 >&2
 fi
