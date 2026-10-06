@@ -22,7 +22,7 @@ const FILES = ['playbook.html', 'ai-without-the-hype-starter-playbook.pdf'];
 if (recordedHash() !== sourceHash()) {
   console.error(
     `playbook: ${SRC}/playbook.html and the PDF are out of date with their sources ` +
-      `(playbook_final.md, style.css, build.py or fonts/). Run \`npm run playbook\` ` +
+      `(playbook_final.md, style.css, build.py, make_pdf.py or fonts/). Run \`npm run playbook\` ` +
       `and commit the result.`,
   );
   process.exit(1);

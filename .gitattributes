@@ -1,0 +1,3 @@
+# The playbook's source hash (scripts/playbook-hash.mjs) is computed from the
+# working-tree bytes, so line-ending conversion would make it disagree with CI.
+playbook-src/** -text

@@ -181,7 +181,7 @@ npm run playbook
 `playbook-src/rebuild.sh` creates `playbook-src/.venv` with Playwright + Chromium on first run and
 runs `build.py` and `make_pdf.py`, which write `playbook.html` and
 `ai-without-the-hype-starter-playbook.pdf` into `playbook-src/`, then records a hash of their
-sources (`playbook_final.md`, `style.css`, `build.py`, `fonts/`) in
+sources (`playbook_final.md`, `style.css`, `build.py`, `make_pdf.py`, `fonts/`) in
 `playbook-src/playbook.source-hash`. Commit all three: CI does not run Python. See
 `playbook-src/README.md` for the markdown conventions.
 

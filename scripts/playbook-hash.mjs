@@ -21,7 +21,7 @@ function inputs() {
     .filter((f) => f.endsWith('.ttf'))
     .sort()
     .map((f) => `fonts/${f}`);
-  return ['playbook_final.md', 'style.css', 'build.py', ...fonts];
+  return ['playbook_final.md', 'style.css', 'build.py', 'make_pdf.py', ...fonts];
 }
 
 export function sourceHash() {
