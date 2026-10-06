@@ -150,6 +150,7 @@ stale shell would reference chunk hashes that a later deploy has already replace
 | `**/*.@(js\|css)` — hashed bundles | `public, max-age=31536000, immutable` |
 | Images and fonts (unhashed, copied from `public/`) | `public, max-age=604800` |
 | `Giovanni_Rufino_Resume.pdf` | `public, max-age=3600` |
+| `ai-without-the-hype-starter-playbook.pdf` | `public, max-age=3600` |
 
 Two things about that block are easy to break:
 
@@ -165,6 +166,25 @@ shell with a full `200` rather than a `304` — it does not honour conditional r
 immutable bundles. So a repeat visit re-downloads roughly 4 kB of gzipped HTML and serves
 everything that shell references from cache. That is the intended trade: a few kB per hard
 load in exchange for never booting a shell that points at deleted chunk hashes.
+
+## Playbook handout (`/ai`)
+
+A standalone page, separate from the Angular app, generated from `playbook-src/playbook_final.md`.
+Edit wording in that markdown file only, never in the generated HTML, then rebuild:
+
+```bash
+npm run playbook
+```
+
+`playbook-src/rebuild.sh` creates `playbook-src/.venv` with Playwright + Chromium on first run,
+runs `build.py` and `make_pdf.py`, and copies `playbook.html` and
+`ai-without-the-hype-starter-playbook.pdf` into `public/`. Commit both regenerated files: CI does
+not run Python. The script warns while any Editor notes remain; do not publish until they are
+resolved. See `playbook-src/README.md` for the markdown conventions.
+
+`firebase.json` rewrites `/ai` to `/playbook.html` and redirects `/ai/` to `/ai`. Both files must
+stay at the root of `public/`: the page links to the PDF by relative filename, so the PDF has to
+resolve from `/ai`. The rewrite sits above the `**` SPA fallback, which would otherwise catch it.
 
 ## Running end-to-end tests
 
