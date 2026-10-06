@@ -47,3 +47,6 @@ __screenshots__/
 # AppleDouble sidecars macOS writes on exFAT/network volumes
 ._*
 Thumbs.db
+
+# Playbook build venv
+/playbook-src/.venv/

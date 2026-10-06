@@ -36,6 +36,15 @@
         ]
       },
       {
+        "source": "/ai-without-the-hype-starter-playbook.pdf",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600"
+          }
+        ]
+      },
+      {
         "source": "/Giovanni_Rufino_Resume.pdf",
         "headers": [
           {
@@ -45,7 +54,18 @@
         ]
       }
     ],
+    "redirects": [
+      {
+        "source": "/ai/",
+        "destination": "/ai",
+        "type": 301
+      }
+    ],
     "rewrites": [
+      {
+        "source": "/ai",
+        "destination": "/playbook.html"
+      },
       {
         "source": "**",
         "destination": "/index.html"

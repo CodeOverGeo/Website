@@ -107,9 +107,11 @@ contains the prerendered `index.html` per route plus `robots.txt`, `sitemap.xml`
 `og-image.png`. Unknown paths still rewrite to `index.html` for SPA routing.
 
 ```bash
-ng build
+npm run build
 firebase deploy
 ```
+
+Use `npm run build`, not bare `ng build`: the npm script also applies the playbook feature flag.
 
 ### Continuous integration
 
@@ -150,6 +152,7 @@ stale shell would reference chunk hashes that a later deploy has already replace
 | `**/*.@(js\|css)` — hashed bundles | `public, max-age=31536000, immutable` |
 | Images and fonts (unhashed, copied from `public/`) | `public, max-age=604800` |
 | `Giovanni_Rufino_Resume.pdf` | `public, max-age=3600` |
+| `ai-without-the-hype-starter-playbook.pdf` | `public, max-age=3600` |
 
 Two things about that block are easy to break:
 
@@ -165,6 +168,35 @@ shell with a full `200` rather than a `304` — it does not honour conditional r
 immutable bundles. So a repeat visit re-downloads roughly 4 kB of gzipped HTML and serves
 everything that shell references from cache. That is the intended trade: a few kB per hard
 load in exchange for never booting a shell that points at deleted chunk hashes.
+
+## Playbook handout (`/ai`)
+
+A standalone page, separate from the Angular app, generated from `playbook-src/playbook_final.md`.
+Edit wording in that markdown file only, never in the generated HTML, then rebuild:
+
+```bash
+npm run playbook
+```
+
+`playbook-src/rebuild.sh` creates `playbook-src/.venv` with Playwright + Chromium on first run and
+runs `build.py` and `make_pdf.py`, which write `playbook.html` and
+`ai-without-the-hype-starter-playbook.pdf` into `playbook-src/`. Commit both: CI does not run
+Python. See `playbook-src/README.md` for the markdown conventions.
+
+### Feature flag
+
+The page is published only while `"playbook": true` in `feature-flags.json`. `npm run build`
+runs `scripts/publish-playbook.mjs` after `ng build`; with the flag on it copies both files to the
+root of the build output, and with it off it copies nothing, so neither file is deployed and `/ai`
+returns a 404. To go live, set the flag to `true` and merge to `main`. To check locally without
+touching the flag, run `PLAYBOOK=on npm run build`.
+
+With the flag on, the build **fails** if the page still contains any Editor notes or `[link]`
+placeholders, so an unfinished handout cannot be deployed by accident.
+
+`firebase.json` rewrites `/ai` to `/playbook.html` and redirects `/ai/` to `/ai`. Both files must
+land at the root of the output: the page links to the PDF by relative filename, so the PDF has to
+resolve from `/ai`. The rewrite sits above the `**` SPA fallback, which would otherwise catch it.
 
 ## Running end-to-end tests
 
