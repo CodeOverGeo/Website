@@ -180,16 +180,23 @@ npm run playbook
 
 `playbook-src/rebuild.sh` creates `playbook-src/.venv` with Playwright + Chromium on first run and
 runs `build.py` and `make_pdf.py`, which write `playbook.html` and
-`ai-without-the-hype-starter-playbook.pdf` into `playbook-src/`. Commit both: CI does not run
-Python. See `playbook-src/README.md` for the markdown conventions.
+`ai-without-the-hype-starter-playbook.pdf` into `playbook-src/`, then records a hash of their
+sources (`playbook_final.md`, `style.css`, `build.py`, `fonts/`) in
+`playbook-src/playbook.source-hash`. Commit all three: CI does not run Python. See
+`playbook-src/README.md` for the markdown conventions.
+
+`npm run build` recomputes that hash and **fails if it doesn't match**, whatever the flag says. So
+a wording change committed without `npm run playbook` fails CI on its own PR instead of quietly
+deploying the old page.
 
 ### Feature flag
 
 The page is published only while `"playbook": true` in `feature-flags.json`. `npm run build`
 runs `scripts/publish-playbook.mjs` after `ng build`; with the flag on it copies both files to the
 root of the build output, and with it off it copies nothing, so neither file is deployed and `/ai`
-returns a 404. To go live, set the flag to `true` and merge to `main`. To check locally without
-touching the flag, run `PLAYBOOK=on npm run build`.
+returns Firebase's default 404 page: its rewrite matches first and points at a missing file, so
+the SPA fallback is never tried. To go live, set the flag to `true` and merge to `main`. To check
+locally without touching the flag, run `PLAYBOOK=on npm run build`.
 
 With the flag on, the build **fails** if the page still contains any Editor notes or `[link]`
 placeholders, so an unfinished handout cannot be deployed by accident.

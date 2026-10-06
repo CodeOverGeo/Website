@@ -23,6 +23,7 @@ fi
 cd "$SRC_DIR"
 "$VENV/bin/python" build.py
 "$VENV/bin/python" make_pdf.py
+node "$SRC_DIR/../scripts/playbook-hash.mjs" --write
 
 NOTES=$(grep -cE '^\[(CONFIRM|OPTIONAL|REMOVE|HAVE)' playbook_final.md || true)
 if [ "$NOTES" -gt 0 ]; then
