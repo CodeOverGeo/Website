@@ -109,8 +109,6 @@ li { margin: 0.35rem 0; }
 .lrung .ln { font-weight: 700; font-size: 1.2rem; color: var(--pine); }
 .lrung .lj { font-weight: 700; }
 .lrung .lw { font-size: 0.9rem; color: var(--muted); }
-.lrung.is-new a { border-style: dashed; }
-.lrung.is-new .lw { color: var(--pine); font-weight: 700; }
 
 /* rungs */
 .rung { position: relative; padding: 0.2rem 0 1rem 3.6rem; margin: 2rem 0 0.5rem; border-left: 0; }
@@ -149,7 +147,9 @@ main { padding-bottom: 4rem; }
   .rung-num { position: static; float: left; margin: -0.15rem 0.75rem 0 0; width: 2.25rem; height: 2.25rem; font-size: 1.15rem; }
   .rung .tag { display: block; clear: left; padding-top: 0.35rem; }
   .profile { padding: 1rem 1rem 0.25rem; }
-  .lrung .lw { font-size: 0.8rem; }
+  .lrung a { grid-template-columns: 2.25rem 1fr; row-gap: 0.1rem; }
+  .lrung .ln { grid-row: span 2; }
+  .lrung .lw { font-size: 0.85rem; }
 }
 
 @media print {
