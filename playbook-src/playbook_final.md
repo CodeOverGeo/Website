@@ -179,16 +179,16 @@ Find the profile that sounds most like you. If two fit, read both. Each one sugg
 
 The talk had time for four rungs. This playbook adds four more that fit between them, for eight in all. Each rung asks a little more of you and of the tool.
 
-| Rung | Job | Where you saw it |
+| Rung | Job | For example |
 |---|---|---|
-| 1 | Writes for you | The talk |
-| 2 | Translates for you | New in this playbook |
-| 3 | Reads for you | The talk |
-| 4 | Sees for you | New in this playbook |
-| 5 | Counts for you | The talk |
-| 6 | Plans for you | New in this playbook |
-| 7 | Watches for you | New in this playbook |
-| 8 | Acts for you | The talk |
+| 1 | Writes for you | A reply to an upset customer |
+| 2 | Translates for you | A customer's text in Spanish |
+| 3 | Reads for you | A supplier's proposal before a meeting |
+| 4 | Sees for you | A photo of a crushed shipment |
+| 5 | Counts for you | Last month's expenses, sorted |
+| 6 | Plans for you | A schedule around time-off requests |
+| 7 | Watches for you | An alert about a new one-star review |
+| 8 | Acts for you | An AI that answers your phone |
 
 The lower rungs only need a general AI assistant. The top rungs usually need a separate tool that connects to your accounts, which is why guardrail 4 matters most up there.
 

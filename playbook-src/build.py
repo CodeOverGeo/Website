@@ -113,11 +113,10 @@ while i < len(body):
             rows.append([c.strip() for c in body[i].strip("|").split("|")]); i += 1
         LADDER = rows[2:]
         rungs = []
-        for n, job, where in reversed(LADDER):
-            new = where.startswith("New")
-            rungs.append(f'<li class="lrung{" is-new" if new else ""}"><a href="#rung-{n}">'
+        for n, job, example in reversed(LADDER):
+            rungs.append(f'<li class="lrung"><a href="#rung-{n}">'
                          f'<span class="ln">{n}</span><span class="lj">{html.escape(job)}</span>'
-                         f'<span class="lw">{"New" if new else "In the talk"}</span></a></li>')
+                         f'<span class="lw">{html.escape(example)}</span></a></li>')
         out.append('<nav class="ladder" aria-label="The eight rungs of the ladder"><ol reversed>'
                    + "".join(rungs) + "</ol></nav>")
         continue

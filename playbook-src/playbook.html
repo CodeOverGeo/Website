@@ -116,8 +116,6 @@ li { margin: 0.35rem 0; }
 .lrung .ln { font-weight: 700; font-size: 1.2rem; color: var(--pine); }
 .lrung .lj { font-weight: 700; }
 .lrung .lw { font-size: 0.9rem; color: var(--muted); }
-.lrung.is-new a { border-style: dashed; }
-.lrung.is-new .lw { color: var(--pine); font-weight: 700; }
 
 /* rungs */
 .rung { position: relative; padding: 0.2rem 0 1rem 3.6rem; margin: 2rem 0 0.5rem; border-left: 0; }
@@ -156,7 +154,9 @@ main { padding-bottom: 4rem; }
   .rung-num { position: static; float: left; margin: -0.15rem 0.75rem 0 0; width: 2.25rem; height: 2.25rem; font-size: 1.15rem; }
   .rung .tag { display: block; clear: left; padding-top: 0.35rem; }
   .profile { padding: 1rem 1rem 0.25rem; }
-  .lrung .lw { font-size: 0.8rem; }
+  .lrung a { grid-template-columns: 2.25rem 1fr; row-gap: 0.1rem; }
+  .lrung .ln { grid-row: span 2; }
+  .lrung .lw { font-size: 0.85rem; }
 }
 
 @media print {
@@ -302,7 +302,7 @@ Things you should never do in your answers (for example: Promise discounts, give
 <section id="the-ladder" class="sec">
 <h2>The ladder: Eight jobs AI can do for you</h2>
 <p>The talk had time for four rungs. This playbook adds four more that fit between them, for eight in all. Each rung asks a little more of you and of the tool.</p>
-<nav class="ladder" aria-label="The eight rungs of the ladder"><ol reversed><li class="lrung"><a href="#rung-8"><span class="ln">8</span><span class="lj">Acts for you</span><span class="lw">In the talk</span></a></li><li class="lrung is-new"><a href="#rung-7"><span class="ln">7</span><span class="lj">Watches for you</span><span class="lw">New</span></a></li><li class="lrung is-new"><a href="#rung-6"><span class="ln">6</span><span class="lj">Plans for you</span><span class="lw">New</span></a></li><li class="lrung"><a href="#rung-5"><span class="ln">5</span><span class="lj">Counts for you</span><span class="lw">In the talk</span></a></li><li class="lrung is-new"><a href="#rung-4"><span class="ln">4</span><span class="lj">Sees for you</span><span class="lw">New</span></a></li><li class="lrung"><a href="#rung-3"><span class="ln">3</span><span class="lj">Reads for you</span><span class="lw">In the talk</span></a></li><li class="lrung is-new"><a href="#rung-2"><span class="ln">2</span><span class="lj">Translates for you</span><span class="lw">New</span></a></li><li class="lrung"><a href="#rung-1"><span class="ln">1</span><span class="lj">Writes for you</span><span class="lw">In the talk</span></a></li></ol></nav>
+<nav class="ladder" aria-label="The eight rungs of the ladder"><ol reversed><li class="lrung"><a href="#rung-8"><span class="ln">8</span><span class="lj">Acts for you</span><span class="lw">An AI that answers your phone</span></a></li><li class="lrung"><a href="#rung-7"><span class="ln">7</span><span class="lj">Watches for you</span><span class="lw">An alert about a new one-star review</span></a></li><li class="lrung"><a href="#rung-6"><span class="ln">6</span><span class="lj">Plans for you</span><span class="lw">A schedule around time-off requests</span></a></li><li class="lrung"><a href="#rung-5"><span class="ln">5</span><span class="lj">Counts for you</span><span class="lw">Last month&#x27;s expenses, sorted</span></a></li><li class="lrung"><a href="#rung-4"><span class="ln">4</span><span class="lj">Sees for you</span><span class="lw">A photo of a crushed shipment</span></a></li><li class="lrung"><a href="#rung-3"><span class="ln">3</span><span class="lj">Reads for you</span><span class="lw">A supplier&#x27;s proposal before a meeting</span></a></li><li class="lrung"><a href="#rung-2"><span class="ln">2</span><span class="lj">Translates for you</span><span class="lw">A customer&#x27;s text in Spanish</span></a></li><li class="lrung"><a href="#rung-1"><span class="ln">1</span><span class="lj">Writes for you</span><span class="lw">A reply to an upset customer</span></a></li></ol></nav>
 <p>The lower rungs only need a general AI assistant. The top rungs usually need a separate tool that connects to your accounts, which is why guardrail 4 matters most up there.</p>
 <p>Every prompt below works best after you paste in your business context from the template.</p>
 <div class="rung" id="rung-1"><div class="rung-head"><div class="rung-num" aria-hidden="true">1</div>
