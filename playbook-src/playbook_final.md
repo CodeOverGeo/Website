@@ -270,7 +270,7 @@ Tell AI what needs to happen by when and what you have to work with, and it can 
 
 ### Rung 7: Watches for you
 
-This is the step before Acts. AI keeps an eye on something and tells you when it changes, and you decide what to do. It can alert you when a new review posts or an invoice goes past due.
+AI keeps an eye on something and tells you when it changes, and you decide what to do. It can alert you when a new review posts or an invoice goes past due.
 
 **Example:** A one-star review shows up overnight. You get an alert in the morning with a draft reply waiting for your approval.
 
@@ -282,7 +282,7 @@ This is the step before Acts. AI keeps an eye on something and tells you when it
 
 ### Rung 8: Acts for you
 
-At the top of the ladder, AI does things on your behalf, like answering your phone or booking appointments. This takes a separate tool. It's also the rung where a mistake can reach a customer before you see it.
+AI does things on your behalf, like answering your phone or booking appointments. This takes a separate tool. It's also the rung where a mistake can reach a customer before you see it.
 
 **Example from the talk:** AI phone answering. When you can't get to the phone, the service picks up and answers common questions. Afterward, it texts you a summary of the call.
 
