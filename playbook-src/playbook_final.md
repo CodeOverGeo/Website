@@ -294,7 +294,7 @@ AI does things on your behalf, like answering your phone or booking appointments
 
 ## Where to get help
 
-[CONFIRM SERVICES WITH THE SBC] **The Small Business Center at Mitchell Community College** offers free, confidential one-on-one counseling and low-cost seminars for business owners. It's a good first call for questions about your business that go beyond AI.
+**Your local Small Business Center**, run by North Carolina's community colleges, offers free, confidential one-on-one counseling and low-cost seminars for business owners. It's a good first call for questions about your business that go beyond AI. To find yours, search for "Small Business Center" and the name of the community college nearest you.
 
 [OPTIONAL: Local consultant listing. Confirm wording with the moderator before publishing.]
 
