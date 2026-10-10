@@ -296,21 +296,17 @@ AI does things on your behalf, like answering your phone or booking appointments
 
 **Your local Small Business Center**, run by North Carolina's community colleges, offers free, confidential one-on-one counseling and low-cost seminars for business owners. It's a good first call for questions about your business that go beyond AI. To find yours, search for "Small Business Center" and the name of the community college nearest you.
 
-[OPTIONAL: Local consultant listing. Confirm wording with the moderator before publishing.]
-
 **Your accountant** for anything about taxes or your books.
 
 **An attorney** for contracts and anything you're about to sign.
 
 ## Want the full playbook?
 
-[REMOVE THIS SECTION IF MITCHELL DOES NOT ALLOW SELLING.]
-
 The full playbook walks through the kinds of AI tools small businesses use and what to look for when you choose one. It also shows you how to spot fake AI services and scams. [link]
 
 ## About the author
 
-[CONFIRM] Giovanni Rufino is a software engineer who helps teams learn to use AI well. Before software, he spent ten years leading retail and operations teams. georufino.com
+Giovanni Rufino is a software engineer who helps teams learn to use AI well. Before software, he spent ten years leading retail and operations teams. georufino.com
 
 ## The fine print
 
