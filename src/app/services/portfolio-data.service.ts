@@ -16,7 +16,7 @@ const SOCIAL_LINKS: SocialLinks = {
   linkedin: 'https://linkedin.com/in/giovannirufino',
   x: 'https://x.com/CodeOverGeo',
   github: 'https://github.com/CodeOverGeo',
-  email: 'mailto:giovannirufino@gmail.com'
+  email: 'mailto:grufino@georufino.com'
 };
 
 const HERO: HeroProfile = {
