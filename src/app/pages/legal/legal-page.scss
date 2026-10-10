@@ -1,0 +1,46 @@
+// Shared by the /terms and /privacy pages.
+.legal-page {
+  max-width: 46rem;
+  padding: 1.25rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+
+  h1 {
+    font-size: 1.6rem;
+    line-height: 1.25;
+    margin-bottom: 0.4rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    margin: 1.6rem 0 0.5rem;
+    color: var(--accent-blue);
+  }
+
+  h3 {
+    font-size: 1rem;
+    margin: 1.1rem 0 0.35rem;
+  }
+
+  p,
+  ul {
+    margin-bottom: 0.75rem;
+  }
+
+  ul {
+    padding-left: 1.25rem;
+  }
+
+  li {
+    margin-bottom: 0.35rem;
+  }
+
+  a {
+    color: var(--accent-blue);
+  }
+
+  .last-updated {
+    color: #8b949e;
+    margin-bottom: 1.25rem;
+  }
+}

@@ -30,4 +30,14 @@
     <lastmod>2026-09-18</lastmod>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://georufino.com/terms</loc>
+    <lastmod>2026-10-09</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://georufino.com/privacy</loc>
+    <lastmod>2026-10-09</lastmod>
+    <priority>0.3</priority>
+  </url>
 </urlset>
