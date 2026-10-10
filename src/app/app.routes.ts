@@ -60,6 +60,24 @@ export const routes: Routes = [
 		loadComponent: () => import('./pages/blog/blog.component').then((m) => m.BlogComponent)
 	},
 	{
+		path: 'terms',
+		title: 'Giovanni Rufino | Terms and Conditions',
+		data: {
+			description:
+				'Terms and Conditions for "AI Without the Hype: The Full Playbook," the ebook by Giovanni Rufino.'
+		},
+		loadComponent: () => import('./pages/terms/terms.component').then((m) => m.TermsComponent)
+	},
+	{
+		path: 'privacy',
+		title: 'Giovanni Rufino | Privacy Policy',
+		data: {
+			description:
+				'How georufino.com, mentoring session bookings, and ebook sales handle your information.'
+		},
+		loadComponent: () => import('./pages/privacy/privacy.component').then((m) => m.PrivacyComponent)
+	},
+	{
 		path: '**',
 		redirectTo: 'dashboard'
 	}
