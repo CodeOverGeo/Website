@@ -314,8 +314,10 @@ The full playbook walks through the kinds of AI tools small businesses use and w
 
 ## The fine print
 
-[HAVE THIS REVIEWED BEFORE PUBLISHING.]
-
 This playbook is general information to help you learn. It isn't legal, tax, financial, or other professional advice. AI tools change often, so features and settings may look different by the time you read this. You are responsible for what you share with AI tools and for checking anything they produce before you use it. Mentions of types of tools are not endorsements of any company.
+
+You're welcome to share this free playbook, as long as you share it unchanged and keep my name on it.
+
+My privacy policy is at georufino.com/privacy.
 
 Current as of October 2026.
