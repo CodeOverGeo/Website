@@ -116,7 +116,7 @@ export class CommandPaletteComponent {
 
   execute(item: CommandPaletteItem): void {
     if (item.actionId === 'MAILTO') {
-      window.location.href = 'mailto:giovannirufino@gmail.com';
+      window.location.href = 'mailto:grufino@georufino.com';
       this.close();
       return;
     }
