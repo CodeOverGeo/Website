@@ -302,7 +302,7 @@ AI does things on your behalf, like answering your phone or booking appointments
 
 ## Want the full playbook?
 
-The full playbook walks through the kinds of AI tools small businesses use and what to look for when you choose one. It also shows you how to spot fake AI services and scams. [link]
+The full playbook walks through the kinds of AI tools small businesses use and what to look for when you choose one. It also shows you how to spot fake AI services and scams. [Get the full playbook](https://georufino.gumroad.com/l/playbook).
 
 ## About the author
 
