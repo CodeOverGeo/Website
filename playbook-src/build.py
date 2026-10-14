@@ -47,6 +47,11 @@ def close_section():
         out.append("</section>")
         open_section = False
 
+# Web-only pointer shown after the last rung. It lives here, not in
+# playbook_final.md, because the ladder section is also used elsewhere.
+NEXT_STEP = ("Ready to look at a phone answering, scheduling, or alert tool? The full playbook "
+             'covers what to look for in each. <a href="#full-playbook">See what\'s in it</a>')
+
 LADDER = None  # filled from table
 RUNGNUM = {'Writes':1,'Translates':2,'Reads':3,'Sees':4,'Counts':5,'Plans':6,'Watches':7,'Acts':8}
 
@@ -56,6 +61,9 @@ while i < len(body):
         i += 1; continue
 
     if line.startswith("## "):
+        if section and section.startswith("The ladder"):
+            close_block()
+            out.append(f'<aside class="next-step"><p>{NEXT_STEP}</p></aside>')
         close_section()
         text = line[3:]
         section = text
@@ -158,7 +166,10 @@ while i < len(body):
         i += 1; continue
     if not cls and line.rstrip().endswith(":"):
         cls = ' class="lead-in"'
-    out.append(f"<p{cls}>{inline(line)}</p>")
+    para = inline(line)
+    if section.startswith("Want the full playbook"):
+        para = para.replace('<a href="https://', '<a class="buy" href="https://')
+    out.append(f"<p{cls}>{para}</p>")
     i += 1
 
 close_section()
@@ -211,6 +222,7 @@ page = f"""<!DOCTYPE html>
 <body>
 <header class="hero">
   <div class="wrap">
+    <p class="home"><a href="/">georufino.com</a></p>
     <h1>{html.escape(t1)}<span>{html.escape(t2)}</span></h1>
     <div class="meta">{meta_html}</div>
     <p class="pdf-link"><a href="ai-without-the-hype-starter-playbook.pdf">Download the PDF version</a></p>

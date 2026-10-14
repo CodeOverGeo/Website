@@ -15,6 +15,9 @@
 - The fenced code block is the business context template with a Copy button.
 - A paragraph starting with `[CONFIRM...]`, `[OPTIONAL...]`, `[REMOVE...]`, or `[HAVE...]` becomes a dashed "Editor note" box.
 - `[text](https://url)` becomes a link (and prints the URL in the PDF).
+- "Want the full playbook?" becomes a card, and its link becomes a button.
+
+One line of wording lives in `build.py`, not here: The `NEXT_STEP` pointer shown after the last rung. It stays out of the markdown because the ladder section is also used elsewhere.
 
 ## Publishing rules
 - Do not publish while any Editor note boxes remain. Resolve each one, then delete the bracketed line from the markdown.
