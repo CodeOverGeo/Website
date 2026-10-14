@@ -55,6 +55,8 @@ strong { font-weight: 700; }
 .hero .meta p:first-child { margin-bottom: 0.25rem; }
 .hero .pdf-link { margin: 1.5rem 0 0; font-size: 1rem; }
 .hero .pdf-link a { color: #F3F7F4; font-weight: 700; }
+.hero .home { margin: 0 0 1.25rem; font-size: 1rem; }
+.hero .home a { color: #F3F7F4; }
 @media (prefers-color-scheme: dark) { .hero { background: #183B30; } }
 
 /* contents */
@@ -159,6 +161,17 @@ main { padding-bottom: 4rem; }
   .lrung .lw { font-size: 0.85rem; }
 }
 
+/* pointer after the ladder */
+.next-step { border-left: 5px solid var(--pine); background: var(--pine-soft); padding: 0.8rem 1rem; border-radius: 0 8px 8px 0; margin: 1.75rem 0 0.5rem; }
+.next-step p { margin: 0; }
+
+/* full playbook card */
+#full-playbook { background: var(--pine-soft); border: 2px solid var(--pine); border-radius: 10px; padding: 1.5rem 1.25rem 0.75rem; margin-top: 2.25rem; }
+a.buy {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0.55rem 1.2rem;
+  background: var(--pine); color: var(--paper); font-weight: 700; text-decoration: none; border-radius: 6px;
+}
+
 @media print {
   @page { size: Letter; margin: 0.6in 0.65in 0.7in; }
   :root { --paper: #FFFFFF; padding: 0; }
@@ -176,11 +189,13 @@ main { padding-bottom: 4rem; }
   .hero { padding: 0 0 18pt; background: none; color: var(--ink); border-bottom: 3pt solid var(--pine); }
   .hero h1 { color: var(--pine); font-size: 30pt; }
   .hero .meta p { opacity: 1; color: var(--muted); }
-  .hero .pdf-link, button.copy, .toc { display: none; }
+  .hero .pdf-link, .hero .home, button.copy, .toc { display: none; }
+  #full-playbook { padding: 10pt 12pt 4pt; }
+  a.buy { display: inline; min-height: 0; padding: 0; background: none; color: var(--ink); }
   .wrap { max-width: none; padding: 0; }
   .sec { break-before: auto; }
   #the-ladder { break-before: page; border-top: 0; margin-top: 0; }
-  .prompt, .profile, .template, .ladder, .g-label, .lrung, .todo { break-inside: avoid; }
+  .prompt, .profile, .template, .ladder, .g-label, .lrung, .todo, .next-step, #full-playbook { break-inside: avoid; }
   h2, h3 { break-after: avoid; }
   .rung-head, .lead-in { break-inside: avoid; break-after: avoid; }
   .rung-head + p { break-before: avoid; }
@@ -193,6 +208,7 @@ main { padding-bottom: 4rem; }
 <body>
 <header class="hero">
   <div class="wrap">
+    <p class="home"><a href="/">georufino.com</a></p>
     <h1>AI Without the Hype<span>The Starter Playbook</span></h1>
     <div class="meta"><p>A free companion to the talk &quot;AI Without the Hype: What It Actually Means for Your Business&quot;</p><p>Mitchell Community College Small Business Center, October 30, 2026</p><p>By Giovanni Rufino</p></div>
     <p class="pdf-link"><a href="ai-without-the-hype-starter-playbook.pdf">Download the PDF version</a></p>
@@ -370,6 +386,7 @@ Things you should never do in your answers (for example: Promise discounts, give
 <p><strong>Starter prompt:</strong></p>
 <div class="prompt"><p id="p287">I run a <span class="fill">[type of business]</span> and I miss about <span class="fill">[number]</span> calls a week while I'm working. Would an AI phone answering service help me? What questions should I ask a company before I sign up? What should it never be allowed to do without me?</p><button class="copy" type="button" data-copy="p287">Copy prompt</button></div>
 </div>
+<aside class="next-step"><p>Ready to look at a phone answering, scheduling, or alert tool? The full playbook covers what to look for in each. <a href="#full-playbook">See what's in it</a></p></aside>
 </section>
 <section id="where-to-get-help" class="sec">
 <h2>Where to get help</h2>
@@ -379,17 +396,19 @@ Things you should never do in your answers (for example: Promise discounts, give
 </section>
 <section id="full-playbook" class="sec">
 <h2>Want the full playbook?</h2>
-<p>The full playbook walks through the kinds of AI tools small businesses use and what to look for when you choose one. It also shows you how to spot fake AI services and scams. <a href="https://georufino.gumroad.com/l/playbook">Get the full playbook</a>.</p>
+<p class="lead-in">The full playbook picks up where this one stops. It covers:</p>
+<ul><li>How to check the software you already pay for before you buy anything new</li><li>Eight questions to ask about any AI tool before you sign up</li><li>Nine kinds of AI tools, from phone answering to bookkeeping, and what to look for in each</li><li>How to spot fake AI services and scams, and where to report them</li><li>Real companies for each kind of tool, with no paid placements</li></ul>
+<p>It comes as a PDF and an EPUB. <a class="buy" href="https://georufino.gumroad.com/l/playbook">Get the full playbook</a></p>
 </section>
 <section id="about-the-author" class="sec">
 <h2>About the author</h2>
-<p>Giovanni Rufino is a software engineer who helps teams learn to use AI well. Before software, he spent ten years leading retail and operations teams. georufino.com</p>
+<p>Giovanni Rufino is a software engineer who helps teams learn to use AI well. Before software, he spent ten years leading retail and operations teams. <a href="https://georufino.com">georufino.com</a></p>
 </section>
 <section id="the-fine-print" class="sec">
 <h2>The fine print</h2>
 <p>This playbook is general information to help you learn. It isn't legal, tax, financial, or other professional advice. AI tools change often, so features and settings may look different by the time you read this. You are responsible for what you share with AI tools and for checking anything they produce before you use it. Mentions of types of tools are not endorsements of any company.</p>
 <p>You're welcome to share this free playbook, as long as you share it unchanged and keep my name on it.</p>
-<p>My privacy policy is at georufino.com/privacy.</p>
+<p>My privacy policy is at <a href="https://georufino.com/privacy">georufino.com/privacy</a>.</p>
 <p>Current as of October 2026.</p>
 </section>
 </main>

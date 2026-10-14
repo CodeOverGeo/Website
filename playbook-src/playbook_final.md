@@ -302,11 +302,19 @@ AI does things on your behalf, like answering your phone or booking appointments
 
 ## Want the full playbook?
 
-The full playbook walks through the kinds of AI tools small businesses use and what to look for when you choose one. It also shows you how to spot fake AI services and scams. [Get the full playbook](https://georufino.gumroad.com/l/playbook).
+The full playbook picks up where this one stops. It covers:
+
+- How to check the software you already pay for before you buy anything new
+- Eight questions to ask about any AI tool before you sign up
+- Nine kinds of AI tools, from phone answering to bookkeeping, and what to look for in each
+- How to spot fake AI services and scams, and where to report them
+- Real companies for each kind of tool, with no paid placements
+
+It comes as a PDF and an EPUB. [Get the full playbook](https://georufino.gumroad.com/l/playbook)
 
 ## About the author
 
-Giovanni Rufino is a software engineer who helps teams learn to use AI well. Before software, he spent ten years leading retail and operations teams. georufino.com
+Giovanni Rufino is a software engineer who helps teams learn to use AI well. Before software, he spent ten years leading retail and operations teams. [georufino.com](https://georufino.com)
 
 ## The fine print
 
@@ -314,6 +322,6 @@ This playbook is general information to help you learn. It isn't legal, tax, fin
 
 You're welcome to share this free playbook, as long as you share it unchanged and keep my name on it.
 
-My privacy policy is at georufino.com/privacy.
+My privacy policy is at [georufino.com/privacy](https://georufino.com/privacy).
 
 Current as of October 2026.
