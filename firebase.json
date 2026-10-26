@@ -59,12 +59,21 @@
         "source": "/ai/",
         "destination": "/ai",
         "type": 301
+      },
+      {
+        "source": "/extrapair/privacy/",
+        "destination": "/extrapair/privacy",
+        "type": 301
       }
     ],
     "rewrites": [
       {
         "source": "/ai",
         "destination": "/playbook.html"
+      },
+      {
+        "source": "/extrapair/privacy",
+        "destination": "/extrapair/privacy.html"
       },
       {
         "source": "**",
