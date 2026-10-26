@@ -52,6 +52,11 @@ def close_section():
 NEXT_STEP = ("Ready to look at a phone answering, scheduling, or alert tool? The full playbook "
              'covers what to look for in each. <a href="#full-playbook">See what\'s in it</a>')
 
+# Web-only pointer under the title, hidden in print so the handout PDF stays
+# as is. Same reason as NEXT_STEP for keeping it out of playbook_final.md.
+TOP_POINTER = ("Ready for specific tools? The full playbook names real companies for nine kinds "
+               'of AI tools. <a href="#full-playbook">See what\'s in it</a>')
+
 LADDER = None  # filled from table
 RUNGNUM = {'Writes':1,'Translates':2,'Reads':3,'Sees':4,'Counts':5,'Plans':6,'Watches':7,'Acts':8}
 
@@ -226,6 +231,7 @@ page = f"""<!DOCTYPE html>
     <h1>{html.escape(t1)}<span>{html.escape(t2)}</span></h1>
     <div class="meta">{meta_html}</div>
     <p class="pdf-link"><a href="ai-without-the-hype-starter-playbook.pdf">Download the PDF version</a></p>
+    <p class="top-pointer">{TOP_POINTER}</p>
   </div>
 </header>
 <nav class="toc wrap" aria-label="Contents"><h2 class="toc-h">In this playbook</h2><ol>{toc_html}</ol></nav>
