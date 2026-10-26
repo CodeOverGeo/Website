@@ -17,7 +17,7 @@
 - `[text](https://url)` becomes a link (and prints the URL in the PDF).
 - "Want the full playbook?" becomes a card, and its link becomes a button.
 
-One line of wording lives in `build.py`, not here: The `NEXT_STEP` pointer shown after the last rung. It stays out of the markdown because the ladder section is also used elsewhere.
+Two lines of wording live in `build.py`, not here: The `NEXT_STEP` pointer shown after the last rung, and the `TOP_POINTER` line under the title (web only, hidden in the PDF). They stay out of the markdown because the ladder section is also used elsewhere.
 
 ## Publishing rules
 - Do not publish while any Editor note boxes remain. Resolve each one, then delete the bracketed line from the markdown.
