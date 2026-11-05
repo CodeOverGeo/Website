@@ -111,6 +111,15 @@ const EXPERIENCE: ExperienceCommit[] = [
 
 const PROJECTS: Project[] = [
   {
+    title: 'ExtraPair',
+    description: 'Native iOS and iPadOS supply tracker helping parents keep spare clothing and food stocked at daycare, with multi-parent iCloud sharing, interactive Home Screen widgets, and usage trend forecasting.',
+    stack: ['Swift', 'SwiftUI', 'CloudKit', 'Core Data', 'WidgetKit'],
+    featured: true,
+    isPrivate: true,
+    liveUrl: 'https://apps.apple.com/us/app/extrapair/id6826965116',
+    specData: 'Given a daycare supply category, when items come home in a bag or a drop-off is packed, then remaining stock and restock checklists update across shared parent devices.'
+  },
+  {
     title: 'Vypto.org',
     description: 'Zero-knowledge architecture platform ensuring privacy-first interactions and secure data handling.',
     stack: ['Architecture', 'Zero-Knowledge Proofs', 'TypeScript'],
