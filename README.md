@@ -66,7 +66,7 @@ src/app/
 ## Portfolio Content
 
 - **Experience** — Software Engineer at Relias (Oct 2024–Present), with prior roles in DevOps evangelism, feature flag enablement, and a full-stack bootcamp at Springboard
-- **Projects** — ExtraPair (Swift/CloudKit, live on the App Store), Vypto.org (ZK architecture), Fluck iOS App (Swift/Firebase), Refinement AI Skill (MCP/Gherkin), Elimibug (React/Node), Rate the Charge (Flask)
+- **Projects** — ExtraPair (Swift/CloudKit, live on the App Store), Vypto.org (ZK architecture), Refinement AI Skill (MCP/Gherkin), Elimibug (React/Node), Rate the Charge (Flask)
 - **Skills** — C#/.NET, TypeScript, Angular, Node.js, Python, Azure, Cosmos DB, SQL, CI/CD, Docker, Swift
 - **Certifications** — AZ-900, AZ-204, AI-900 (Microsoft), IBM & Coursera certs
 
