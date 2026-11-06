@@ -128,14 +128,6 @@ const PROJECTS: Project[] = [
     specData: 'Given user data, when verified via ZK proofs, then authenticity is confirmed without revealing the underlying information.'
   },
   {
-    title: 'Fluck iOS App',
-    description: 'Native iOS dual-profile application featuring secure Firebase authentication, real-time Firestore sync, and StoreKit 2 monetization.',
-    stack: ['Swift', 'iOS', 'StoreKit', 'Firebase'],
-    featured: true,
-    isPrivate: true,
-    specData: 'Given a connected couple, when navigating the app, then relationship milestones and activities are displayed.'
-  },
-  {
     title: 'Refinement AI Skill',
     description: 'Reads technical documents, compares repo context, and drafts refined user stories with Gherkin acceptance criteria.',
     stack: ['TypeScript', 'MCP', 'AI', 'Gherkin'],
