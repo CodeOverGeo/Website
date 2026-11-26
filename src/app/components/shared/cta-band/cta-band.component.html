@@ -1,0 +1,22 @@
+<section class="cta-band-section">
+  <div class="container">
+    <div class="cta-band-card">
+      <div class="cta-band-copy">
+        @if (kicker()) {
+          <span class="stage-kicker">{{ kicker() }}</span>
+        }
+        <h2>{{ heading() }}</h2>
+        <p class="muted">{{ body() }}</p>
+      </div>
+
+      <div class="cta-band-actions">
+        <a class="btn btn-primary" [routerLink]="primaryRoute()">{{ primaryLabel() }}</a>
+        @if (secondaryLabel() && secondaryRoute()) {
+          <a class="btn" [routerLink]="secondaryRoute()">{{ secondaryLabel() }}</a>
+        } @else if (secondaryLabel() && secondaryHref()) {
+          <a class="btn" [href]="secondaryHref()">{{ secondaryLabel() }}</a>
+        }
+      </div>
+    </div>
+  </div>
+</section>
