@@ -1,0 +1,1394 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>georufino.com — Interactive Design Decision Studio (#47)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,650;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Outfit:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg-primary: #0B0F17;
+      --bg-surface: #131926;
+      --bg-elevated: #1B2334;
+      --text-primary: #F1F5F9;
+      --text-muted: #94A3B8;
+      --border-subtle: #243046;
+      --header-bg: rgb(11 15 23 / 0.92);
+
+      /* Locked (#47): Electric Cobalt on Midnight Slate */
+      --accent-primary: #60A5FA;
+      --accent-hover: #7DB6FC;
+      --accent-ink: #0B0F17;
+      --accent-soft: rgb(96 165 250 / 0.14);
+      --accent-border: rgb(96 165 250 / 0.34);
+      --spotlight-glow: rgb(96 165 250 / 0.11);
+
+      --font-display: 'Space Grotesk', system-ui, sans-serif;
+      --font-body: 'Atkinson Hyperlegible', system-ui, sans-serif;
+      --font-mono: 'Fira Code', ui-monospace, monospace;
+
+      --radius-btn: 999px;
+      --radius-card: 1rem;
+      --hero-em-style: normal;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html {
+      -webkit-text-size-adjust: 100%;
+      scroll-behavior: smooth;
+      scroll-padding-block-start: 5.5rem;
+      scrollbar-color: var(--border-subtle) var(--bg-primary);
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    ::selection {
+      background: var(--accent-primary);
+      color: var(--accent-ink);
+    }
+
+    body {
+      margin: 0;
+      accent-color: var(--accent-primary);
+      background-color: var(--bg-primary);
+      background-image: radial-gradient(ellipse 75% 38rem at 50% -6rem, var(--spotlight-glow), transparent 70%);
+      background-repeat: no-repeat;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      overflow-wrap: break-word;
+      padding-block-end: 5rem;
+      transition: background-color 180ms ease, color 180ms ease;
+    }
+
+    a { color: var(--accent-primary); text-underline-offset: 0.2em; }
+    :focus-visible {
+      outline: 2.5px solid var(--accent-primary);
+      outline-offset: 3px;
+      border-radius: 0.25rem;
+    }
+
+    /* Top Route Preview Bar */
+    .proto-bar {
+      background: #0A0B09;
+      color: #D6D2C8;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 0.5rem 1rem;
+      border-block-end: 1px solid #262924;
+    }
+    .proto-bar-inner {
+      max-inline-size: 75rem;
+      margin-inline: auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem 1rem;
+    }
+    .proto-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.375rem;
+    }
+    .proto-pill {
+      display: inline-flex;
+      align-items: center;
+      min-block-size: 1.85rem;
+      padding: 0.15rem 0.7rem;
+      border-radius: 999px;
+      color: #C7C3B8;
+      text-decoration: none;
+      border: 1px solid #30352E;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      background: transparent;
+      cursor: pointer;
+    }
+    .proto-pill[aria-current="page"] {
+      background: var(--accent-primary);
+      color: var(--accent-ink);
+      border-color: var(--accent-primary);
+      font-weight: 600;
+    }
+
+    .container {
+      max-inline-size: 75rem;
+      margin-inline: auto;
+      padding-inline: clamp(1.125rem, 3vw, 2.25rem);
+    }
+
+    /* Responsive Site Header (`navbar` guide) */
+    .site-header {
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 30;
+      background: var(--header-bg);
+      backdrop-filter: blur(12px);
+      border-block-end: 1px solid var(--border-subtle);
+    }
+    .site-header.is-measuring * { transition: none !important; }
+    .header-inner {
+      max-inline-size: 75rem;
+      margin-inline: auto;
+      padding: 0.75rem clamp(1.125rem, 3vw, 2.25rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .header-inner > * { flex-shrink: 0; white-space: nowrap; }
+
+    .site-logo {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.625rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.35rem;
+      letter-spacing: -0.015em;
+    }
+    .site-logo span.sub {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-primary);
+      font-weight: 400;
+    }
+    @media (max-width: 36rem) {
+      .site-logo span.sub { display: none; }
+    }
+
+    .menu-button {
+      anchor-name: --menu-button;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      min-block-size: 2.75rem;
+      padding: 0.45rem 0.875rem;
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-btn);
+      font: inherit;
+      font-size: 0.90625rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .site-menu {
+      list-style: none;
+      position: fixed;
+      inset: auto;
+      inset-block-start: 6.75rem;
+      inset-block-start: anchor(--menu-button bottom);
+      inset-inline-end: 1rem;
+      inline-size: min(84dvw, 21rem);
+      max-inline-size: calc(100dvw - 2rem);
+      block-size: fit-content;
+      max-block-size: calc(100dvh - 7.5rem);
+      margin: 0.5rem 0 0;
+      padding: 0.75rem;
+      overflow: auto;
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      box-shadow: 0 24px 48px rgb(0 0 0 / 0.45);
+    }
+    @supports not selector(:popover-open) {
+      [popover]:not(.\:popover-open) { display: none; }
+    }
+    .site-menu:is(:popover-open, .\:popover-open) {
+      display: grid;
+      gap: 0.25rem;
+    }
+    .site-menu a {
+      display: inline-flex;
+      align-items: center;
+      inline-size: 100%;
+      min-block-size: 2.75rem;
+      padding: 0.45rem 0.8rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      position: relative;
+    }
+    .site-menu a:hover { background: var(--accent-soft); }
+    .site-menu a[aria-current="page"] {
+      color: var(--accent-primary);
+      background: var(--accent-soft);
+      border-inline-start: 3px solid var(--accent-primary);
+    }
+    .site-menu .nav-cta {
+      background: var(--accent-primary);
+      color: var(--accent-ink);
+      font-weight: 700;
+      justify-content: center;
+      border-radius: var(--radius-btn);
+      margin-block-start: 0.25rem;
+    }
+    .site-menu .nav-cta:hover { background: var(--accent-hover); }
+
+    .site-header.is-wide .menu-button { display: none; }
+    .site-header.is-wide .site-menu {
+      position: static;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      inline-size: auto;
+      max-inline-size: none;
+      block-size: auto;
+      max-block-size: none;
+      overflow: visible;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+    .site-header.is-wide .site-menu::backdrop { display: none; }
+    .site-header.is-wide .site-menu a {
+      inline-size: auto;
+      border-inline-start: 0;
+    }
+    .site-header.is-wide .site-menu a[aria-current="page"] {
+      background: transparent;
+      border-radius: 0;
+    }
+    .site-header.is-wide .site-menu a[aria-current="page"]::after {
+      content: "";
+      position: absolute;
+      inset: auto 0.8rem 0.25rem;
+      border-block-end: 2px solid var(--accent-primary);
+    }
+    .site-header.is-wide .site-menu .nav-cta {
+      margin-block-start: 0;
+      margin-inline-start: 0.5rem;
+      padding-inline: 1.15rem;
+    }
+
+    /* Typography */
+    .stage-kicker {
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      color: var(--accent-primary);
+      margin: 0 0 1rem;
+      display: inline-block;
+      padding: 0.2rem 0.7rem;
+      border-radius: var(--radius-btn);
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+    }
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+    h1 {
+      font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4rem);
+      line-height: 1.05;
+      font-weight: 600;
+      margin: 0 0 1.25rem;
+      text-wrap: balance;
+    }
+    h1 em {
+      font-style: var(--hero-em-style);
+      font-weight: 400;
+      color: var(--accent-primary);
+    }
+    h2 {
+      font-size: clamp(1.7rem, 1.25rem + 1.8vw, 2.5rem);
+      line-height: 1.12;
+      font-weight: 600;
+      margin: 0 0 0.875rem;
+      text-wrap: balance;
+    }
+    h3 {
+      font-size: 1.35rem;
+      line-height: 1.2;
+      font-weight: 600;
+      margin: 0 0 0.5rem;
+    }
+    p { margin: 0 0 1rem; text-wrap: pretty; }
+    .prose { max-inline-size: 64ch; }
+    .muted { color: var(--text-muted); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-block-size: 2.875rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: var(--radius-btn);
+      font-family: var(--font-body);
+      font-size: 0.96875rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+    .btn:hover { border-color: var(--accent-primary); }
+    .btn-primary {
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+      color: var(--accent-ink);
+      font-weight: 700;
+    }
+    .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.875rem;
+      margin-block-start: 1.75rem;
+    }
+
+    /* Auditorium Hero */
+    .stage-hero {
+      padding-block: clamp(3rem, 6vw, 5.25rem) clamp(2.5rem, 4vw, 3.75rem);
+      text-align: center;
+    }
+    .stage-hero-inner {
+      max-inline-size: 54rem;
+      margin-inline: auto;
+    }
+    .stage-hero .cta-row { justify-content: center; }
+    .hero-lead {
+      font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.25rem);
+      color: var(--text-muted);
+      max-inline-size: 54ch;
+      margin-inline: auto;
+    }
+
+    .stage-reel {
+      margin-block-start: 2.75rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: clamp(1.25rem, 3vw, 2rem);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      align-items: center;
+      text-align: start;
+    }
+    @media (min-width: 52rem) {
+      .stage-reel { grid-template-columns: 1.1fr 0.9fr; }
+    }
+    .reel-screen {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      min-block-size: 12rem;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .play-pill {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent-primary);
+      color: var(--accent-ink);
+      font-weight: 700;
+      font-size: 0.875rem;
+      padding: 0.4rem 0.95rem;
+      border-radius: var(--radius-btn);
+    }
+
+    .proof-bar {
+      border-block: 1px solid var(--border-subtle);
+      padding-block: 1.15rem;
+      background: var(--bg-surface);
+    }
+    .proof-items {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem 2.25rem;
+      font-size: 0.90625rem;
+      color: var(--text-muted);
+    }
+    .proof-items strong { color: var(--text-primary); }
+
+    .section {
+      padding-block: clamp(3rem, 6vw, 4.75rem);
+      border-block-end: 1px solid var(--border-subtle);
+    }
+
+    .bento-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+      gap: 1.375rem;
+      margin-block-start: 2rem;
+    }
+    .basalt-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 1.625rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.15rem;
+    }
+    .basalt-card:hover { border-color: var(--accent-border); }
+    .basalt-foot {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      border-block-start: 1px solid var(--border-subtle);
+      padding-block-start: 0.875rem;
+      margin: 0;
+    }
+    .basalt-foot strong { color: var(--text-primary); }
+
+    .split-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media (min-width: 54rem) {
+      .split-2 { grid-template-columns: 1fr 1fr; }
+    }
+    .mono-chips {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+    .mono-chips li {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-btn);
+      color: var(--text-primary);
+    }
+
+    .bento-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 26rem), 1fr));
+      gap: 1.5rem;
+      margin-block-start: 2rem;
+    }
+    .takeaway-box {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 0.875rem 1rem 0.875rem 2rem;
+      margin: 0;
+      font-size: 0.90625rem;
+      color: var(--text-primary);
+    }
+    .takeaway-box li { margin-block: 0.3rem; }
+
+    /* Bio Tabs (`tabs` + `copy-button`) */
+    .bio-tabs { max-inline-size: 56rem; }
+    .bio-tablist {
+      display: flex;
+      overflow-x: auto;
+      border-block-end: 1px solid var(--border-subtle);
+      gap: 0.375rem;
+    }
+    .bio-tablist button {
+      flex: none;
+      position: relative;
+      background: transparent;
+      border: 0;
+      padding: 0.75rem 1.125rem;
+      min-block-size: 2.75rem;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .bio-tablist button[aria-selected="true"] {
+      color: var(--accent-primary);
+    }
+    .bio-tablist button[aria-selected="true"]::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      border-block-end: 3px solid var(--accent-primary);
+    }
+    .bio-panels { display: grid; }
+    .bio-panels > [role="tabpanel"] { grid-area: 1 / 1; }
+    .bio-panels > [role="tabpanel"][hidden] { pointer-events: none; }
+
+    .bio-panel-card {
+      margin-block-start: 1rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-card);
+      padding: 1.5rem;
+    }
+    .bio-panel-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-block-end: 1rem;
+      padding-block-end: 0.75rem;
+      border-block-end: 1px solid var(--border-subtle);
+    }
+    .bio-word-badge {
+      font-family: var(--font-mono);
+      font-size: 0.78125rem;
+      color: var(--text-muted);
+    }
+    .copy-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
+    .copy-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      min-inline-size: 2.75rem;
+      min-block-size: 2.5rem;
+      padding: 0.45rem 0.95rem;
+      border-radius: var(--radius-btn);
+      border: 1px solid var(--accent-primary);
+      background: var(--accent-primary);
+      color: var(--accent-ink);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .copy-button[data-copied] {
+      background: var(--text-primary);
+      border-color: var(--text-primary);
+      color: var(--bg-primary);
+    }
+    .copy-button .icon-check { display: none; }
+    .copy-button[data-copied] .icon-copy { display: none; }
+    .copy-button[data-copied] .icon-check { display: inline; }
+    .copy-tip {
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--accent-primary);
+      opacity: 0;
+      transition: opacity 150ms ease;
+    }
+    .copy-button[data-copied] + .copy-tip,
+    .copy-button[data-failed] + .copy-tip { opacity: 1; }
+
+    .asset-frame-dark {
+      background: var(--bg-elevated);
+      border: 1px dashed var(--border-subtle);
+      border-radius: var(--radius-card);
+      min-block-size: 9.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.78125rem;
+      color: var(--text-muted);
+    }
+
+    .site-footer {
+      padding-block: 2.5rem;
+      font-size: 0.90625rem;
+      color: var(--text-muted);
+    }
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .footer-links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+    }
+
+    /* ================= INTERACTIVE DESIGN DECISION PICKER ================= */
+    .picker-dock {
+      position: fixed;
+      inset-block-end: 1rem;
+      inset-inline-end: 1rem;
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.625rem;
+      max-inline-size: calc(100dvw - 2rem);
+    }
+
+    .picker-launcher {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-block-size: 2.875rem;
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      background: #141614;
+      color: #F3EFE6;
+      border: 1.5px solid var(--accent-primary);
+      box-shadow: 0 12px 32px rgb(0 0 0 / 0.5);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .picker-dot {
+      inline-size: 0.75rem;
+      block-size: 0.75rem;
+      border-radius: 999px;
+      background: var(--accent-primary);
+      border: 1px solid rgb(255 255 255 / 0.35);
+    }
+
+    .picker-card {
+      inline-size: min(26rem, calc(100dvw - 2rem));
+      max-block-size: min(42rem, calc(100dvh - 5.5rem));
+      overflow-y: auto;
+      background: #141614;
+      color: #F3EFE6;
+      border: 1px solid #323730;
+      border-radius: 1rem;
+      padding: 1.125rem;
+      box-shadow: 0 24px 56px rgb(0 0 0 / 0.65);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 0.8125rem;
+      line-height: 1.45;
+      color-scheme: dark;
+    }
+
+    .picker-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding-block-end: 0.75rem;
+      margin-block-end: 0.875rem;
+      border-block-end: 1px solid #292E27;
+    }
+    .picker-head strong {
+      font-size: 0.9375rem;
+      color: #FFFFFF;
+    }
+    .picker-head-actions {
+      display: flex;
+      gap: 0.375rem;
+    }
+    .picker-mini-btn {
+      min-block-size: 2rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 0.375rem;
+      border: 1px solid #353B33;
+      background: #1E211D;
+      color: #D6D2C8;
+      font: inherit;
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .picker-mini-btn:hover { border-color: var(--accent-primary); color: #FFFFFF; }
+
+    .picker-fieldset {
+      border: 0;
+      margin: 0 0 0.95rem;
+      padding: 0;
+    }
+    .picker-legend {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      inline-size: 100%;
+      font-weight: 600;
+      color: #D6D2C8;
+      margin-block-end: 0.45rem;
+      font-size: 0.78125rem;
+    }
+    .picker-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      color: #A6B0A4;
+    }
+
+    /* Native radio pills styled via label:has(:checked) (`browser-ui-theming`) */
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.4rem;
+    }
+    .swatch-option {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-block-size: 2.25rem;
+      padding: 0.3rem 0.55rem;
+      border-radius: 0.5rem;
+      border: 1px solid #2D322B;
+      background: #1B1E1A;
+      cursor: pointer;
+      color: #E2DFD7;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .swatch-option input[type="radio"] {
+      appearance: none;
+      margin: 0;
+      inline-size: 0.95rem;
+      block-size: 0.95rem;
+      border-radius: 999px;
+      background: var(--sw, #5EC29A);
+      border: 2px solid rgb(255 255 255 / 0.28);
+      flex: none;
+    }
+    .swatch-option:has(:checked) {
+      border-color: var(--accent-primary);
+      background: #242923;
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+    .swatch-option:has(:focus-visible) {
+      outline: 2px solid var(--accent-primary);
+      outline-offset: 2px;
+    }
+
+    .custom-color-row {
+      margin-block-start: 0.45rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.35rem 0.6rem;
+      border-radius: 0.5rem;
+      border: 1px dashed #353B33;
+      background: #181B17;
+    }
+    .custom-color-row input[type="color"] {
+      inline-size: 2rem;
+      block-size: 1.75rem;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .seg-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.375rem;
+    }
+    .seg-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      min-block-size: 2.1rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 0.45rem;
+      border: 1px solid #2D322B;
+      background: #1B1E1A;
+      color: #D6D2C8;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .seg-pill input[type="radio"] {
+      position: absolute;
+      clip-path: inset(50%);
+      inline-size: 1px;
+      block-size: 1px;
+      overflow: hidden;
+    }
+    .seg-pill:has(:checked) {
+      border-color: var(--accent-primary);
+      background: var(--accent-soft);
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+    .seg-pill:has(:focus-visible) {
+      outline: 2px solid var(--accent-primary);
+      outline-offset: 2px;
+    }
+
+    .font-select-grid {
+      display: grid;
+      gap: 0.55rem;
+      margin-block-end: 0.95rem;
+    }
+    .font-field {
+      display: grid;
+      gap: 0.25rem;
+    }
+    .font-field label {
+      font-weight: 600;
+      color: #D6D2C8;
+      font-size: 0.75rem;
+    }
+    .font-field select {
+      min-block-size: 2.25rem;
+      padding: 0.35rem 0.6rem;
+      border-radius: 0.45rem;
+      border: 1px solid #353B33;
+      background: #1B1E1A;
+      color: #F3EFE6;
+      font: inherit;
+      font-size: 0.8125rem;
+    }
+
+    .picker-export {
+      border-block-start: 1px solid #292E27;
+      padding-block-start: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .sr-textarea {
+      position: absolute;
+      clip-path: inset(50%);
+      inline-size: 1px;
+      block-size: 1px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <aside class="proto-bar" aria-label="Route switcher">
+    <div class="proto-bar-inner">
+      <div class="proto-group">
+        <span>Keynote Stage · Live Token Studio (#47)</span>
+      </div>
+      <div class="proto-group">
+        <span>Preview Route:</span>
+        <a class="proto-pill" href="?page=home" data-page-trigger="home" data-page-link="home" aria-current="page">Home (/)</a>
+        <a class="proto-pill" href="?page=speaking" data-page-trigger="speaking" data-page-link="speaking">Speaker Kit (/speaking)</a>
+      </div>
+    </div>
+  </aside>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-logo" href="?page=home" data-page-trigger="home">
+        <span>Giovanni Rufino</span>
+        <span class="sub">keynotes · workshops</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <button
+          class="menu-button"
+          type="button"
+          popovertarget="site-menu"
+          popovertargetaction="toggle"
+          aria-controls="site-menu"
+        >
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <span>Menu</span>
+        </button>
+
+        <ul id="site-menu" class="site-menu" popover="auto">
+          <li><a href="?page=home" data-page-trigger="home" data-page-link="home" aria-current="page">Home</a></li>
+          <li><a href="?page=speaking" data-page-trigger="speaking" data-page-link="speaking">Speaker Kit</a></li>
+          <li><a href="#c-offers">Talks &amp; Workshops</a></li>
+          <li><a href="#c-engineering">Engineering</a></li>
+          <li><a href="#c-playbook">/ai Playbook</a></li>
+          <li><a class="nav-cta" href="#c-contact">Book a Talk</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==================== VIEW 1: HOME (/) ==================== -->
+  <main id="view-home" data-page-view="home">
+    <section class="stage-hero">
+      <div class="container">
+        <div class="stage-hero-inner">
+          <span class="stage-kicker">AI keynotes, workshops and walkthroughs</span>
+          <h1>Practical AI, taught by someone who <em>builds it</em></h1>
+          <p class="hero-lead">
+            I'm Giovanni Rufino, a software engineer and AI Chapter Lead at Relias. My talks and workshops help business owners, leaders and teams use AI in their real work, safely and without the hype.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#c-contact">Book a talk or workshop</a>
+            <a class="btn" href="?page=speaking" data-page-trigger="speaking">See keynote topics →</a>
+          </div>
+        </div>
+
+        <div class="stage-reel">
+          <div class="reel-screen">
+            <span class="stage-kicker" style="margin:0;">KEYNOTE SPOTLIGHT</span>
+            <div>
+              <h2 style="font-size:1.5rem;margin-block:0.75rem 0.4rem;">"Putting AI to Work for You!"</h2>
+              <p class="muted" style="font-size:0.9375rem;margin-block-end:1rem;">Plain-language AI habits, prompt patterns, and safety rules for teams without a tech budget.</p>
+              <span class="play-pill">▶ Watch 90s Explainer Preview</span>
+            </div>
+          </div>
+          <div>
+            <h3>Why event organizers book a working builder</h3>
+            <p class="muted">Before building production .NET, Angular, and Azure software at Relias, Giovanni spent ten years leading retail and operations teams. He meets audiences in their daily work — never burying them in buzzwords.</p>
+            <a href="?page=speaking" data-page-trigger="speaking">Explore all 4 keynote topics &amp; bios →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof-bar" aria-label="Credentials">
+      <div class="container">
+        <ul class="proof-items">
+          <li><strong>AI Chapter Lead</strong> at Relias</li>
+          <li><strong>Keynote Speaker</strong> · Mitchell Community College Small Business Center</li>
+          <li><strong>Author</strong> · Free AI Without the Hype Starter Playbook</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="c-offers" class="section">
+      <div class="container">
+        <div class="prose">
+          <span class="stage-kicker">Talks &amp; Teaching</span>
+          <h2>Sessions built around your team's real work</h2>
+          <p class="muted">Every session starts with your tools, your tasks and your questions, so people leave able to do something new the next morning.</p>
+        </div>
+
+        <div class="bento-3">
+          <article class="basalt-card">
+            <div>
+              <h3>Keynote Speeches</h3>
+              <p class="muted">A talk built on one of my keynote topics, adjusted for your audience and event. Q&amp;A is optional.</p>
+            </div>
+            <p class="basalt-foot">
+              <strong>Includes:</strong> Talk, one-page handout or free <code>/ai</code> playbook, and follow-up resources.<br>
+              <strong>For:</strong> Conferences, SBCs, chambers of commerce &amp; leadership offsites.
+            </p>
+          </article>
+
+          <article class="basalt-card">
+            <div>
+              <h3>Business Workshops</h3>
+              <p class="muted">A hands-on session built around the tools your team already has: safe AI habits, prompt craft, output checking, and real work live.</p>
+            </div>
+            <p class="basalt-foot">
+              <strong>Includes:</strong> Live workshop, practice exercises, quick-reference sheet, and follow-up Q&amp;A.<br>
+              <strong>For:</strong> Departments, leadership teams &amp; small business staff.
+            </p>
+          </article>
+
+          <article class="basalt-card">
+            <div>
+              <h3>One-on-One Walkthroughs</h3>
+              <p class="muted">A private session on your own work. We walk through your real tasks together, pick tools that fit, and set clear safety rules.</p>
+            </div>
+            <p class="basalt-foot">
+              <strong>Includes:</strong> Private walkthrough and a short written plan for what to try next.<br>
+              <strong>For:</strong> Owners, executives &amp; managers preparing to lead AI adoption.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="c-engineering" class="section" style="border-block-end:0;">
+      <div class="container split-2">
+        <article class="basalt-card">
+          <div>
+            <span class="stage-kicker">/engineering</span>
+            <h2>Real software architecture behind every talk</h2>
+            <p class="muted">At Relias, I build backend APIs for AI initiatives (cutting latency from 10s to under 1.5s), author MCP-based AI skills, took a microservice to Cortex Gold quality, and ship native iOS apps like ExtraPair.</p>
+            <ul class="mono-chips">
+              <li>C# / .NET</li>
+              <li>Angular</li>
+              <li>Azure (AZ-900 · AZ-204 · AI-900)</li>
+              <li>MCP</li>
+              <li>SwiftUI</li>
+            </ul>
+          </div>
+          <a href="#c-engineering">View full engineering record →</a>
+        </article>
+
+        <article id="c-playbook" class="basalt-card" style="background:var(--bg-elevated);">
+          <div>
+            <span class="stage-kicker" id="c-contact">Book or Read First</span>
+            <h2>Bring Giovanni to your next stage or team offsite</h2>
+            <p class="muted">Check event availability for keynotes and workshops, or explore the free <em>AI Without the Hype</em> starter playbook at <code>/ai</code>.</p>
+          </div>
+          <div class="cta-row" style="margin:0;">
+            <a class="btn btn-primary" href="?page=speaking" data-page-trigger="speaking">Open Speaker Kit</a>
+            <a class="btn" href="#c-playbook">Read /ai Playbook</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== VIEW 2: SPEAKER KIT (/speaking) ==================== -->
+  <main id="view-speaking" data-page-view="speaking" hidden>
+    <section class="stage-hero" style="text-align:start;padding-block-end:2.25rem;">
+      <div class="container">
+        <span class="stage-kicker">Event Organizer Kit · /speaking</span>
+        <h1>Keynote Topics &amp; <em>Speaker Dossier</em></h1>
+        <p class="hero-lead" style="margin-inline:0;">
+          Four ready-to-book keynotes, pre-trimmed 50/150/300-word bios with instant clipboard copy, high-resolution headshots, and speaking highlights.
+        </p>
+        <div class="cta-row" style="justify-content:flex-start;">
+          <a class="btn btn-primary" href="#c-book">Inquire About Event Dates</a>
+          <a class="btn" href="#c-bios">Copy Speaker Bios</a>
+          <a class="btn" href="#c-media">Download Headshots</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <span class="stage-kicker">4 Signature Keynotes</span>
+        <h2>Talks that turn AI curiosity into safe Monday habits</h2>
+
+        <div class="bento-2">
+          <article class="basalt-card">
+            <div>
+              <span class="stage-kicker">Small Business · SBCs · Chambers</span>
+              <h3>1. AI Without the Hype: What a Small Business Can Do Monday Morning</h3>
+              <p class="muted">Most AI advice is written for companies with tech teams and big budgets. Small businesses need something else: a few uses that save real time this week, with tools they may already pay for. In this talk, Giovanni Rufino walks through everyday tasks where AI helps a small business today, such as drafting customer emails, summarizing documents and planning the week. He also covers the limits: what not to share, how to check the answers, and when to skip AI entirely. Owners leave with a short list of things to try on Monday and a free starter playbook to keep.</p>
+            </div>
+            <ol class="takeaway-box">
+              <li>Three to five AI uses that fit a small business with no technical staff</li>
+              <li>Simple rules for what information never goes into an AI tool</li>
+              <li>A habit for checking AI output before it reaches a customer</li>
+            </ol>
+          </article>
+
+          <article class="basalt-card">
+            <div>
+              <span class="stage-kicker">Executives · HR &amp; Training · Ops Heads</span>
+              <h3>2. From Curiosity to Habit: Getting a Whole Organization Using AI</h3>
+              <p class="muted">Buying AI licenses is easy. Getting people to use them well is harder. Most rollouts stall after the first demo, because people can't see how AI fits their own job. As an AI Chapter Lead at Relias, Giovanni Rufino walks department after department through using AI in their daily work. This talk shares what he has learned: start with the tasks people already do, show results on their own work, give clear rules about data, and make it safe to ask basic questions. Leaders leave with a practical plan to move their teams from curiosity to everyday use.</p>
+            </div>
+            <ol class="takeaway-box">
+              <li>Why AI rollouts stall after the demo, and how to keep them going</li>
+              <li>A department-by-department approach that starts from real work</li>
+              <li>How to set clear data rules without scaring people away from the tools</li>
+            </ol>
+          </article>
+
+          <article class="basalt-card">
+            <div>
+              <span class="stage-kicker">Conference Keynotes · Workforce · Leadership</span>
+              <h3>3. From the Sales Floor to the Codebase</h3>
+              <p class="muted">Giovanni Rufino spent ten years leading retail and operations teams, including years as an assistant store manager at Lowe's, before he became a software engineer. Today he helps teams at Relias adopt AI. This talk connects the two careers. On a sales floor, new systems only work when the people using them understand why and feel ready. The same is true for AI. Giovanni shares stories from both worlds and what they teach about introducing any new technology to people who are already busy. Audiences leave with a people-first way to lead change in their own organizations.</p>
+            </div>
+            <ol class="takeaway-box">
+              <li>Why people, not tools, decide whether new technology sticks</li>
+              <li>Lessons from retail leadership that apply directly to AI adoption</li>
+              <li>How career changers bring an advantage to technical work</li>
+            </ol>
+          </article>
+
+          <article class="basalt-card">
+            <div>
+              <span class="stage-kicker">Compliance Industries · Risk &amp; Quality</span>
+              <h3>4. Trust, but Check: Using AI When Mistakes Are Expensive</h3>
+              <p class="muted">AI tools are fast and confident, and sometimes wrong. For teams where a mistake costs money, trust or safety, that is a real risk. In this talk, Giovanni Rufino, a software engineer and AI Chapter Lead at Relias, explains in plain language why AI makes mistakes and how to catch them. He covers what data should stay out of AI tools, how to check output before anyone relies on it, and how to write short, usable rules a team will follow. Leaders leave able to say yes to AI for the right tasks while keeping their people and customers safe.</p>
+            </div>
+            <ol class="takeaway-box">
+              <li>Why AI tools get things wrong, explained without jargon</li>
+              <li>A simple checking routine for AI output in high-stakes work</li>
+              <li>How to write a one-page AI use policy people will follow</li>
+            </ol>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="c-bios" class="section">
+      <div class="container">
+        <span class="stage-kicker">Approved Bios</span>
+        <h2>Copy-paste speaker bios</h2>
+
+        <div class="bio-tabs">
+          <div class="bio-tablist" focusgroup="tablist nomemory" aria-label="Speaker bio lengths">
+            <button type="button" id="c-tab-50" aria-selected="true" focusgroupstart>Short (50 words)</button>
+            <button type="button" id="c-tab-150" aria-selected="false">Standard (150 words)</button>
+            <button type="button" id="c-tab-300" aria-selected="false">Extended (300 words)</button>
+          </div>
+
+          <div class="bio-panels">
+            <div role="tabpanel" aria-labelledby="c-tab-50">
+              <div class="bio-panel-card">
+                <div class="bio-panel-header">
+                  <span class="bio-word-badge">50 words · Stage intro &amp; social cards</span>
+                  <span class="copy-wrap">
+                    <button type="button" class="copy-button" command="--copy" commandfor="c-bio-50">
+                      <span class="icon-copy" aria-hidden="true">⧉</span>
+                      <span class="icon-check" aria-hidden="true">✓</span>
+                      <span>Copy 50w Bio</span>
+                    </button>
+                    <span class="copy-tip" role="status"></span>
+                  </span>
+                </div>
+                <div id="c-bio-50" class="prose">
+                  <p>Giovanni Rufino is a software engineer and AI Chapter Lead at Relias, where he walks departments through using AI in their daily work. Before software, he spent ten years leading retail and operations teams. He speaks to business owners and leaders about using AI practically and safely, without the hype.</p>
+                </div>
+              </div>
+            </div>
+
+            <div role="tabpanel" aria-labelledby="c-tab-150" hidden="until-found">
+              <div class="bio-panel-card">
+                <div class="bio-panel-header">
+                  <span class="bio-word-badge">149 words · Event program standard</span>
+                  <span class="copy-wrap">
+                    <button type="button" class="copy-button" command="--copy" commandfor="c-bio-150">
+                      <span class="icon-copy" aria-hidden="true">⧉</span>
+                      <span class="icon-check" aria-hidden="true">✓</span>
+                      <span>Copy 150w Bio</span>
+                    </button>
+                    <span class="copy-tip" role="status"></span>
+                  </span>
+                </div>
+                <div id="c-bio-150" class="prose">
+                  <p>Giovanni Rufino is a software engineer and AI Chapter Lead at Relias. He builds production software with .NET, Angular and Azure. As AI Chapter Lead, he walks departments across the company through how to use AI tools in their own jobs, safely and well.</p>
+                  <p>Giovanni came to software after ten years leading retail and operations teams, including years as an assistant store manager at Lowe's. That background shapes how he teaches. He starts with the work people already do, not with the technology, and he explains AI in plain language.</p>
+                  <p>He gave the keynote "Putting AI to Work for You!" for the Mitchell Community College Small Business Center, and he wrote AI Without the Hype, a free starter playbook for owners and their teams. He holds Microsoft certifications in Azure development and Azure AI. Giovanni lives in North Carolina with his family and gives keynotes, workshops and one-on-one walkthroughs.</p>
+                </div>
+              </div>
+            </div>
+
+            <div role="tabpanel" aria-labelledby="c-tab-300" hidden="until-found">
+              <div class="bio-panel-card">
+                <div class="bio-panel-header">
+                  <span class="bio-word-badge">293 words · Full press &amp; keynote profile</span>
+                  <span class="copy-wrap">
+                    <button type="button" class="copy-button" command="--copy" commandfor="c-bio-300">
+                      <span class="icon-copy" aria-hidden="true">⧉</span>
+                      <span class="icon-check" aria-hidden="true">✓</span>
+                      <span>Copy 300w Bio</span>
+                    </button>
+                    <span class="copy-tip" role="status"></span>
+                  </span>
+                </div>
+                <div id="c-bio-300" class="prose">
+                  <p>Giovanni Rufino is a software engineer and AI Chapter Lead at Relias, where he builds production software with .NET, Angular and Azure. His recent work includes backend APIs for the company's AI initiatives and AI skills that help engineering teams turn technical documents into clear user stories. As AI Chapter Lead, he also walks departments across the company through how to use AI tools in their daily work.</p>
+                  <p>Giovanni spent ten years leading retail and operations teams. As an assistant store manager at Lowe's, he coached teams across service, logistics and store operations. Later, as a purchasing specialist at Creedmoor Forest Products, he helped raise operational uptime from 55 percent to 85 percent and led a safety program that passed 400 days without a recordable incident. He then completed an 800-hour software engineering program and joined Relias as an associate engineer in 2022.</p>
+                  <p>At Relias he became the go-to resource for feature flags, training teams during architecture migrations, before moving into AI work. He holds Microsoft certifications in Azure fundamentals, Azure development and Azure AI, and he builds his own apps, including ExtraPair, an iOS app for parents.</p>
+                  <p>That mix of operations and engineering shapes how Giovanni teaches. He knows that new technology only sticks when the people using it understand why it matters to their own work. His talks and workshops start with the tasks people already do, explain AI in plain language, and set simple rules for using it safely.</p>
+                  <p>He gave the keynote "Putting AI to Work for You!" for the Mitchell Community College Small Business Center, and he wrote AI Without the Hype, a free starter playbook for owners and their teams. Giovanni lives in North Carolina with his family. He offers keynote speeches, business workshops and one-on-one walkthroughs.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="c-media" class="section" style="border-block-end:0;">
+      <div class="container">
+        <span class="stage-kicker" id="c-book">Media &amp; Booking</span>
+        <h2>Headshots, reel &amp; event inquiries</h2>
+        <div class="bento-3">
+          <div class="basalt-card">
+            <div class="asset-frame-dark">PORTRAIT HEADSHOT (4:5)<br>Hi-Res JPG</div>
+            <a class="btn" href="#c-media">Download Portrait</a>
+          </div>
+          <div class="basalt-card">
+            <div class="asset-frame-dark">STAGE LANDSCAPE (16:9)<br>Hi-Res JPG</div>
+            <a class="btn" href="#c-media">Download Landscape</a>
+          </div>
+          <div class="basalt-card">
+            <div class="asset-frame-dark" style="border-style:solid;border-color:var(--accent-primary);color:var(--text-primary);">▶ 60–90s SPEAKING REEL<br>Mitchell CC SBC Keynote + Walkthroughs</div>
+            <a class="btn btn-primary" href="#c-book">Book Giovanni for Your Event</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© 2026 Giovanni Rufino · Raleigh-Durham-Chapel Hill, NC</span>
+      <ul class="footer-links">
+        <li><a href="?page=home" data-page-trigger="home">Home</a></li>
+        <li><a href="?page=speaking" data-page-trigger="speaking">Speaker Kit</a></li>
+        <li><a href="#c-engineering">/engineering</a></li>
+        <li><a href="#c-playbook">/ai Playbook</a></li>
+        <li><a href="#llms">/llms.txt</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- ==================== FLOATING DESIGN DECISION PICKER ==================== -->
+  <aside class="picker-dock" aria-label="Design Decision Picker">
+    <div id="picker-panel" class="picker-card">
+      <div class="picker-head">
+        <strong>Design Decision Picker</strong>
+        <div class="picker-head-actions">
+          <button type="button" id="picker-reset" class="picker-mini-btn">Reset</button>
+          <button type="button" id="picker-minimize" class="picker-mini-btn" aria-label="Minimize design picker">Hide ✕</button>
+        </div>
+      </div>
+
+      <form id="design-picker-form">
+        <fieldset class="picker-fieldset">
+          <legend class="picker-legend">
+            <span>1. Accent Color</span>
+            <span id="picker-contrast-badge" class="picker-badge">#5EC29A · WCAG AA ✓</span>
+          </legend>
+          <div class="swatch-grid">
+            <label class="swatch-option" style="--sw:#5EC29A">
+              <input type="radio" name="accent" value="pine" checked>
+              <span>Pine Mint (/ai)</span>
+            </label>
+            <label class="swatch-option" style="--sw:#F0B429">
+              <input type="radio" name="accent" value="gold">
+              <span>Signal Gold (/ai)</span>
+            </label>
+            <label class="swatch-option" style="--sw:#67B7F7">
+              <input type="radio" name="accent" value="sky">
+              <span>Arctic Sky</span>
+            </label>
+            <label class="swatch-option" style="--sw:#60A5FA">
+              <input type="radio" name="accent" value="cobalt">
+              <span>Electric Cobalt</span>
+            </label>
+            <label class="swatch-option" style="--sw:#38C6BD">
+              <input type="radio" name="accent" value="teal">
+              <span>Verdigris Teal</span>
+            </label>
+            <label class="swatch-option" style="--sw:#B8E04A">
+              <input type="radio" name="accent" value="lime">
+              <span>Chartreuse</span>
+            </label>
+            <label class="swatch-option" style="--sw:#F26B6B">
+              <input type="radio" name="accent" value="crimson">
+              <span>Stage Vermilion</span>
+            </label>
+            <label class="swatch-option" style="--sw:#F3EFE6">
+              <input type="radio" name="accent" value="ivory">
+              <span>Mono Ivory</span>
+            </label>
+          </div>
+          <div class="custom-color-row">
+            <label class="seg-pill" style="border:0;background:transparent;padding:0;">
+              <input type="radio" name="accent" value="custom">
+              <span>Custom Hex: <strong id="custom-hex-label">#5EC29A</strong></span>
+            </label>
+            <input type="color" id="custom-accent-color" value="#5EC29A" aria-label="Pick any custom accent color">
+          </div>
+        </fieldset>
+
+        <fieldset class="picker-fieldset">
+          <legend class="picker-legend"><span>2. Canvas Undertone</span></legend>
+          <div class="seg-row">
+            <label class="seg-pill"><input type="radio" name="canvas" value="obsidian" checked><span>Warm Obsidian</span></label>
+            <label class="seg-pill"><input type="radio" name="canvas" value="pineNight"><span>Pine Night</span></label>
+            <label class="seg-pill"><input type="radio" name="canvas" value="slate"><span>Midnight Slate</span></label>
+            <label class="seg-pill"><input type="radio" name="canvas" value="graphite"><span>Graphite</span></label>
+            <label class="seg-pill"><input type="radio" name="canvas" value="paper"><span>Light Paper</span></label>
+          </div>
+        </fieldset>
+
+        <div class="font-select-grid">
+          <div class="font-field">
+            <label for="sel-display">3. Display / Heading Font</label>
+            <select id="sel-display" name="displayFont">
+              <option value="newsreader">Newsreader (Editorial Serif)</option>
+              <option value="fraunces">Fraunces (Warm Book Serif)</option>
+              <option value="instrumentSerif">Instrument Serif (Tall Stage Serif)</option>
+              <option value="spaceGrotesk">Space Grotesk (Architectural Sans)</option>
+              <option value="jakarta">Plus Jakarta Sans (Executive Sans)</option>
+              <option value="outfit">Outfit (Clean Geometric Sans)</option>
+            </select>
+          </div>
+
+          <div class="font-field">
+            <label for="sel-body">4. Body Font</label>
+            <select id="sel-body" name="bodyFont">
+              <option value="dmSans">DM Sans (Keynote Stage default)</option>
+              <option value="atkinson">Atkinson Hyperlegible (/ai Playbook font)</option>
+              <option value="jakarta">Plus Jakarta Sans</option>
+              <option value="inter">Inter</option>
+            </select>
+          </div>
+
+          <div class="font-field">
+            <label for="sel-mono">5. Metadata / Mono Font</label>
+            <select id="sel-mono" name="monoFont">
+              <option value="jetbrains">JetBrains Mono</option>
+              <option value="fira">Fira Code</option>
+              <option value="plex">IBM Plex Mono</option>
+              <option value="spaceMono">Space Mono</option>
+            </select>
+          </div>
+        </div>
+
+        <fieldset class="picker-fieldset">
+          <legend class="picker-legend"><span>6. Button &amp; Card Geometry</span></legend>
+          <div class="seg-row">
+            <label class="seg-pill"><input type="radio" name="shape" value="pill" checked><span>Stage Pill</span></label>
+            <label class="seg-pill"><input type="radio" name="shape" value="editorial"><span>Editorial Soft</span></label>
+            <label class="seg-pill"><input type="radio" name="shape" value="crisp"><span>Crisp 4px</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="picker-fieldset" style="margin-block-end:0.65rem;">
+          <legend class="picker-legend"><span>7. Hero Accent Style</span></legend>
+          <div class="seg-row">
+            <label class="seg-pill"><input type="radio" name="italicAccent" value="on" checked><span>Italic emphasis</span></label>
+            <label class="seg-pill"><input type="radio" name="italicAccent" value="off"><span>Upright</span></label>
+          </div>
+        </fieldset>
+      </form>
+
+      <textarea id="picker-token-summary" class="sr-textarea" readonly aria-hidden="true"></textarea>
+      <div class="picker-export">
+        <span style="color:#A6B0A4;font-size:0.75rem;">Happy with the look?</span>
+        <span class="copy-wrap">
+          <button type="button" class="copy-button" command="--copy" commandfor="picker-token-summary">
+            <span class="icon-copy" aria-hidden="true">⧉</span>
+            <span class="icon-check" aria-hidden="true">✓</span>
+            <span>Copy My Choices</span>
+          </button>
+          <span class="copy-tip" role="status"></span>
+        </span>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      id="picker-toggle"
+      class="picker-launcher"
+      aria-expanded="true"
+      aria-controls="picker-panel"
+    >
+      <span class="picker-dot" aria-hidden="true"></span>
+      <span>Design Picker</span>
+    </button>
+  </aside>
+
+  <script type="module" src="shared.js"></script>
+  <script type="module" src="picker.js"></script>
+</body>
+</html>
