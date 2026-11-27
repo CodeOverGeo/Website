@@ -2,16 +2,13 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavigationStateService } from './services/navigation-state.service';
 import { SeoService } from './services/seo.service';
-import { NavTabsComponent } from './components/shell/nav-tabs/nav-tabs.component';
-import { StatusBarComponent } from './components/shell/status-bar/status-bar.component';
-import { CommandPaletteComponent } from './components/shell/command-palette/command-palette.component';
-import { SpecPanelComponent } from './components/shell/spec-panel/spec-panel.component';
+import { SiteHeaderComponent } from './components/shell/site-header/site-header.component';
 import { SiteFooterComponent } from './components/shell/site-footer/site-footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavTabsComponent, StatusBarComponent, CommandPaletteComponent, SpecPanelComponent, SiteFooterComponent],
+  imports: [RouterOutlet, SiteHeaderComponent, SiteFooterComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

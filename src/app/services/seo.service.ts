@@ -5,10 +5,10 @@ import { filter } from 'rxjs';
 
 export const SITE_URL = 'https://georufino.com';
 
-export const DEFAULT_TITLE = 'Giovanni Rufino | Software Engineer';
+export const DEFAULT_TITLE = 'Giovanni Rufino | AI Keynotes, Workshops & Engineering';
 
 export const DEFAULT_DESCRIPTION =
-  'Giovanni Rufino is a Software Engineer in the Raleigh-Durham-Chapel Hill area building scalable backend systems, AI-assisted workflows, and polished developer experiences.';
+  'Practical AI keynotes, business workshops, and one-on-one walkthroughs taught by Giovanni Rufino, a software engineer and AI Chapter Lead in North Carolina.';
 
 const OG_IMAGE = `${SITE_URL}/og-image.png`;
 

@@ -1,10 +1,28 @@
-@if (showFooter()) {
-  <footer class="site-footer mono" aria-label="Legal">
-    <a routerLink="/terms">Terms</a>
-    <span aria-hidden="true">·</span>
-    <a routerLink="/privacy">Privacy</a>
-    <span aria-hidden="true">·</span>
-    <!-- Plain href: /ai is a static page outside the Angular app (see firebase.json). -->
-    <a href="/ai">Free AI playbook</a>
-  </footer>
-}
+<footer class="site-footer" aria-label="Site footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a class="footer-name" routerLink="/">Giovanni Rufino</a>
+      <p class="footer-tagline">
+        Practical AI keynotes, business workshops, and one-on-one walkthroughs · Raleigh-Durham-Chapel Hill, NC
+      </p>
+      <app-social-links />
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer">
+      <ul class="footer-links">
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/speaking">Speaker Kit</a></li>
+        <li><a routerLink="/consulting">Talks &amp; Workshops</a></li>
+        <li><a routerLink="/engineering">Engineering</a></li>
+        <li><a routerLink="/writing">Writing</a></li>
+        <li><a routerLink="/contact">Contact</a></li>
+        <!-- Plain href for static non-Angular routes/assets served by Firebase Hosting -->
+        <li><a href="/ai">Free AI Playbook</a></li>
+        <li><a routerLink="/terms">Terms</a></li>
+        <li><a routerLink="/privacy">Privacy</a></li>
+        <li><a href="/llms.txt" class="mono">/llms.txt</a></li>
+      </ul>
+      <p class="footer-copy">© {{ year }} Giovanni Rufino. All rights reserved.</p>
+    </nav>
+  </div>
+</footer>
