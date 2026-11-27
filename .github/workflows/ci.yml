@@ -90,9 +90,8 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GEORUFINO_EDC02 }}
           projectId: georufino-edc02
 
-  # Live channel on merge to main. Not gated on `test`: branch protection already
-  # required it to pass on the PR, and this preserves the previous behaviour where
-  # the merge deploy ran alongside CI rather than behind it.
+  # Temporary staging channel during the v2 redesign (switch back to `channelId: live`
+  # in Issue #58 on Launch Day so public georufino.com stays untouched until ready).
   deploy_live:
     needs: build
     if: github.event_name == 'push'
@@ -103,9 +102,15 @@ jobs:
         with:
           name: dist
           path: dist/personal-portfolio/browser
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - id: firebase_redesign
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GEORUFINO_EDC02 }}
-          channelId: live
+          channelId: redesign
+          expires: 30d
           projectId: georufino-edc02
+      - name: Print redesign channel URL
+        run: |
+          echo "### Private Redesign Channel" >> "$GITHUB_STEP_SUMMARY"
+          echo "${{ steps.firebase_redesign.outputs.details_url }}" >> "$GITHUB_STEP_SUMMARY"
