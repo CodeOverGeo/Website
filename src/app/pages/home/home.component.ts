@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CtaBandComponent } from '../../components/shared/cta-band/cta-band.component';
+import { ProofBarComponent } from '../../components/shared/proof-bar/proof-bar.component';
+import { PROOF_STRIP } from '../../content/proof.content';
 
 /**
  * Home route shell (`/`) — full section buildout tracked in Issue #49.
@@ -8,7 +10,7 @@ import { CtaBandComponent } from '../../components/shared/cta-band/cta-band.comp
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterLink, CtaBandComponent],
+  imports: [RouterLink, CtaBandComponent, ProofBarComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section class="stage-hero stage-hero-centered">
@@ -27,15 +29,7 @@ import { CtaBandComponent } from '../../components/shared/cta-band/cta-band.comp
       </div>
     </section>
 
-    <section class="proof-bar" aria-label="Credentials">
-      <div class="container">
-        <ul class="proof-items">
-          <li><strong>AI Chapter Lead</strong> at Relias</li>
-          <li><strong>Keynote Speaker</strong> · Mitchell Community College Small Business Center</li>
-          <li><strong>Author</strong> · Free <a href="/ai">AI Without the Hype</a> starter playbook</li>
-        </ul>
-      </div>
-    </section>
+    <app-proof-bar [items]="proofStrip" />
 
     <app-cta-band
       kicker="Book or Read First"
@@ -48,4 +42,6 @@ import { CtaBandComponent } from '../../components/shared/cta-band/cta-band.comp
     />
   `
 })
-export class HomeComponent {}
+export class HomeComponent {
+  protected readonly proofStrip = PROOF_STRIP;
+}
