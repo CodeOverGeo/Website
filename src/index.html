@@ -85,7 +85,7 @@
           if (typeof namespace === "string") {
             cal.ns[namespace] = cal.ns[namespace] || api;
             p(cal.ns[namespace], ar);
-            p(cal, ["-", namespace, api]);
+            p(cal, ["initNamespace", namespace]);
           } else {
             p(cal, ar);
           }
