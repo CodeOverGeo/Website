@@ -47,3 +47,24 @@ export interface Certification {
   readonly name: string;
   readonly year: number;
 }
+
+export interface SpeakingEngagement {
+  readonly title: string;
+  readonly detail: string;
+  readonly href?: string;
+}
+
+export interface Headshot {
+  readonly label: string;
+  /** Path under `public/`, e.g. `/media/giovanni-rufino-portrait.jpg`. */
+  readonly src: string;
+  readonly alt: string;
+  readonly width: number;
+  readonly height: number;
+}
+
+export interface SpeakerReel {
+  readonly title: string;
+  /** Privacy-friendly embed URL, e.g. `https://www.youtube-nocookie.com/embed/<id>`. */
+  readonly embedUrl: string;
+}
